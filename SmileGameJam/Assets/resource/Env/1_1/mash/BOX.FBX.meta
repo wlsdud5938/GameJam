@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 53e058e917fadd546b9f1b76b6c543f7
+guid: 5e888b2d5856d44449c83ca946ac1680
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -8,7 +8,7 @@ ModelImporter:
     2100000: No Name
     2300000: //RootNode
     3300000: //RootNode
-    4300000: stadium
+    4300000: Box
   externalObjects: {}
   materials:
     importMaterials: 1
