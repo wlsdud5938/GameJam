@@ -24,5 +24,5 @@ public abstract class SkillBase : MonoBehaviour
 
     public abstract void ShowRange(int power, Vector3 position, float rotation);
     public abstract void HideRange();
-    public abstract void UseSkill(int power, float range, Vector3 position, float rotation, Action hitCall);
+    public abstract void UseSkill(int power, float range, Vector3 position, float rotation, PlayerAttack owner);
 }

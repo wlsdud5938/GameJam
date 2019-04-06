@@ -18,7 +18,6 @@ public class PlayerAttack : MonoBehaviour {
 
     [Header("Charge")]
     public int index = 0;
-    //[HideInInspector]
     public int[] powerGrade;
     public int chargeSpeed = 20;
 
@@ -26,8 +25,9 @@ public class PlayerAttack : MonoBehaviour {
 
     [Header("Ultimate")]
     public UltBase nowUltimate;
+    public Image ultimateBar;
 
-    private int count = 0;
+    public int count = 0;
     public int ultCount
     {
         get
@@ -37,9 +37,10 @@ public class PlayerAttack : MonoBehaviour {
         set
         {
             count = Mathf.Clamp(value, 0 , maxUltCount);
+            ultimateBar.fillAmount = (float)count / maxUltCount;
         }
     }
-    public int maxUltCount = 3;
+    private int maxUltCount = 100;
 
     public void SkillButtonDown()
     {
@@ -48,8 +49,7 @@ public class PlayerAttack : MonoBehaviour {
 
     public void SkillButtonUp()
     {
-        nowSkill.UseSkill(index, range, 
-            transform.position/* + Quaternion.Euler(0,playerMove.targetRot,0) * Vector3.forward * 0.2f*/, playerMove.targetRot, ChargeUltimate);
+        nowSkill.UseSkill(index, range, transform.position, playerMove.targetRot, this);
         nowSkill.HideRange();
 
         isClicked = false;
@@ -75,9 +75,9 @@ public class PlayerAttack : MonoBehaviour {
         }
     }
 
-    public void ChargeUltimate()
+    public void ChargeUltimate(int damage)
     {
-        ultCount += 1;
+        ultCount += damage;
     }
 
     public void UseUltimate()
