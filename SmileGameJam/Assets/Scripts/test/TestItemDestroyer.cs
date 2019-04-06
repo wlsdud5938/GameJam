@@ -17,6 +17,7 @@ public class TestItemDestroyer : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         other.GetComponent<UnitInfo>().score += point;
+        other.GetComponent<UnitInfo>().maxHealthPoint += point * 10;
         gameObject.transform.parent.GetComponent<CheckItem>().checkItem = false;
         gameObject.SetActive(false);
     }
