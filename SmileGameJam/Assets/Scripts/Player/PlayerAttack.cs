@@ -42,7 +42,10 @@ public class PlayerAttack : MonoBehaviour {
             count = Mathf.Clamp(value, 0 , maxUltCount);
             ultimateBar.fillAmount = (float)count / maxUltCount;
             if (count >= maxUltCount)
+            {
+                ultimateBar.enabled = false;
                 ultButton.interactable = true;
+            }
         }
     }
     private int maxUltCount = 100;
@@ -112,6 +115,7 @@ public class PlayerAttack : MonoBehaviour {
         if (isDead) return;
         ultCount = 0;
         ultButton.interactable = false;
+        ultimateBar.enabled = true;
         animator.SetBool("IsUltimating", true);
         Invoke("ShotUltimate", 0.5f);
         Invoke("FinishUltimate", 0.1f);

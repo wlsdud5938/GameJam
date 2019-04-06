@@ -43,7 +43,7 @@ public class UnitInfo : MonoBehaviour {
     private void Update()
     {
         healthBarImg.fillAmount = healthPoint / maxHealthPoint;
-        healthText.text = healthPoint.ToString();
+        healthText.text = Mathf.RoundToInt(Mathf.Clamp(healthPoint,0,maxHealthPoint)).ToString();
 
         if (healthPoint < maxHealthPoint && healTime < 0.0f)
         {
