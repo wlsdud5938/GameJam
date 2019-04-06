@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33904799656524912}
   - component: {fileID: 23640663438939510}
   - component: {fileID: 95593491589829120}
+  - component: {fileID: 65626035750165336}
   m_Layer: 0
   m_Name: stone2
   m_TagString: Untagged
@@ -84,6 +85,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1841036696183314}
   m_Mesh: {fileID: 4300000, guid: fff487cb368d55d4c932f960c7564f3d, type: 3}
+--- !u!65 &65626035750165336
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1841036696183314}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4555142, y: 1.4413513, z: 1.460002}
+  m_Center: {x: 0.022333235, y: 0.012519658, z: -0.346969}
 --- !u!95 &95593491589829120
 Animator:
   serializedVersion: 3
