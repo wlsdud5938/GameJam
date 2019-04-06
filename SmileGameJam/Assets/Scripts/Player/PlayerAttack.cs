@@ -8,6 +8,8 @@ public class PlayerAttack : MonoBehaviour {
     public Transform muzzle;
     private PlayerMove playerMove;
 
+    public Animator animator;
+
     [Header("Skill")]
     public SkillBase nowSkill;
     public int poolSize = 15;
@@ -45,6 +47,8 @@ public class PlayerAttack : MonoBehaviour {
     }
     private int maxUltCount = 100;
 
+    public bool isDead = false;
+
     public void SkillButtonDown()
     {
         isClicked = true;
@@ -52,12 +56,24 @@ public class PlayerAttack : MonoBehaviour {
 
     public void SkillButtonUp()
     {
-        nowSkill.UseSkill(index, range, transform.position, playerMove.targetRot, this);
-        nowSkill.HideRange();
+        animator.SetBool("IsAttacking", true);
+        UseSkill();
+        Invoke("FinishSkill", 0.1f);
 
         isClicked = false;
         percent = index = 0;
         chargeBar.fillAmount = 0;
+    }
+
+    private void UseSkill()
+    {
+        nowSkill.UseSkill(index, range, muzzle.position, playerMove.targetRot, this);
+        nowSkill.HideRange();
+    }
+
+    private void FinishSkill()
+    {
+        animator.SetBool("IsAttacking", false);
     }
 
     private void Start()
@@ -74,7 +90,7 @@ public class PlayerAttack : MonoBehaviour {
             if(index < 4 && powerGrade[index + 1] < percent)
                 index += 1;
 
-            nowSkill.ShowRange(index, transform.position + Quaternion.Euler(0, playerMove.targetRot, 0) * Vector3.forward * 0.2f, playerMove.targetRot);
+            nowSkill.ShowRange(index, muzzle.position, playerMove.targetRot);
         }
     }
 
@@ -87,6 +103,18 @@ public class PlayerAttack : MonoBehaviour {
     {
         ultCount = 0;
         ultButton.interactable = false;
-        nowUltimate.UseUltimate(transform.position, playerMove.targetRot);
+        animator.SetBool("IsUltimating", true);
+        Invoke("ShotUltimate", 0.5f);
+        Invoke("FinishUltimate", 0.1f);
+    }
+
+    private void ShotUltimate()
+    {
+        nowUltimate.UseUltimate(muzzle.position, playerMove.targetRot);
+    }
+
+    private void FinishUltimate()
+    {
+        animator.SetBool("IsUltimating", false);
     }
 }

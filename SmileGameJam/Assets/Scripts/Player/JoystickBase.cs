@@ -120,8 +120,8 @@ public abstract class JoystickBase : MonoBehaviour
         lever.anchoredPosition = nowPos * distance;
 
         direction = nowPos;
-
-        GetJoystickStay(distance);
+    
+        GetJoystickStay(distance / radius);
     }
 
     private void End_Move_Joystick()
@@ -170,7 +170,7 @@ public abstract class JoystickBase : MonoBehaviour
 
             direction = nowPos;
 
-            GetJoystickStay(distance);
+            GetJoystickStay(distance / radius);
         }
         else if (isStick_Stay && Input.GetMouseButtonUp(0))
         {
