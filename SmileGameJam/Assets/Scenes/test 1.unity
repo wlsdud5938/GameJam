@@ -869,6 +869,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playTime: 0
+  king: 0
+  imKing: 0
+  gameEndTime: 15
+  enemyCount: 3
 --- !u!4 &629534303
 Transform:
   m_ObjectHideFlags: 0
@@ -1288,6 +1292,11 @@ Transform:
   m_Father: {fileID: 1997298621}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &746254198 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95700885302854740, guid: d0723ef617ad3f7428693f242aad2a15,
+    type: 2}
+  m_PrefabInternal: {fileID: 1125615939}
 --- !u!1 &835787830
 GameObject:
   m_ObjectHideFlags: 0
@@ -2186,6 +2195,16 @@ Prefab:
       propertyPath: stopDist
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114274236760802794, guid: d0723ef617ad3f7428693f242aad2a15,
+        type: 2}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 746254198}
+    - target: {fileID: 95700885302854740, guid: d0723ef617ad3f7428693f242aad2a15,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6863223071b58b04db297dab66f180db, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0723ef617ad3f7428693f242aad2a15, type: 2}
   m_IsPrefabAsset: 0

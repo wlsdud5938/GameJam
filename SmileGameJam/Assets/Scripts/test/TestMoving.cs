@@ -21,12 +21,14 @@ public class TestMoving : MonoBehaviour
     public Transform target = null;
     public Transform player;
 
+    public Animator animator;
+
     public Transform[] wayPoints;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = speed;
+        agent.speed = 2.5f;
 
         playerGap = GetComponent<UnitInfo>().stopDist;
 
@@ -50,7 +52,6 @@ public class TestMoving : MonoBehaviour
         {
             if (Vector3.SqrMagnitude(transform.position - target.position) < 0.2f)
                 target = wayPoints[Random.Range(0, wayPoints.Length - 1)];
-            agent.stoppingDistance = 0;
             return;
         }
 
@@ -82,13 +83,13 @@ public class TestMoving : MonoBehaviour
                 }
             }
         }
-        if (!flag)
+        if (!flag && target != player)
         {
             if (nearestTarget == null)
             {
                 if (nowState != State.Wander && nowState != State.Chase)
                     target = wayPoints[Random.Range(0, wayPoints.Length - 1)];
-                else if(target && Vector3.SqrMagnitude(transform.position - target.position) < 0.2f)
+                else if(Vector3.SqrMagnitude(transform.position - target.position) < 0.2f)
                     target = wayPoints[Random.Range(0, wayPoints.Length - 1)];
                 agent.stoppingDistance = 0;
                 nowState = State.Wander;
@@ -101,11 +102,16 @@ public class TestMoving : MonoBehaviour
             }
         }
 
+        if (Vector3.SqrMagnitude(transform.position - target.position) <= agent.stoppingDistance * agent.stoppingDistance)
+            animator.SetBool("IsRunning", false);
+        else
+            animator.SetBool("IsRunning", true);
+
         if (target == player && delay <= 0)
         {
             delay = 3;
             StartCoroutine(UseSkill(Random.Range(0, 3), 6, transform.position + Vector3.up * 0.3f, transform.eulerAngles.y));
-            if (Vector3.SqrMagnitude(transform.position - target.position) > 30 && Random.Range(0, 100) < 50)
+            if (Vector3.SqrMagnitude(transform.position - target.position) > 36 && Random.Range(0, 100) < 20)
             {
                 isWait = true;
                 target = wayPoints[Random.Range(0, wayPoints.Length - 1)];
@@ -139,9 +145,12 @@ public class TestMoving : MonoBehaviour
             angleGap = 3.5f;
         }
 
+        animator.SetBool("IsAttacking", true);
         for (int i = 0; i < 15; i++)
             Instantiate(bullet, position, Quaternion.Euler(0, startAngle + angleGap * i + Random.Range(-0.1f, 0.1f), 0));
         agent.speed = 2.5f;
+        yield return new WaitForSeconds(0.25f);
+        animator.SetBool("IsAttacking", false);
     }
 
     public IEnumerator ResetDestination(float term)
