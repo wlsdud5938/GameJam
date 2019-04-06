@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -9,6 +9,7 @@ public class GameManager : Singleton<GameManager>
     public bool king = false;
     public bool imKing = false;
     public float gameEndTime = 15.0f;
+    public int enemyCount = 3;
 	// Use this for initialization
 	void Start () {
 
@@ -23,9 +24,13 @@ public class GameManager : Singleton<GameManager>
         if (gameEndTime < 0)
         {
             if (imKing)
-            { }
+            {
+                SceneManager.LoadScene("WinScene");
+            }
+            SceneManager.LoadScene("LossScene");
         }
-
-	}
+        if(enemyCount == 0)
+            SceneManager.LoadScene("WinScene");
+    }
 
 }

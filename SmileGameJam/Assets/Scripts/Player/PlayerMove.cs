@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
 public class PlayerMove : JoystickBase
@@ -62,5 +63,6 @@ public class PlayerMove : JoystickBase
         rb.velocity = Vector3.zero;
         playerAttack.Death();
         playerAttack.isDead = isDead = true;
+        SceneManager.LoadScene("LossScene");
     }
 }
