@@ -1,11 +1,12 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public abstract class BulletBase : MonoBehaviour{
 
-    public int power = 0;
+    public int damage = 0;
     public float range = 5, speed = 10;
+    private Action hitCall;
 
     protected virtual void Update()
     {
@@ -15,10 +16,12 @@ public abstract class BulletBase : MonoBehaviour{
             PushToPool();
     }
 
-    public virtual void SetInformation(int power, float range)
+    public virtual void SetInformation(int damage, float speed , float range, Action hitCall)
     {
-        this.power = power;
+        this.damage = damage;
+        this.speed = speed;
         this.range = range;
+        this.hitCall = hitCall;
     }
 
     public void Reuse(Vector3 position, Quaternion rotation)

@@ -9,10 +9,10 @@ public class PlayerAttack : MonoBehaviour {
     private PlayerMove playerMove;
 
     [Header("Skill")]
-    public BulletBase nowBullet;
+    public SkillBase nowSkill;
     public int poolSize = 15;
     public float range = 6;
-    private string id;
+
     private bool isClicked = false;
     private float percent = 0, maxPercent = 100;
 
@@ -48,7 +48,10 @@ public class PlayerAttack : MonoBehaviour {
 
     public void SkillButtonUp()
     {
-        UseSkill();
+        nowSkill.UseSkill(index, range, 
+            transform.position/* + Quaternion.Euler(0,playerMove.targetRot,0) * Vector3.forward * 0.2f*/, playerMove.targetRot, ChargeUltimate);
+        nowSkill.HideRange();
+
         isClicked = false;
         percent = index = 0;
         chargeBar.fillAmount = 0;
@@ -56,9 +59,6 @@ public class PlayerAttack : MonoBehaviour {
 
     private void Start()
     {
-        id = nowBullet.name;
-        BulletPooler.instance.CreatePool(id, nowBullet, poolSize);
-
         playerMove = GetComponent<PlayerMove>();
     }
 
@@ -70,14 +70,9 @@ public class PlayerAttack : MonoBehaviour {
             chargeBar.fillAmount = percent * 0.01f;
             if(index < 4 && powerGrade[index + 1] < percent)
                 index += 1;
-        }
-    }
 
-    public void UseSkill()
-    {
-        BulletBase newBullet = 
-            BulletPooler.instance.ReuseObject(id, transform.position + playerMove.targetRot * Vector3.forward * 0.2f, playerMove.targetRot);
-        newBullet.SetInformation(index, range);
+            nowSkill.ShowRange(index, transform.position + Quaternion.Euler(0, playerMove.targetRot, 0) * Vector3.forward * 0.2f, playerMove.targetRot);
+        }
     }
 
     public void ChargeUltimate()

@@ -9,9 +9,9 @@ public class RifleBullet : BulletBase {
         base.Update();
     }
 
-    public override void SetInformation(int power, float range)
+    public override void SetInformation(int power,float speed, float range)
     {
-        base.SetInformation(power, range);
+        base.SetInformation(power, speed, range);
         transform.localScale = Vector3.one * (power + 0.5f) * 1.2f;
     }
 }

@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public Transform target;
+
+    public Vector3 dist;
+
+    public void LateUpdate()
+    {
+        transform.position = target.position + dist;
+    }
 }

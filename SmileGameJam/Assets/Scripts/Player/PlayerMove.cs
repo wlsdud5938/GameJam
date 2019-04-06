@@ -9,12 +9,12 @@ public class PlayerMove : JoystickBase
     public float speed = 5;
     public float rotSpeed = 3;
 
-    public Quaternion targetRot = Quaternion.identity;
+    public float targetRot = 0;
 
     protected override void Update()
     {
         base.Update();
-        target.rotation = Quaternion.Slerp(target.rotation, targetRot, Time.deltaTime * rotSpeed);
+        target.rotation = Quaternion.Slerp(target.rotation, Quaternion.Euler(0, targetRot, 0), Time.deltaTime * rotSpeed);
     }
 
     protected override void GetJoystickDown()
@@ -24,8 +24,8 @@ public class PlayerMove : JoystickBase
 
     protected override void GetJoystickStay(float dist)
     {
-        targetRot = Quaternion.Euler(0, rotation, 0);
-        target.position += targetRot * Vector3.forward * speed * Time.deltaTime;
+        targetRot = rotation;
+        target.position += Quaternion.Euler(0, targetRot, 0) * Vector3.forward * speed * Time.deltaTime;
     }
 
     protected override void GetJoystickUp(bool isClicked)
