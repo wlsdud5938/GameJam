@@ -102,10 +102,13 @@ public class TestMoving : MonoBehaviour
             }
         }
 
-        if (Vector3.SqrMagnitude(transform.position - target.position) <= agent.stoppingDistance * agent.stoppingDistance)
-            animator.SetBool("IsRunning", false);
-        else
-            animator.SetBool("IsRunning", true);
+        if (animator.gameObject.activeSelf)
+        {
+            if (target && Vector3.SqrMagnitude(transform.position - target.position) <= agent.stoppingDistance * agent.stoppingDistance)
+                animator.SetBool("IsRunning", false);
+            else
+                animator.SetBool("IsRunning", true);
+        }
 
         if (target == player && delay <= 0)
         {
@@ -145,12 +148,14 @@ public class TestMoving : MonoBehaviour
             angleGap = 3.5f;
         }
 
-        animator.SetBool("IsAttacking", true);
+        if (animator.gameObject.activeSelf)
+            animator.SetBool("IsAttacking", true);
         for (int i = 0; i < 15; i++)
             Instantiate(bullet, position, Quaternion.Euler(0, startAngle + angleGap * i + Random.Range(-0.1f, 0.1f), 0));
         agent.speed = 2.5f;
         yield return new WaitForSeconds(0.25f);
-        animator.SetBool("IsAttacking", false);
+        if (animator.gameObject.activeSelf)
+            animator.SetBool("IsAttacking", false);
     }
 
     public IEnumerator ResetDestination(float term)

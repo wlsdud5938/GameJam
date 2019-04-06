@@ -1586,6 +1586,7 @@ MonoBehaviour:
   defensivePower: 1
   heal: 0.1
   stopDist: 5
+  isDead: 0
 --- !u!114 &114498545429458876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1710,7 +1711,7 @@ MonoBehaviour:
   - 5
   - 6
   - 7
-  material: {fileID: 2100000, guid: d018186b588efc447be6234b9f9adfdf, type: 2}
+  material: {fileID: 2100000, guid: da243d152984d6f4aa4dc8c94a330fd8, type: 2}
   intervalDegree: 5
 --- !u!114 &114877333293853726
 MonoBehaviour:
