@@ -5,7 +5,7 @@ using UnityEngine;
 public class UnitInfo : MonoBehaviour {
 
     public int score = 0;
-
+    public bool king = false;
     public float healthPoint = 100.0f;
     public float maxHealthPoint = 100.0f;
 
@@ -36,6 +36,7 @@ public class UnitInfo : MonoBehaviour {
         if (score >= 10 && !GameManager.Instance.king)
         {
             GameManager.Instance.king = true;
+            king = true;
             if (gameObject.tag == "Player")
                 GameManager.Instance.imKing = true;
         }
