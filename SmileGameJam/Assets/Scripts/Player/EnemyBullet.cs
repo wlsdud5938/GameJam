@@ -28,5 +28,7 @@ public class EnemyBullet : MonoBehaviour {
             other.GetComponent<UnitInfo>().healthPoint -= damage;
             Destroy(gameObject);
         }
+        else if(other.CompareTag("Wall"))
+            Destroy(gameObject);
     }
 }

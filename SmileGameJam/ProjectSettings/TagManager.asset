@@ -8,6 +8,7 @@ TagManager:
   - SpawnPoint
   - Enemy
   - Wall
+  - Box
   layers:
   - Default
   - TransparentFX
@@ -18,8 +19,8 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
+  - Box
+  - Ground
   - 
   - 
   - 

@@ -29,7 +29,7 @@ public class GameManager : Singleton<GameManager>
             }
             SceneManager.LoadScene("LossScene");
         }
-        if(enemyCount == 0)
+        if(enemyCount <= 0)
             SceneManager.LoadScene("WinScene");
     }
 

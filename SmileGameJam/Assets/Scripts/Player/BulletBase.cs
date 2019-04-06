@@ -44,5 +44,14 @@ public abstract class BulletBase : MonoBehaviour{
             owner.ChargeUltimate(damage);
             PushToPool();
         }
+        else if(other.CompareTag("Box"))
+        {
+            other.GetComponent<DestroyBox>().TakeDamage(damage);
+            PushToPool();
+        }
+        else if(other.CompareTag("Wall"))
+        {
+            PushToPool();
+        }
     }
 }
