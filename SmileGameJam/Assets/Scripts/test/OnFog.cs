@@ -20,10 +20,17 @@ public class OnFog : MonoBehaviour {
         numOfWave = (int)((playTime-waveStartTime) / waveTime);
         if (playTime > waveStartTime && numOfWave != 0 && numOfWave <= 4)
         {
+            for (i = 0; i < 4; i++)
+                gameObject.transform.GetChild(i).gameObject.transform.GetChild(numOfWave - 1).gameObject.SetActive(true);
+        }
+        else if (numOfWave > 4)
+            secondStageTime -= 1.0f * Time.deltaTime;
+        if(secondStageTime<0)
+        {
+            numOfWave = 4 + (int)(Mathf.Abs(secondStageTime) / waveTime);
             for(i=0;i<4;i++)
                 gameObject.transform.GetChild(i).gameObject.transform.GetChild(numOfWave - 1).gameObject.SetActive(true);
         }
-
 	}
 }
 
