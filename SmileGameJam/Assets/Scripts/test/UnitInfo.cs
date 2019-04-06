@@ -34,6 +34,7 @@ public class UnitInfo : MonoBehaviour {
         if(gameObject.tag == "Enemy")
             animator = gameObject.transform.GetChild(0).GetComponent<Animator>();    
         rb = gameObject.GetComponent<Rigidbody>();
+        nickname = PlayerPrefs.GetString("Name");
         nicknameText.text = nickname;
         mainCam = Camera.main.gameObject;
     }
