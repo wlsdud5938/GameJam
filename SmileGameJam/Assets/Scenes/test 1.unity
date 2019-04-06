@@ -377,6 +377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: 1
+  spawnItem: {fileID: 0}
 --- !u!136 &25268388
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -666,6 +667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: 5
+  spawnItem: {fileID: 0}
 --- !u!65 &448529957
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -934,6 +936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: 1
+  spawnItem: {fileID: 0}
 --- !u!136 &633517134
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1051,6 +1054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: 5
+  spawnItem: {fileID: 0}
 --- !u!65 &645445922
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1411,6 +1415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: 1
+  spawnItem: {fileID: 0}
 --- !u!136 &871810078
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1974,6 +1979,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 114694311507342558, guid: 11a6a74cbd2ec7346b549c166b8a3ef1,
+        type: 2}
+      propertyPath: joystick
+      value: 
+      objectReference: {fileID: 380534544}
     - target: {fileID: 114072291744476038, guid: 11a6a74cbd2ec7346b549c166b8a3ef1,
         type: 2}
       propertyPath: chargeBar
@@ -1989,16 +1999,6 @@ Prefab:
       propertyPath: ultButton
       value: 
       objectReference: {fileID: 1044145090}
-    - target: {fileID: 114694311507342558, guid: 11a6a74cbd2ec7346b549c166b8a3ef1,
-        type: 2}
-      propertyPath: joystick
-      value: 
-      objectReference: {fileID: 380534544}
-    - target: {fileID: 114820731565823500, guid: 11a6a74cbd2ec7346b549c166b8a3ef1,
-        type: 2}
-      propertyPath: poolSize
-      value: 150
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11a6a74cbd2ec7346b549c166b8a3ef1, type: 2}
   m_IsPrefabAsset: 0
@@ -2278,6 +2278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: 5
+  spawnItem: {fileID: 0}
 --- !u!65 &1157163054
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2815,6 +2816,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: 5
+  spawnItem: {fileID: 0}
 --- !u!65 &1657961896
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3003,6 +3005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: 1
+  spawnItem: {fileID: 0}
 --- !u!136 &1811054472
 CapsuleCollider:
   m_ObjectHideFlags: 0

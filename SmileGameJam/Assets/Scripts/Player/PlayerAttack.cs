@@ -95,7 +95,7 @@ public class PlayerAttack : MonoBehaviour {
         if (isClicked)
         {
             percent = Mathf.Clamp(percent + Time.deltaTime * chargeSpeed, 0, maxPercent);
-            chargeBar.fillAmount = percent * 0.01f;
+            chargeBar.fillAmount = percent * 0.0078f;
             if(index < 4 && powerGrade[index + 1] < percent)
                 index += 1;
 

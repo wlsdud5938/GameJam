@@ -10,6 +10,7 @@ public class UnitInfo : MonoBehaviour {
     public Image healthBarImg;
     public Text healthText;
     public Text nicknameText;
+    public Text scoreText;
 
     public string nickname = "Player";
 
@@ -44,6 +45,8 @@ public class UnitInfo : MonoBehaviour {
     {
         healthBarImg.fillAmount = healthPoint / maxHealthPoint;
         healthText.text = Mathf.RoundToInt(Mathf.Clamp(healthPoint,0,maxHealthPoint)).ToString();
+
+        scoreText.text = score.ToString();
 
         if (healthPoint < maxHealthPoint && healTime < 0.0f)
         {
