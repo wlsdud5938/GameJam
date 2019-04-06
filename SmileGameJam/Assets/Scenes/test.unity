@@ -351,6 +351,7 @@ MonoBehaviour:
   healthPoint: 100
   maxHealthPoint: 100
   defensivePower: 1
+  heal: 0.1
   stopDist: 5
 --- !u!114 &145822043
 MonoBehaviour:
@@ -363,11 +364,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b2ca52347528b34fa18c207797a2a61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goal: {fileID: 0}
+  nowState: 0
+  sight: {x: 0, y: 0, z: 0}
   speed: 5
-  player: {fileID: 0}
+  delay: 0
+  isWait: 0
+  bullet: {fileID: 0}
   target: {fileID: 0}
-  spawnPoint: {fileID: 0}
+  player: {fileID: 0}
+  wayPoints: []
 --- !u!195 &145822044
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -542,6 +547,48 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 380534543}
   m_CullTransparentMesh: 0
+--- !u!1001 &476651296
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4474185237728702, guid: 32890e5f60eb32645a7bca4b360ba3de, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474185237728702, guid: 32890e5f60eb32645a7bca4b360ba3de, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474185237728702, guid: 32890e5f60eb32645a7bca4b360ba3de, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474185237728702, guid: 32890e5f60eb32645a7bca4b360ba3de, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474185237728702, guid: 32890e5f60eb32645a7bca4b360ba3de, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474185237728702, guid: 32890e5f60eb32645a7bca4b360ba3de, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474185237728702, guid: 32890e5f60eb32645a7bca4b360ba3de, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474185237728702, guid: 32890e5f60eb32645a7bca4b360ba3de, type: 2}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 32890e5f60eb32645a7bca4b360ba3de, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!114 &528050333 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114072291744476038, guid: 11a6a74cbd2ec7346b549c166b8a3ef1,
@@ -577,7 +624,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playTime: 0
   king: 0
+  imKing: 0
   gameEndTime: 15
+  enemyCount: 3
 --- !u!4 &629534303
 Transform:
   m_ObjectHideFlags: 0

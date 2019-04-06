@@ -1323,7 +1323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9530d4dbe2855f48b0dc1d6ae5185e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 80
   range: 100
   speed: 10
   cannon: {fileID: 114450130151435568, guid: 3d6482f2e308f2e49ae52376f3c54eab, type: 2}
@@ -1339,9 +1339,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  healthPoint: 100
-  maxHealthPoint: 100
+  healthPoint: 200
+  maxHealthPoint: 200
   defensivePower: 1
+  heal: 0.1
   stopDist: 5
 --- !u!114 &114694311507342558
 MonoBehaviour:
