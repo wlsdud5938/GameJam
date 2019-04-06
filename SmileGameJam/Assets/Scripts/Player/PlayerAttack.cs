@@ -58,9 +58,12 @@ public class PlayerAttack : MonoBehaviour {
     public void SkillButtonUp()
     {
         if (isDead) return;
-        animator.SetBool("IsAttacking", true);
-        UseSkill();
-        Invoke("FinishSkill", 0.1f);
+        if (index > 0)
+        {
+            animator.SetBool("IsAttacking", true);
+            UseSkill();
+            Invoke("FinishSkill", 0.1f);
+        }
 
         isClicked = false;
         percent = index = 0;
@@ -93,6 +96,7 @@ public class PlayerAttack : MonoBehaviour {
             if(index < 4 && powerGrade[index + 1] < percent)
                 index += 1;
 
+            if(index > 0)
             nowSkill.ShowRange(index, transform.position, playerMove.targetRot);
         }
     }
