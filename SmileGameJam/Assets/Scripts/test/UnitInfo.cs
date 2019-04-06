@@ -5,9 +5,12 @@ using UnityEngine;
 public class UnitInfo : MonoBehaviour {
 
     public int score = 0;
-
+    public bool king = false;
     public float healthPoint = 100.0f;
     public float maxHealthPoint = 100.0f;
+    public float rot = 0;
+
+    public GameObject crown;
 
     public float defensivePower = 1.0f;
     public float heal = 0.1f;
@@ -36,6 +39,8 @@ public class UnitInfo : MonoBehaviour {
         if (score >= 10 && !GameManager.Instance.king)
         {
             GameManager.Instance.king = true;
+            king = true;
+            crown.SetActive(true);
             if (gameObject.tag == "Player")
                 GameManager.Instance.imKing = true;
         }
@@ -63,6 +68,18 @@ public class UnitInfo : MonoBehaviour {
         healTime = 3.0f;
     }
 
+    private void LateUpdate()
+    {
+        if (crown.activeSelf)
+        {
+            if (rot < 360)
+                rot += Time.deltaTime * 60;
+            else
+                rot = 0;
+            crown.transform.eulerAngles = new Vector3(0, rot, 0);
+        }
+    }
+
     public void Death()
     {
         animator.SetBool("IsDead", true);
@@ -72,6 +89,7 @@ public class UnitInfo : MonoBehaviour {
     private void Destroy()
     {
         Death();
+
         GameManager.Instance.enemyCount--;
     }
 
