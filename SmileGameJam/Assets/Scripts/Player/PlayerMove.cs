@@ -63,6 +63,12 @@ public class PlayerMove : JoystickBase
         rb.velocity = Vector3.zero;
         playerAttack.Death();
         playerAttack.isDead = isDead = true;
+        StartCoroutine(WaitForIt());
+    }
+
+    IEnumerator WaitForIt()
+    {
+        yield return new WaitForSeconds(2.0f);
         SceneManager.LoadScene("LossScene");
     }
 }

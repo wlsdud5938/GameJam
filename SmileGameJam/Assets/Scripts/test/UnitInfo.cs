@@ -15,6 +15,14 @@ public class UnitInfo : MonoBehaviour {
 
     float healTime = 0.0f;
     bool hit = false;
+    Animator animator;
+    Rigidbody rb;
+    private void Start()
+    {
+        if(gameObject.tag == "Enemy")
+            animator = gameObject.transform.GetChild(0).GetComponent<Animator>();    
+        rb = gameObject.GetComponent<Rigidbody>();
+    }
 
     private void Update()
     {
@@ -34,7 +42,11 @@ public class UnitInfo : MonoBehaviour {
         if(healthPoint <= 0)
         {
             if (gameObject.tag == "Enemy")
-                GameManager.Instance.enemyCount--;
+            {
+                Death();
+                Destroy(gameObject, 2);
+            }
+
             else
             {
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -49,6 +61,18 @@ public class UnitInfo : MonoBehaviour {
         healthPoint -= damage;
         hit = true;
         healTime = 3.0f;
+    }
+
+    public void Death()
+    {
+        animator.SetBool("IsDead", true);
+        rb.velocity = Vector3.zero;
+    }
+
+    private void Destroy()
+    {
+        Death();
+        GameManager.Instance.enemyCount--;
     }
 
 }
