@@ -1378,8 +1378,8 @@ MonoBehaviour:
   poolSize: 15
   range: 6
   index: 0
-  powerGrade: 0000000019000000320000004b00000063000000
-  chargeSpeed: 30
+  powerGrade: 000000000f000000280000004600000063000000
+  chargeSpeed: 50
   chargeBar: {fileID: 0}
   nowUltimate: {fileID: 114393410785969022}
   ultimateBar: {fileID: 0}
