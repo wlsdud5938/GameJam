@@ -21,6 +21,7 @@ public class ShotgunSkill : SkillBase
             meshFilter = newObj.AddComponent<MeshFilter>();
             meshRenderer = newObj.GetComponent<MeshRenderer>();
             meshRenderer.material = material;
+            meshRenderer.material.color = new Color(0.2f, 0.2f, 0.2f, 0.5f);
             ShowCircularSector(i, mesh, meshFilter);
 
             newObj.SetActive(false);
