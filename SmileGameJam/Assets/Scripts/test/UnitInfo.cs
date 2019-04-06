@@ -72,6 +72,7 @@ public class UnitInfo : MonoBehaviour {
     private void Destroy()
     {
         Death();
+
         GameManager.Instance.enemyCount--;
     }
 
