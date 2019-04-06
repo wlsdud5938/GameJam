@@ -43,7 +43,7 @@ public class TestMoving : MonoBehaviour
             }
         }
         if (target == player.transform)
-            nav.stoppingDistance = gameObject.GetComponent<UnitInfo>().AR;
+            nav.stoppingDistance = gameObject.GetComponent<UnitInfo>().attackRange;
         else
             nav.stoppingDistance = 0;
         nav.SetDestination(target.position);
