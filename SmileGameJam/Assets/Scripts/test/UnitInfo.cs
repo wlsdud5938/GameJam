@@ -52,13 +52,15 @@ public class UnitInfo : MonoBehaviour {
                 healthPoint = maxHealthPoint;
             healTime = 3.0f;
         }
-        if (score >= 10 && !GameManager.Instance.king)
+        if (score >= 10 && !GameManager.Instance.king && !GameManager.Instance.imKing)
         {
-            GameManager.Instance.king = true;
-            king = true;
-            crown.SetActive(true);
             if (gameObject.tag == "Player")
                 GameManager.Instance.imKing = true;
+            else
+                GameManager.Instance.king = true;
+            king = true;
+            crown.SetActive(true);
+
         }
         if(healthPoint <= 0)
         {

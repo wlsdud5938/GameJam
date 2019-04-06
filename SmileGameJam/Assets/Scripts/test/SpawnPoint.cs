@@ -3,32 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour {
-    public float itemTime = 30.0f;
-    public List<int> itemCount;
+    public float itemTime = 10.0f;
+    public int itemCount = 4;
     Queue<int> itemList = new Queue<int>();
     int total = 0;
     int i;
-    int idx=0;
+    int r=0;
+    int s = 0;
     int itemIdx = 0;
+    bool firstItem = false;
 
     // Use this for initialization
     void Start () {
-        for (i = 0; i < itemCount.Count; i++)
-            total += itemCount[i];
-        while(true)
-        {
-            if (itemCount[idx] != 0)
-            {
-                itemList.Enqueue(idx);
-                itemCount[idx]--;
-                total--;
-            }
-            idx++;
-            if (idx == 4)
-                idx = 0;
-            if (total == 0)
-                break;
-        }
+
     }
 	
 	// Update is called once per frame
@@ -40,23 +27,28 @@ public class SpawnPoint : MonoBehaviour {
         }
         else
         {
-            itemTime = 5.0f;
-            while (true)
+            itemTime = 10.0f;
+            if (!firstItem)
             {
-                if (itemList.Count == 0)
-                    break;
-                for(i=0;i<gameObject.transform.childCount;i++)
+                firstItem = true;
+                for (i = 0; i < gameObject.transform.GetChild(0).gameObject.transform.childCount; i++)
+                    gameObject.transform.GetChild(0).transform.GetChild(i).gameObject.SetActive(true);
+            }
+            else
+            {
+                i = 0;
+                while (itemCount>0)
                 {
-                    idx = Random.Range(0, 2);
-                    if (idx != 0 && !gameObject.transform.GetChild(i).GetComponent<CheckItem>().checkItem)
+                    i++;
+                    if (i > gameObject.transform.GetChild(1).childCount-1)
+                        i = 0;
+                    r = Random.Range(0, 3);
+                    if (r == 0)
                     {
-                        itemIdx = itemList.Dequeue();
-                        gameObject.transform.GetChild(i).transform.GetChild(itemIdx).gameObject.SetActive(true);
-                        gameObject.transform.GetChild(i).GetComponent<CheckItem>().itemIdx = itemIdx;
-                        gameObject.transform.GetChild(i).GetComponent<CheckItem>().checkItem = true;
+                        s = Random.Range(0, 4);
+                        gameObject.transform.GetChild(1).gameObject.transform.GetChild(i).gameObject.transform.GetChild(s).gameObject.SetActive(true);
+                        itemCount--;
                     }
-                    if (itemList.Count == 0)
-                        break;
                 }
 
             }

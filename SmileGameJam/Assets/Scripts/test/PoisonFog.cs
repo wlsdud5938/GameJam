@@ -23,7 +23,8 @@ public class PoisonFog : MonoBehaviour {
         else
         {
             time = 1.0f;
-            other.GetComponent<UnitInfo>().healthPoint -= other.GetComponent<UnitInfo>().maxHealthPoint * poisonDamge;
+            if(other.CompareTag("Player")|| other.CompareTag("Enemy"))
+                other.GetComponent<UnitInfo>().healthPoint -= other.GetComponent<UnitInfo>().maxHealthPoint * poisonDamge;
         }
     }
 

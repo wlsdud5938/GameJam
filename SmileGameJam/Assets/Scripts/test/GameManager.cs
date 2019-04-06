@@ -17,7 +17,7 @@ public class GameManager : Singleton<GameManager>
 	
 	// Update is called once per frame
 	void Update () {
-        if(king)
+        if(king || imKing)
         {
             gameEndTime -= 1.0f * Time.deltaTime;
         }
@@ -27,7 +27,8 @@ public class GameManager : Singleton<GameManager>
             {
                 SceneManager.LoadScene("WinScene");
             }
-            SceneManager.LoadScene("LossScene");
+            else
+                SceneManager.LoadScene("LossScene");
         }
         if(enemyCount <= 0)
             SceneManager.LoadScene("WinScene");
