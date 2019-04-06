@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletPooler : MonoBehaviour
 {
-    public Dictionary<string, Queue<Poolable>> poolDictionary = new Dictionary<string, Queue<Poolable>>();
+    public Dictionary<string, Queue<BulletBase>> poolDictionary = new Dictionary<string, Queue<BulletBase>>();
     private Dictionary<string, Transform> parentDictionary = new Dictionary<string, Transform>();
 
     static BulletPooler _instance;
@@ -22,36 +22,35 @@ public class BulletPooler : MonoBehaviour
         }
     }
 
-    public void CreatePool(string name, GameObject prefab, int size)
+    public void CreatePool(string name, BulletBase prefab, int size)
     {
-        poolDictionary.Add(tag, new Queue<Poolable>());
-        parentDictionary.Add(tag, new GameObject(tag + "Pool").transform);
+        poolDictionary.Add(name, new Queue<BulletBase>());
+        parentDictionary.Add(name, new GameObject(name + "Pool").transform);
 
         for (int i = 0; i < size; i++)
         {
-            Poolable newObject = Instantiate(prefab, parentDictionary[tag]).GetComponent<Poolable>();
+            BulletBase newObject = Instantiate(prefab, parentDictionary[name]);
+            newObject.name = name;
             newObject.gameObject.SetActive(false);
-            poolDictionary[tag].Enqueue(newObject);
+            poolDictionary[name].Enqueue(newObject);
         }
     }
 
-    public Poolable ReuseObject(string tag, Vector3 position, Quaternion rotation)
+    public BulletBase ReuseObject(string tag, Vector3 position, Quaternion rotation)
     {
         if (poolDictionary.ContainsKey(tag))
         {
-            Poolable objectToReuse = poolDictionary[tag].Dequeue();
-            objectToReuse.transform.position = position;
-            objectToReuse.transform.rotation = rotation;
-            objectToReuse.gameObject.SetActive(true);
+            BulletBase objectToReuse = poolDictionary[tag].Dequeue();
+            objectToReuse.Reuse(position, rotation);
             return objectToReuse;
         }
         Debug.LogError("There is no particle : " + tag);
         return null;
     }
 
-    public void PushToPool(Poolable obj)
+    public void PushToPool(BulletBase obj)
     {
-        poolDictionary[obj.id].Enqueue(obj);
+        poolDictionary[obj.name].Enqueue(obj);
         obj.gameObject.SetActive(false);
     }
 }
