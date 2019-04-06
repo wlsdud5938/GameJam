@@ -88,7 +88,7 @@ public class TestMoving : MonoBehaviour
             {
                 if (nowState != State.Wander && nowState != State.Chase)
                     target = wayPoints[Random.Range(0, wayPoints.Length - 1)];
-                else if(Vector3.SqrMagnitude(transform.position - target.position) < 0.2f)
+                else if(target && Vector3.SqrMagnitude(transform.position - target.position) < 0.2f)
                     target = wayPoints[Random.Range(0, wayPoints.Length - 1)];
                 agent.stoppingDistance = 0;
                 nowState = State.Wander;
@@ -105,7 +105,7 @@ public class TestMoving : MonoBehaviour
         {
             delay = 3;
             StartCoroutine(UseSkill(Random.Range(0, 3), 6, transform.position + Vector3.up * 0.3f, transform.eulerAngles.y));
-            if (Vector3.SqrMagnitude(transform.position - target.position) > 9 && Random.Range(0, 100) < 20)
+            if (Vector3.SqrMagnitude(transform.position - target.position) > 30 && Random.Range(0, 100) < 50)
             {
                 isWait = true;
                 target = wayPoints[Random.Range(0, wayPoints.Length - 1)];
