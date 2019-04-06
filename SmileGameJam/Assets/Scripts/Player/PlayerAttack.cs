@@ -51,11 +51,13 @@ public class PlayerAttack : MonoBehaviour {
 
     public void SkillButtonDown()
     {
+        if (isDead) return;
         isClicked = true;
     }
 
     public void SkillButtonUp()
     {
+        if (isDead) return;
         animator.SetBool("IsAttacking", true);
         UseSkill();
         Invoke("FinishSkill", 0.1f);
@@ -83,6 +85,7 @@ public class PlayerAttack : MonoBehaviour {
 
     private void Update()
     {
+        if (isDead) return;
         if (isClicked)
         {
             percent = Mathf.Clamp(percent + Time.deltaTime * chargeSpeed, 0, maxPercent);
@@ -90,17 +93,19 @@ public class PlayerAttack : MonoBehaviour {
             if(index < 4 && powerGrade[index + 1] < percent)
                 index += 1;
 
-            nowSkill.ShowRange(index, muzzle.position, playerMove.targetRot);
+            nowSkill.ShowRange(index, transform.position, playerMove.targetRot);
         }
     }
 
     public void ChargeUltimate(int damage)
     {
+        if (isDead) return;
         ultCount += damage;
     }
 
     public void UseUltimate()
     {
+        if (isDead) return;
         ultCount = 0;
         ultButton.interactable = false;
         animator.SetBool("IsUltimating", true);
@@ -116,5 +121,10 @@ public class PlayerAttack : MonoBehaviour {
     private void FinishUltimate()
     {
         animator.SetBool("IsUltimating", false);
+    }
+
+    public void Death()
+    {
+        isClicked = false;
     }
 }

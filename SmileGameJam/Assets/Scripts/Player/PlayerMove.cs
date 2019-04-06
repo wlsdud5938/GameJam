@@ -17,6 +17,11 @@ public class PlayerMove : JoystickBase
 
     public Animator animator;
 
+    private void Start()
+    {
+        playerAttack = GetComponent<PlayerAttack>();
+    }
+
     protected override void Update()
     {
         base.Update();
@@ -51,6 +56,7 @@ public class PlayerMove : JoystickBase
     public void Death()
     {
         animator.SetBool("IsDead", true);
+        playerAttack.Death();
         playerAttack.isDead = isDead = true;
     }
 }

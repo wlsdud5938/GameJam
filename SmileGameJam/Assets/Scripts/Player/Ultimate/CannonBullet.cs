@@ -14,7 +14,7 @@ public class CannonBullet : MonoBehaviour
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
         range -= speed * Time.deltaTime;
         if (range <= 0)
-            Boom();
+            Destroy(gameObject);
     }
 
     public virtual void SetInformation(int damage, float speed, float range)
@@ -24,32 +24,15 @@ public class CannonBullet : MonoBehaviour
         this.range = range;
     }
 
-    public void Boom()
-    {
-        Collider[] cols = Physics.OverlapSphere(transform.position, radius);
-        foreach (Collider col in cols)
-        {
-            if (col.CompareTag("Enemy"))
-            {
-                col.GetComponent<UnitInfo>().healthPoint -= damage;
-            }
-            else if (col.CompareTag("Wall"))
-            {
-                Destroy(col.gameObject);
-            }
-        }
-    }
-
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
             other.GetComponent<UnitInfo>().healthPoint -= damage;
-            Boom();
         }
         else if (other.CompareTag("Wall"))
         {
-            Boom();
+            Destroy(other.gameObject);
         }
     }
 }
