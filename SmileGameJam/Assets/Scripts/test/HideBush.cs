@@ -20,20 +20,13 @@ public class HideBush : MonoBehaviour {
     {
         if (other.tag == "Enemy")
         {
-            other.transform.GetChild(0).transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
-            other.transform.GetChild(2).GetComponent<MeshRenderer>().enabled = false;
+            other.transform.GetChild(0).gameObject.SetActive(false);
+            other.transform.GetChild(2).gameObject.SetActive(false);
         }
         if (other.tag == "Player")
         {
-            for (i = 0; i < other.transform.Find("Model").GetComponent<MeshRenderer>().materials.Length; i++)
-            {
-                material = other.transform.Find("Model").GetComponent<MeshRenderer>().materials[i];
-                color = material.color;
-                color.a = 0.5f;
-                material.color = new Color(color.r, color.g, color.b, 0.7f);
-                Debug.Log(other.transform.Find("Model").GetComponent<MeshRenderer>().material.color.a);
-                //other.transform.Find("Model").GetComponent<MeshRenderer>().materials[i] = material;
-            }
+            other.transform.Find("char").transform.GetChild(0).gameObject.SetActive(false);
+            other.transform.Find("char").transform.GetChild(1).gameObject.SetActive(true);
         }
 
     }
@@ -42,8 +35,13 @@ public class HideBush : MonoBehaviour {
     {
         if (other.tag == "Enemy")
         {
-            other.transform.GetChild(0).transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
-            other.transform.GetChild(2).GetComponent<MeshRenderer>().enabled = true;
+            other.transform.GetChild(0).gameObject.SetActive(true);
+            other.transform.GetChild(2).gameObject.SetActive(true);
+        }
+        if (other.tag == "Player")
+        {
+            other.transform.Find("char").transform.GetChild(0).gameObject.SetActive(true);
+            other.transform.Find("char").transform.GetChild(1).gameObject.SetActive(false);
         }
     }
 
