@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class ShotgunBullet : BulletBase {
@@ -9,8 +9,8 @@ public class ShotgunBullet : BulletBase {
         base.Update();
     }
 
-    public override void SetInformation(int damage, float speed, float range)
+    public override void SetInformation(int damage, float speed, float range, Action hitCall)
     {
-        base.SetInformation(damage, speed, range);
+        base.SetInformation(damage, speed, range, hitCall);
     }
 }

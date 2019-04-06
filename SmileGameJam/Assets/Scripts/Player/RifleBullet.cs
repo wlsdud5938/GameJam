@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class RifleBullet : BulletBase {
@@ -9,9 +9,9 @@ public class RifleBullet : BulletBase {
         base.Update();
     }
 
-    public override void SetInformation(int power,float speed, float range)
+    public override void SetInformation(int power,float speed, float range, Action hitCall)
     {
-        base.SetInformation(power, speed, range);
+        base.SetInformation(power, speed, range, hitCall);
         transform.localScale = Vector3.one * (power + 0.5f) * 1.2f;
     }
 }
