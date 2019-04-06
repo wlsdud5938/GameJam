@@ -68,7 +68,7 @@ public class UnitInfo : MonoBehaviour {
                 Destroy();
             }
 
-            else
+            if(gameObject.tag == "Player")
             {
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
                 player.GetComponent<PlayerMove>().Death();
@@ -79,7 +79,7 @@ public class UnitInfo : MonoBehaviour {
 
     public void TakeDamage(int damage)
     {
-        healthPoint -= damage;
+        healthPoint = Mathf.Clamp(healthPoint - damage, 0, maxHealthPoint);
         hit = true;
         healTime = 5.0f;
     }
