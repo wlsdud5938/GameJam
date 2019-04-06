@@ -25,6 +25,7 @@ public class UnitInfo : MonoBehaviour {
     public float heal = 0.05f;
     public float stopDist = 5.0f;
 
+    public bool isDead = false;
     float healTime = 0.0f;
     bool hit = false;
     Animator animator;
@@ -61,8 +62,11 @@ public class UnitInfo : MonoBehaviour {
         }
         if(healthPoint <= 0)
         {
-            if (gameObject.tag == "Enemy")
+            if (!isDead && gameObject.tag == "Enemy")
+            {
+                isDead = true;
                 Destroy();
+            }
 
             else
             {
