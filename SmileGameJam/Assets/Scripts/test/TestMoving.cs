@@ -5,32 +5,38 @@ using UnityEngine.AI;
 
 public class TestMoving : MonoBehaviour
 {
-
-    public Transform goal;
     public float speed = 5.0f;
-    NavMeshAgent nav;
-    public GameObject player;
+    NavMeshAgent agent;
+
     public Transform target;
+
+    public GameObject player;
     public GameObject spawnPoint;
+    public GameObject[] points = new GameObject[9];
 
     float mindist = 99999.0f;
     float dist = 99999.0f;
-    int i = 0;
-    // Use this for initialization
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
-        nav = GetComponent<NavMeshAgent>();
-        nav.speed = speed;
+
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = speed;
+
+        target = player.transform;
     }
 
-    // Update is called once per frame
+    private void CheckItem()
+    {
+
+    }
+
     void Update()
     {
-        target = player.transform;
         mindist = Mathf.Abs(Vector3.Distance(transform.position, player.transform.position));
-        for (i = 0; i < spawnPoint.transform.childCount; i++)
+        for (int i = 0; i < spawnPoint.transform.childCount; i++)
         {
             if (spawnPoint.transform.GetChild(i).GetComponent<CheckItem>().checkItem)
             {
@@ -43,10 +49,10 @@ public class TestMoving : MonoBehaviour
             }
         }
         if (target == player.transform)
-            nav.stoppingDistance = gameObject.GetComponent<UnitInfo>().stopDist;
+            agent.stoppingDistance = gameObject.GetComponent<UnitInfo>().stopDist;
         else
-            nav.stoppingDistance = 0;
-        nav.SetDestination(target.position);
+            agent.stoppingDistance = 0;
+        agent.SetDestination(target.position);
     }
 
 }

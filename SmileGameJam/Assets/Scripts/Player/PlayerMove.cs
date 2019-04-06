@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
 public class PlayerMove : JoystickBase
 {
     public Transform target;
     private PlayerAttack playerAttack;
+    private Rigidbody rb;
 
     public float speed = 5;
     public float rotSpeed = 3;
@@ -19,6 +21,7 @@ public class PlayerMove : JoystickBase
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
         playerAttack = GetComponent<PlayerAttack>();
     }
 
@@ -43,7 +46,7 @@ public class PlayerMove : JoystickBase
         if(dist > 0.2f)
             animator.SetBool("IsRunning", true);
 
-        target.position += Quaternion.Euler(0, targetRot, 0) * Vector3.forward * speed * dist * Time.deltaTime;
+        rb.velocity = Quaternion.Euler(0, targetRot, 0) * Vector3.forward * speed * dist;
         animator.SetFloat("Speed", dist);
     }
 
@@ -51,12 +54,15 @@ public class PlayerMove : JoystickBase
     {
         if (isDead) return;
         animator.SetBool("IsRunning", false);
+        rb.velocity = Vector3.zero;
     }
 
     public void Death()
     {
         animator.SetBool("IsDead", true);
+        rb.velocity = Vector3.zero;
         playerAttack.Death();
         playerAttack.isDead = isDead = true;
+        SceneManager.LoadScene("LossScene");
     }
 }
