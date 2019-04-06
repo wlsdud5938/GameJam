@@ -40,7 +40,7 @@ public abstract class BulletBase : MonoBehaviour{
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<UnitInfo>().HP -= damage;
+            other.GetComponent<UnitInfo>().healthPoint -= damage;
             owner.ChargeUltimate(damage);
             PushToPool();
         }

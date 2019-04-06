@@ -11,6 +11,8 @@ public class PlayerMove : JoystickBase
 
     public float targetRot = 0;
 
+    public Animator animator;
+
     protected override void Update()
     {
         base.Update();
@@ -19,7 +21,7 @@ public class PlayerMove : JoystickBase
 
     protected override void GetJoystickDown()
     {
-
+        animator.SetBool("IsRunning", true);
     }
 
     protected override void GetJoystickStay(float dist)
@@ -30,6 +32,6 @@ public class PlayerMove : JoystickBase
 
     protected override void GetJoystickUp(bool isClicked)
     {
-
+        animator.SetBool("IsRunning", false);
     }
 }

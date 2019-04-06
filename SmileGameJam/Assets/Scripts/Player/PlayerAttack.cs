@@ -26,8 +26,9 @@ public class PlayerAttack : MonoBehaviour {
     [Header("Ultimate")]
     public UltBase nowUltimate;
     public Image ultimateBar;
+    public Button ultButton;
 
-    public int count = 0;
+    private int count = 0;
     public int ultCount
     {
         get
@@ -38,6 +39,8 @@ public class PlayerAttack : MonoBehaviour {
         {
             count = Mathf.Clamp(value, 0 , maxUltCount);
             ultimateBar.fillAmount = (float)count / maxUltCount;
+            if (count >= maxUltCount)
+                ultButton.interactable = true;
         }
     }
     private int maxUltCount = 100;
@@ -82,10 +85,8 @@ public class PlayerAttack : MonoBehaviour {
 
     public void UseUltimate()
     {
-        if (maxUltCount > ultCount)
-        {
-            ultCount = 0;
-            nowUltimate.UseUltimate();
-        }
+        ultCount = 0;
+        ultButton.interactable = false;
+        nowUltimate.UseUltimate(transform.position, playerMove.targetRot);
     }
 }
