@@ -105,7 +105,7 @@ public class TestMoving : MonoBehaviour
         {
             delay = 3;
             StartCoroutine(UseSkill(Random.Range(0, 3), 6, transform.position + Vector3.up * 0.3f, transform.eulerAngles.y));
-            if (Vector3.SqrMagnitude(transform.position - target.position) > 9 && Random.Range(0, 100) < 20)
+            if (Vector3.SqrMagnitude(transform.position - target.position) > 30 && Random.Range(0, 100) < 20)
             {
                 isWait = true;
                 target = wayPoints[Random.Range(0, wayPoints.Length - 1)];
