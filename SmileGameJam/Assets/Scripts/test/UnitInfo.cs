@@ -12,4 +12,15 @@ public class UnitInfo : MonoBehaviour {
     public float defensivePower = 1.0f;
 
     public float stopDist = 5.0f;
+    private void Update()
+    {
+        if(score >= 10 && !GameManager.Instance.king)
+        {
+            GameManager.Instance.king = true;
+            if (gameObject.tag == "Player")
+                GameManager.Instance.imKing = true;
+        }
+    }
+
+
 }
