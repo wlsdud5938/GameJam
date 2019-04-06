@@ -19,7 +19,10 @@ public class HideBush : MonoBehaviour {
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Enemy")
-            other.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
+        {
+            other.transform.GetChild(0).transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
+            other.transform.GetChild(2).GetComponent<MeshRenderer>().enabled = false;
+        }
         if (other.tag == "Player")
         {
             for (i = 0; i < other.transform.Find("Model").GetComponent<MeshRenderer>().materials.Length; i++)
@@ -38,7 +41,10 @@ public class HideBush : MonoBehaviour {
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Enemy")
-            other.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
+        {
+            other.transform.GetChild(0).transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
+            other.transform.GetChild(2).GetComponent<MeshRenderer>().enabled = true;
+        }
     }
 
 

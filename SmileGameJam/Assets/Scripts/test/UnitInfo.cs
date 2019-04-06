@@ -1,8 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UnitInfo : MonoBehaviour {
+
+    private GameObject mainCam;
+    public Transform playerCanavas;
+    public Image healthBarImg;
+    public Text healthText;
+    public Text nicknameText;
+
+    public string nickname = "Player";
 
     public int score = 0;
     public bool king = false;
@@ -13,7 +22,7 @@ public class UnitInfo : MonoBehaviour {
     public GameObject crown;
 
     public float defensivePower = 1.0f;
-    public float heal = 0.1f;
+    public float heal = 0.05f;
     public float stopDist = 5.0f;
 
     float healTime = 0.0f;
@@ -25,16 +34,21 @@ public class UnitInfo : MonoBehaviour {
         if(gameObject.tag == "Enemy")
             animator = gameObject.transform.GetChild(0).GetComponent<Animator>();    
         rb = gameObject.GetComponent<Rigidbody>();
+        nicknameText.text = nickname;
+        mainCam = Camera.main.gameObject;
     }
 
     private void Update()
     {
-        if(healthPoint < maxHealthPoint && healTime < 0.0f)
+        healthBarImg.fillAmount = healthPoint / maxHealthPoint;
+        healthText.text = healthPoint.ToString();
+
+        if (healthPoint < maxHealthPoint && healTime < 0.0f)
         {
             healthPoint += maxHealthPoint * heal;
             if (maxHealthPoint < healthPoint)
                 healthPoint = maxHealthPoint;
-            healTime = 1.0f;
+            healTime = 3.0f;
         }
         if (score >= 10 && !GameManager.Instance.king)
         {
@@ -47,10 +61,7 @@ public class UnitInfo : MonoBehaviour {
         if(healthPoint <= 0)
         {
             if (gameObject.tag == "Enemy")
-            {
-                Death();
-                Destroy(gameObject, 2);
-            }
+                Destroy();
 
             else
             {
@@ -65,11 +76,12 @@ public class UnitInfo : MonoBehaviour {
     {
         healthPoint -= damage;
         hit = true;
-        healTime = 3.0f;
+        healTime = 5.0f;
     }
 
     private void LateUpdate()
     {
+        playerCanavas.LookAt(mainCam.transform.position);
         if (crown.activeSelf)
         {
             if (rot < 360)
@@ -88,9 +100,11 @@ public class UnitInfo : MonoBehaviour {
 
     private void Destroy()
     {
-        Death();
 
         GameManager.Instance.enemyCount--;
+        Death();
+        Destroy(gameObject, 2);
+
     }
 
 }
