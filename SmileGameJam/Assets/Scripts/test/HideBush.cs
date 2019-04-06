@@ -27,8 +27,9 @@ public class HideBush : MonoBehaviour {
                 material = other.transform.Find("Model").GetComponent<MeshRenderer>().materials[i];
                 color = material.color;
                 color.a = 0.5f;
-                material.color = color;
-                other.transform.Find("Model").GetComponent<MeshRenderer>().materials[i] = material;
+                material.color = new Color(color.r, color.g, color.b, 0.7f);
+                Debug.Log(other.transform.Find("Model").GetComponent<MeshRenderer>().material.color.a);
+                //other.transform.Find("Model").GetComponent<MeshRenderer>().materials[i] = material;
             }
         }
 

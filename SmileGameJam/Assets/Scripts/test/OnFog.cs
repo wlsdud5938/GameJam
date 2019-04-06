@@ -25,7 +25,7 @@ public class OnFog : MonoBehaviour {
         }
         else if (numOfWave > 4)
             secondStageTime -= 1.0f * Time.deltaTime;
-        if(secondStageTime<0)
+        if(secondStageTime<0 && numOfWave<9)
         {
             numOfWave = 4 + (int)(Mathf.Abs(secondStageTime) / waveTime);
             for(i=0;i<4;i++)

@@ -55,7 +55,7 @@ public class ShotgunSkill : SkillBase
         {
             BulletBase newBullet =
                 BulletPooler.instance.ReuseObject(id, position, Quaternion.Euler(0, startAngle + angleGap * i + UnityEngine.Random.Range(-0.1f, 0.1f), 0));
-            newBullet.SetInformation(damage, bulletSpeed + UnityEngine.Random.Range(-1.5f, 1.5f), range + UnityEngine.Random.Range(-0.3f, 0.2f), owner);
+            newBullet.SetInformation(damage + gameObject.transform.parent.GetComponent<UnitInfo>().score, bulletSpeed + UnityEngine.Random.Range(-1.5f, 1.5f), range + UnityEngine.Random.Range(-0.3f, 0.2f), owner);
         }
     }
 
