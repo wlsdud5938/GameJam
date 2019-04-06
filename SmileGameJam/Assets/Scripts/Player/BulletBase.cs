@@ -6,7 +6,7 @@ public abstract class BulletBase : MonoBehaviour{
 
     public int damage = 0;
     public float range = 5, speed = 10;
-    private Action hitCall;
+    private PlayerAttack owner;
 
     protected virtual void Update()
     {
@@ -16,12 +16,12 @@ public abstract class BulletBase : MonoBehaviour{
             PushToPool();
     }
 
-    public virtual void SetInformation(int damage, float speed , float range, Action hitCall)
+    public virtual void SetInformation(int damage, float speed , float range, PlayerAttack owner)
     {
         this.damage = damage;
         this.speed = speed;
         this.range = range;
-        this.hitCall = hitCall;
+        this.owner = owner;
     }
 
     public void Reuse(Vector3 position, Quaternion rotation)
@@ -34,5 +34,15 @@ public abstract class BulletBase : MonoBehaviour{
     public void PushToPool()
     {
         BulletPooler.instance.PushToPool(this);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            other.GetComponent<UnitInfo>().HP -= damage;
+            owner.ChargeUltimate(damage);
+            PushToPool();
+        }
     }
 }

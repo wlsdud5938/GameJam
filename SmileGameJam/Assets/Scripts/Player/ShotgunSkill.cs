@@ -47,7 +47,7 @@ public class ShotgunSkill : SkillBase
             rangeList[i].SetActive(false);
     }
 
-    public override void UseSkill(int power, float range, Vector3 position, float rotation, Action hitCall)
+    public override void UseSkill(int power, float range, Vector3 position, float rotation, PlayerAttack owner)
     {
         float startAngle = rotation - angleList[power] * 0.5f;
         float angleGap = angleList[power] / bulletCount;
@@ -55,7 +55,7 @@ public class ShotgunSkill : SkillBase
         {
             BulletBase newBullet =
                 BulletPooler.instance.ReuseObject(id, position, Quaternion.Euler(0, startAngle + angleGap * i + UnityEngine.Random.Range(-0.1f, 0.1f), 0));
-            newBullet.SetInformation(damage, bulletSpeed + UnityEngine.Random.Range(-1.5f, 1.5f), range + UnityEngine.Random.Range(-0.3f, 0.2f), hitCall);
+            newBullet.SetInformation(damage, bulletSpeed + UnityEngine.Random.Range(-1.5f, 1.5f), range + UnityEngine.Random.Range(-0.3f, 0.2f), owner);
         }
     }
 
