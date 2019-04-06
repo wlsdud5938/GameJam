@@ -48,12 +48,9 @@ public class TestMoving : MonoBehaviour
 
         if (isWait)
         {
-            nowState = State.Wander;
-            if (nowState != State.Wander)
-                target = wayPoints[Random.Range(0, wayPoints.Length - 1)];
             if (Vector3.SqrMagnitude(transform.position - target.position) < 0.2f)
                 target = wayPoints[Random.Range(0, wayPoints.Length - 1)];
-            Invoke("ReChase", 5f);
+            agent.stoppingDistance = 0;
             return;
         }
 
@@ -89,11 +86,12 @@ public class TestMoving : MonoBehaviour
         {
             if (nearestTarget == null)
             {
-                nowState = State.Wander;
-                if (nowState != State.Wander)
+                if (nowState != State.Wander && nowState != State.Chase)
                     target = wayPoints[Random.Range(0, wayPoints.Length - 1)];
                 else if(Vector3.SqrMagnitude(transform.position - target.position) < 0.2f)
                     target = wayPoints[Random.Range(0, wayPoints.Length - 1)];
+                agent.stoppingDistance = 0;
+                nowState = State.Wander;
             }
             else
             {
@@ -107,8 +105,14 @@ public class TestMoving : MonoBehaviour
         {
             delay = 3;
             StartCoroutine(UseSkill(Random.Range(0, 3), 6, transform.position + Vector3.up * 0.3f, transform.eulerAngles.y));
-            if (Random.Range(0, 100) < 20)
+            if (Vector3.SqrMagnitude(transform.position - target.position) > 9 && Random.Range(0, 100) < 20)
+            {
                 isWait = true;
+                target = wayPoints[Random.Range(0, wayPoints.Length - 1)];
+                agent.stoppingDistance = 0;
+                nowState = State.Wander;
+                Invoke("ReChase", 5f);
+            }
         }
 
         if (delay > 0)
@@ -124,14 +128,14 @@ public class TestMoving : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             delay = 4;
-            startAngle = rotation - 12;
+            startAngle = rotation - 30;
             angleGap = 4;
         }
         else
         {
             yield return new WaitForSeconds(0.35f);
             delay = 5f;
-            startAngle = rotation - 10;
+            startAngle = rotation - 26;
             angleGap = 3.5f;
         }
 
