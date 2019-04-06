@@ -7,6 +7,7 @@ public class SceneDirector : MonoBehaviour {
     
     public void GoScene(string sceneName)
     {
+        Debug.Log("Go : " + sceneName);
         SceneManager.LoadScene(sceneName);
     }
 }
