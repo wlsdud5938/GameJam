@@ -27,7 +27,6 @@ public class UnitInfo : MonoBehaviour {
     private int healValue;
     private float healTime = 0.0f;
 
-
     [Header("King")]
     public GameObject crown;
     private bool isKing = false;

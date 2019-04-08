@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 114072291744476038}
   - component: {fileID: 54682167891742820}
   - component: {fileID: 65653657788394288}
+  - component: {fileID: 136828877942348052}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1346,7 +1347,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1061518980686530}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -23.1}
+  m_LocalPosition: {x: 0, y: 0.01499999, z: -23.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4765976669185304}
@@ -1494,8 +1495,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 1.5, z: 0.8}
-  m_Center: {x: 0, y: 0.8, z: 0}
+  m_Size: {x: 0.5, y: 0.4, z: 0.5}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!95 &95693621334761442
 Animator:
   serializedVersion: 3
@@ -1866,6 +1867,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!136 &136828877942348052
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1061518980686530}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!137 &137299344764797472
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
