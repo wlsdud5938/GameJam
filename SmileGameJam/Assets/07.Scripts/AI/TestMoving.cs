@@ -170,9 +170,6 @@ public class TestMoving : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position + Vector3.up * sight.y * 0.5f, sight * 2);
-
         foreach (Transform point in wayPoints)
         {
             if(point != null)

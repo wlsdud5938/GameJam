@@ -14,6 +14,7 @@ public class FogManager : MonoBehaviour
     void Update()
     {
         playTime += 1.0f * Time.deltaTime;
+
         numOfWave = (int)((playTime - waveStartTime) / waveTime);
         if (playTime > waveStartTime && numOfWave != 0 && numOfWave <= 4)
         {

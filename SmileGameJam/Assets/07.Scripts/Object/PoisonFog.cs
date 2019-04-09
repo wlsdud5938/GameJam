@@ -2,25 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoisonFog : MonoBehaviour {
-    public float poisonDamge = 0.2f;
-
-    float time = 0.0f;
+public class PoisonFog : MonoBehaviour
+{
+    public int poisonDamge;
 
     private void OnTriggerStay(Collider other)
     {
-        if (time > 0.0f)
-            time -= 1.0f * Time.deltaTime;
-        else
-        {
-            time = 1.0f;
-            if(other.CompareTag("Player")|| other.CompareTag("Enemy"))
-                other.GetComponent<UnitInfo>().TakeDamage((int)(other.GetComponent<UnitInfo>().maxHealthPoint * poisonDamge));
-        }
+        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
+            other.GetComponent<UnitInfo>().EnterPoison(poisonDamge);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        time = 1.0f;
+        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
+            other.GetComponent<UnitInfo>().ExitPoison();
     }
 }

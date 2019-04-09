@@ -69,6 +69,6 @@ public class PlayerMove : JoystickBase
     IEnumerator WaitForIt()
     {
         yield return new WaitForSeconds(2.0f);
-        SceneManager.LoadScene("LossScene");
+        SceneManager.LoadScene("LostScene");
     }
 }

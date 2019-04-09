@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class UnitInfo : MonoBehaviour {
+public partial class UnitInfo : MonoBehaviour {
 
     private GameObject mainCam;
 
@@ -25,12 +23,11 @@ public class UnitInfo : MonoBehaviour {
     [Header("Heal")]
     public float healPercent = 0.05f;
     private int healValue;
-    private float healTime = 0.0f;
-
+    public float healTime = 0.0f;
 
     [Header("King")]
     public GameObject crown;
-    private bool isKing = false;
+    public bool isKing = false;
     private float rot = 0;
 
     private Animator animator;
@@ -52,20 +49,25 @@ public class UnitInfo : MonoBehaviour {
     {
         if(healTime > 0)
             healTime -= Time.deltaTime;
-        else
+        else if(healthPoint < maxHealthPoint)
         {
             TakeHeal(healValue);
             healTime = 3.0f;
         }
 
-        if (score >= 10 && !GameManager.Instance.king && !GameManager.Instance.imKing)
+        if (isPoisoned)
         {
-            if (gameObject.tag == "Player")
-                GameManager.Instance.imKing = true;
-            else
-                GameManager.Instance.king = true;
-            BeTheKing();
+            poisonTime += Time.deltaTime;
+            healTime = 5.0f;
+            if (poisonTime > 1)
+            {
+                poisonTime = 0;
+                TakeDamage(poisonDamage);
+            }
         }
+
+        if (score >= 10 && !GameDirector.Instance.hasKing)
+            GameDirector.Instance.BeTheKing(this);
     }
 
     private void LateUpdate()
@@ -73,15 +75,13 @@ public class UnitInfo : MonoBehaviour {
         playerCanavas.LookAt(mainCam.transform.position);
         if (crown.activeSelf)
         {
-            if (rot < 360)
-                rot += Time.deltaTime * 60;
-            else
-                rot = 0;
+            rot = rot + Time.deltaTime * 60;
+            rot = rot > 360 ? 0 : rot;
             crown.transform.eulerAngles = new Vector3(0, rot, 0);
         }
     }
 
-    private void BeTheKing()
+    public void BeTheKing()
     {
         isKing = true;
         crown.SetActive(true);
@@ -125,7 +125,7 @@ public class UnitInfo : MonoBehaviour {
 
     public void Death()
     {
-        GameManager.Instance.enemyCount--;
+        GameDirector.Instance.DiePlayer(this);
         animator.SetBool("IsDead", true);
         rb.velocity = Vector3.zero;
         Destroy(gameObject, 2);
