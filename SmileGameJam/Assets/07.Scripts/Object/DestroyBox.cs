@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DestroyBox : MonoBehaviour
 {
@@ -10,6 +8,7 @@ public class DestroyBox : MonoBehaviour
     public void TakeDamage(int damage)
     {
         if (isBroken) return;
+
         isBroken = true;
         GameObject obj = Instantiate(brokenBox, gameObject.transform.position, Quaternion.identity);
         Destroy(obj, 2.0f);

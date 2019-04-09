@@ -43,6 +43,7 @@ public partial class UnitInfo : MonoBehaviour {
         healValue = Mathf.RoundToInt(maxHealthPoint * healPercent);
         nickname = PlayerPrefs.GetString("Name");
         nicknameText.text = nickname;
+        SetInfo();
     }
 
     private void Update()

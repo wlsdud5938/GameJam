@@ -13,9 +13,12 @@ public class GameDirector : Singleton<GameDirector>
 
     [Header("Fog")]
     public GameObject[] fogList;
+    public BoxCollider safeCollider;
+    private float safeSize = 50;
+
     private float nextWaveTime = 5.0f;
-    private float waveTerm = 5.0f, secondWaveTerm = 20.0f;
-    private int fogWave = 0, secondWave = 3;
+    public float waveTerm = 5.0f, secondWaveTerm = 20.0f;
+    private int fogWave = 0, secondWave = 4;
 
     [Header("Player")]
     public UnitInfo myPlayer;
@@ -26,6 +29,7 @@ public class GameDirector : Singleton<GameDirector>
         if(playTime > nextWaveTime && fogWave < 8)
         {
             fogList[fogWave++].SetActive(true);
+            safeCollider.size = new Vector3(safeCollider.size.x - 6, 5, safeCollider.size.z - 6);
 
             if (fogWave == secondWave)
                 nextWaveTime += secondWaveTerm;

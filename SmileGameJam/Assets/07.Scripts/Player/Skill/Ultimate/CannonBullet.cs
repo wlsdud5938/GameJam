@@ -28,7 +28,7 @@ public class CannonBullet : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<UnitInfo>().healthPoint -= damage;
+            other.GetComponent<UnitInfo>().TakeDamage(damage);
         }
         else if (other.CompareTag("Wall"))
         {
