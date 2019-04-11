@@ -13,6 +13,7 @@ public partial class UnitInfo : MonoBehaviour {
     public Text scoreText;
 
     [Header("Information")]
+    public Sprite characterImage;
     public string nickname = "Player";
     public float healthPoint = 100.0f;
     public float maxHealthPoint = 100.0f;

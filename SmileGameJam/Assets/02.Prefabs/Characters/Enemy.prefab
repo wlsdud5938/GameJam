@@ -1710,13 +1710,17 @@ MonoBehaviour:
   healthText: {fileID: 114524819701113994}
   nicknameText: {fileID: 114348157923453820}
   scoreText: {fileID: 114733526330319928}
+  characterImage: {fileID: 21300000, guid: 279886133d8f64e4fab2bf8d0bbb3082, type: 3}
   nickname: AI
   healthPoint: 200
   maxHealthPoint: 200
   score: 0
   stopDist: 5
   healPercent: 0.05
+  healTime: 0
   crown: {fileID: 1988075043234120}
+  isKing: 0
+  isPoisoned: 0
 --- !u!114 &114884512211839504
 MonoBehaviour:
   m_ObjectHideFlags: 1
