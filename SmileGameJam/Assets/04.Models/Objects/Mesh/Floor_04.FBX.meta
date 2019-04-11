@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: aa6ba240e88c91d47894aa1a5c0e5592
+guid: 4a65bc8fb1b5da64daa9b5607892c419
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -8,7 +8,7 @@ ModelImporter:
     2100000: 'Material #27'
     2300000: //RootNode
     3300000: //RootNode
-    4300000: C_Rock_01
+    4300000: Floor_04
   externalObjects: {}
   materials:
     importMaterials: 0
@@ -41,7 +41,7 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 3
+    meshCompression: 0
     addColliders: 0
     importVisibility: 1
     importBlendShapes: 1
@@ -67,7 +67,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
