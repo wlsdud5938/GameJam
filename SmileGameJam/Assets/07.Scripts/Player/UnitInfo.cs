@@ -33,6 +33,8 @@ public partial class UnitInfo : MonoBehaviour {
 
     private Animator animator;
     private Rigidbody rb;
+    [HideInInspector]
+    public PlayerAttack playerAttack;
 
     private void Start()
     {
@@ -40,9 +42,14 @@ public partial class UnitInfo : MonoBehaviour {
 
         animator = transform.GetChild(0).GetComponent<Animator>();    
         rb = transform.GetComponent<Rigidbody>();
+        playerAttack = transform.GetComponent<PlayerAttack>();
 
         healValue = Mathf.RoundToInt(maxHealthPoint * healPercent);
-        nickname = PlayerPrefs.GetString("Name");
+
+        if (transform.CompareTag("Enemy"))
+            nickname = "AI " + Random.Range(1000, 10000);
+        else
+            nickname = PlayerPrefs.GetString("Name");
         nicknameText.text = nickname;
         SetInfo();
     }
@@ -64,7 +71,7 @@ public partial class UnitInfo : MonoBehaviour {
             if (poisonTime > 1)
             {
                 poisonTime = 0;
-                TakeDamage(poisonDamage);
+                TakeDamage(this, poisonDamage);
             }
         }
 
@@ -97,7 +104,7 @@ public partial class UnitInfo : MonoBehaviour {
         scoreText.text = score.ToString();
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(UnitInfo owner, int damage)
     {
         healthPoint = Mathf.Clamp(healthPoint - damage, 0, maxHealthPoint);
         healTime = 5.0f;
@@ -107,7 +114,7 @@ public partial class UnitInfo : MonoBehaviour {
             if (!isDead && gameObject.tag == "Enemy")
             {
                 isDead = true;
-                Death();
+                Death(owner);
             }
 
             if (gameObject.tag == "Player")
@@ -125,9 +132,9 @@ public partial class UnitInfo : MonoBehaviour {
         SetInfo();
     }
 
-    public void Death()
+    public void Death(UnitInfo killer)
     {
-        GameDirector.Instance.DiePlayer(this);
+        GameDirector.Instance.DiePlayer(killer,this);
         animator.SetBool("IsDead", true);
         rb.velocity = Vector3.zero;
         Destroy(gameObject, 2);

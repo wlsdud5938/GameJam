@@ -9,9 +9,9 @@ public class CannonUltimate : UltBase
 
     public CannonBullet cannon;
 
-    public override void UseUltimate(Vector3 position, float rotation)
+    public override void UseUltimate(Vector3 position, float rotation, UnitInfo owner)
     {
         CannonBullet newCannon = Instantiate(cannon, position, Quaternion.Euler(0, rotation, 0));
-        newCannon.SetInformation(damage, speed, range);
+        newCannon.SetInformation(damage, speed, range, owner);
     }
 }

@@ -50,6 +50,8 @@ public class PlayerAttack : MonoBehaviour {
     }
     private int maxUltCount = 100;
 
+    private UnitInfo unitInfo;
+
     public bool isDead = false;
 
     public void SkillButtonDown()
@@ -75,7 +77,7 @@ public class PlayerAttack : MonoBehaviour {
 
     private void UseSkill()
     {
-        nowSkill.UseSkill(index, range, muzzle.position, playerMove.targetRot, this);
+        nowSkill.UseSkill(index, range, muzzle.position, playerMove.targetRot, unitInfo);
         nowSkill.HideRange();
     }
 
@@ -87,6 +89,7 @@ public class PlayerAttack : MonoBehaviour {
     private void Start()
     {
         playerMove = GetComponent<PlayerMove>();
+        unitInfo = GetComponent<UnitInfo>();
     }
 
     private void Update()
@@ -123,7 +126,7 @@ public class PlayerAttack : MonoBehaviour {
 
     private void ShotUltimate()
     {
-        nowUltimate.UseUltimate(muzzle.position, playerMove.targetRot);
+        nowUltimate.UseUltimate(muzzle.position, playerMove.targetRot, unitInfo);
     }
 
     private void FinishUltimate()

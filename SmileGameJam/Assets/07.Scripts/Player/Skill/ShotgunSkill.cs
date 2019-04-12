@@ -48,10 +48,13 @@ public class ShotgunSkill : SkillBase
             rangeList[i].SetActive(false);
     }
 
-    public override void UseSkill(int power, float range, Vector3 position, float rotation, PlayerAttack owner)
+    public override void UseSkill(int power, float range, Vector3 position, float rotation, UnitInfo owner)
     {
         float startAngle = rotation - angleList[power] * 0.5f;
         float angleGap = angleList[power] / bulletCount;
+
+        CameraManager.instance.ReboundCamera(0.15f, Quaternion.Euler(0,rotation,0) * Vector3.forward);
+
         for (int i = 0; i < bulletCount; i++)
         {
             BulletBase newBullet =

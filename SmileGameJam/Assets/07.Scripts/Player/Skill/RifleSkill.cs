@@ -14,7 +14,7 @@ public class RifleSkill : SkillBase
 
     }
 
-    public override void UseSkill(int power, float range, Vector3 position, float rotation, PlayerAttack owner)
+    public override void UseSkill(int power, float range, Vector3 position, float rotation, UnitInfo owner)
     {
         BulletBase newBullet = BulletPooler.instance.ReuseObject(id, position, Quaternion.Euler(0, rotation, 0));
         newBullet.SetInformation(power, bulletSpeed, range, owner);

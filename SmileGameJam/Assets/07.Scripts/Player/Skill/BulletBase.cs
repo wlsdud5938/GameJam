@@ -6,7 +6,7 @@ public abstract class BulletBase : MonoBehaviour{
 
     public int damage = 0;
     public float range = 5, speed = 10;
-    private PlayerAttack owner;
+    private UnitInfo owner;
 
     protected virtual void Update()
     {
@@ -16,7 +16,7 @@ public abstract class BulletBase : MonoBehaviour{
             PushToPool();
     }
 
-    public virtual void SetInformation(int damage, float speed , float range, PlayerAttack owner)
+    public virtual void SetInformation(int damage, float speed , float range, UnitInfo owner)
     {
         this.damage = damage;
         this.speed = speed;
@@ -40,8 +40,8 @@ public abstract class BulletBase : MonoBehaviour{
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<UnitInfo>().TakeDamage(damage);
-            owner.ChargeUltimate(damage);
+            other.GetComponent<UnitInfo>().TakeDamage(owner, damage);
+            owner.playerAttack.ChargeUltimate(damage);
             PushToPool();
         }
         else if(other.CompareTag("Box"))

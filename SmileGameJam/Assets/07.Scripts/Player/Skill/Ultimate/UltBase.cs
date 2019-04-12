@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class UltBase : MonoBehaviour {
 
-    public abstract void UseUltimate(Vector3 position, float rotation);
+    public abstract void UseUltimate(Vector3 position, float rotation, UnitInfo owner);
 }

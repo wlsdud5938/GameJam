@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CannonBullet : MonoBehaviour
 {
+    private UnitInfo owner;
     public int damage = 0;
     public float range = 5, speed = 10;
 
@@ -17,18 +18,19 @@ public class CannonBullet : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public virtual void SetInformation(int damage, float speed, float range)
+    public virtual void SetInformation(int damage, float speed, float range, UnitInfo owner)
     {
         this.damage = damage;
         this.speed = speed;
         this.range = range;
+        this.owner = owner;
     }
 
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<UnitInfo>().TakeDamage(damage);
+            other.GetComponent<UnitInfo>().TakeDamage(owner, damage);
         }
         else if (other.CompareTag("Wall"))
         {

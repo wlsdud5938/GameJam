@@ -9,7 +9,7 @@ public class ShotgunBullet : BulletBase {
         base.Update();
     }
 
-    public override void SetInformation(int damage, float speed, float range, PlayerAttack owner)
+    public override void SetInformation(int damage, float speed, float range, UnitInfo owner)
     {
         base.SetInformation(damage, speed, range, owner);
     }

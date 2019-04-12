@@ -16,12 +16,18 @@ public class GameDirector : Singleton<GameDirector>
     public BoxCollider safeCollider;
     private float safeSize = 50;
 
-    private float nextWaveTime = 5.0f;
-    public float waveTerm = 5.0f, secondWaveTerm = 20.0f;
+    private float nextWaveTime = 0;
+    public float waveTerm = 5.0f;
+    public float firstWaveTerm = 20.0f, secondWaveTerm = 20.0f;
     private int fogWave = 0, secondWave = 4;
 
     [Header("Player")]
     public UnitInfo myPlayer;
+
+    private void Start()
+    {
+        playTime = -firstWaveTerm;
+    }
 
     void Update()
     {
@@ -56,9 +62,10 @@ public class GameDirector : Singleton<GameDirector>
         player.BeTheKing();
 }
 
-    public void DiePlayer(UnitInfo player)
+    public void DiePlayer(UnitInfo killer, UnitInfo killed)
     {
         playerCount--;
+        KillLogManager.instance.AddKillData(killer, killed);
         if (playerCount <= 0)
             WinTheGame();
     }
