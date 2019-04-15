@@ -8719,6 +8719,7 @@ MonoBehaviour:
   - {fileID: 285582009}
   safeCollider: {fileID: 2019502892}
   waveTerm: 15
+  firstWaveTerm: 20
   secondWaveTerm: 30
   myPlayer: {fileID: 1708242114}
 --- !u!4 &256137141
@@ -35051,6 +35052,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1789732415}
   dist: {x: 0, y: 15, z: -14}
+  shakeDist: {x: 0, y: 0, z: 0}
 --- !u!20 &1083182321
 Camera:
   m_ObjectHideFlags: 0
@@ -35103,7 +35105,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 45.000004, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!114 &1083182323
 MonoBehaviour:
   m_ObjectHideFlags: 0
