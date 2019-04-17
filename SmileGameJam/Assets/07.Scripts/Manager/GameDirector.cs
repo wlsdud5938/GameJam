@@ -1,15 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameDirector : Singleton<GameDirector>
 {
     [Header("Time")]
     public float playTime = 0.0f;
     public float gameEndTime = 15.0f;
+    private int gameNextTime = 16;
     public int playerCount = 3;
     public bool hasKing = false;
+    public Text timeText;
 
     [Header("Fog")]
     public GameObject[] fogList;
@@ -32,7 +34,7 @@ public class GameDirector : Singleton<GameDirector>
     void Update()
     {
         playTime += Time.deltaTime;
-        if(playTime > nextWaveTime && fogWave < 8)
+        if (playTime > nextWaveTime && fogWave < 8)
         {
             fogList[fogWave++].SetActive(true);
             safeCollider.size = new Vector3(safeCollider.size.x - 6, 5, safeCollider.size.z - 6);
@@ -46,6 +48,7 @@ public class GameDirector : Singleton<GameDirector>
         if (hasKing)
         {
             gameEndTime -= Time.deltaTime;
+
             if (gameEndTime < 0)
             {
                 if (myPlayer.isKing)
@@ -53,14 +56,35 @@ public class GameDirector : Singleton<GameDirector>
                 else
                     LoseTheGame();
             }
+            else if (gameEndTime < gameNextTime)
+            {
+                gameNextTime -= 1;
+                timeText.text = gameNextTime.ToString();
+                StartCoroutine(BoomText(7));
+            }
         }
     }
 
     public void BeTheKing(UnitInfo player)
     {
         hasKing = true;
+        Debug.Log(player.name);
         player.BeTheKing();
-}
+        gameEndTime = 18;
+        timeText.text = player.nickname + " is the KING";
+        StartCoroutine(BoomText(5));
+    }
+
+    IEnumerator BoomText(int start)
+    {
+        Transform timeTr = timeText.transform;
+        for (int i = start; i < 10; i++)
+        {
+            timeTr.localScale = Vector3.one * 0.1f * i;
+            yield return null;
+        }
+        yield return new WaitForSeconds(1);
+    }
 
     public void DiePlayer(UnitInfo killer, UnitInfo killed)
     {

@@ -46,6 +46,7 @@ public partial class UnitInfo : MonoBehaviour {
 
         healValue = Mathf.RoundToInt(maxHealthPoint * healPercent);
 
+        PlayerPrefs.SetString("Name", "Player");
         if (transform.CompareTag("Enemy"))
             nickname = "AI " + Random.Range(1000, 10000);
         else
@@ -129,6 +130,15 @@ public partial class UnitInfo : MonoBehaviour {
     public void TakeHeal(int heal)
     {
         healthPoint = Mathf.Clamp(healthPoint + heal, 0, maxHealthPoint);
+        SetInfo();
+    }
+
+    public void GetScore(int point)
+    {
+        score += point;
+        float health = maxHealthPoint * point * 0.1f;
+        maxHealthPoint += health;
+        healthPoint += health;
         SetInfo();
     }
 
