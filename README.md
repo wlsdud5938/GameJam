@@ -31,8 +31,8 @@
 <img width="70%" src="https://user-images.githubusercontent.com/40797534/56403309-a2a9ca00-629b-11e9-844f-5dd4ecb5a5bb.png"></img>
 <img width="70%" src="https://user-images.githubusercontent.com/40797534/56403310-a3426080-629b-11e9-870c-f544f51741b7.png"></img>
 <img width="70%" src="https://user-images.githubusercontent.com/40797534/56403313-a4738d80-629b-11e9-881d-928971eb9d6d.png"></img>
-* **왕이 된 상태에서 15초간 버티면, 승리하게 됩니다.**<br>
 <img width="70%" src="https://user-images.githubusercontent.com/40797534/56403314-a4738d80-629b-11e9-9a3b-7bdd2a3dee17.png"></img>
+* **왕이 된 상태에서 15초간 버티면, 승리하게 됩니다.**<br>
 <img width="70%" src="https://user-images.githubusercontent.com/40797534/56403728-b6563000-629d-11e9-9731-66f3def8ac3d.png"></img>
 <img width="70%" src="https://user-images.githubusercontent.com/40797534/56403729-b6eec680-629d-11e9-92f7-1fbb7412b670.png"></img>
 <img width="70%" src="https://user-images.githubusercontent.com/40797534/56403731-b7875d00-629d-11e9-9386-de1e8318d3e7.png"></img>
