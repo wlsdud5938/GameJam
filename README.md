@@ -39,3 +39,76 @@
 <img width="70%" src="https://user-images.githubusercontent.com/40797534/56403728-b6563000-629d-11e9-9731-66f3def8ac3d.png"></img>
 <img width="70%" src="https://user-images.githubusercontent.com/40797534/56403729-b6eec680-629d-11e9-92f7-1fbb7412b670.png"></img>
 <img width="70%" src="https://user-images.githubusercontent.com/40797534/56403731-b7875d00-629d-11e9-9386-de1e8318d3e7.png"></img>
+
+### 코드
+* #### 조이스틱 스크립트
+```C#
+#if UNITY_ANDROID
+    private void Start_Move_Joystick(int touch)
+    {
+        nowTouch = touch;
+        isStick_Stay = true;
+        isDraged = false;
+        
+        //시작 점, 조이스틱위치 초기화
+        firstPos = joystick.position = Input.GetTouch(touch).position;
+        nowPos = firstPos;
+
+        GetJoystickDown();
+    }
+
+    private void Stay_Move_Joystick()
+    {
+        nowPos = Input.GetTouch(nowTouch).position;
+        
+        if (Vector2.SqrMagnitude(nowPos - firstPos) > 0.1f) isDraged = true;
+
+        distance = Vector3.Distance(nowPos, firstPos);
+        distance = (distance < radius) ? distance : radius;
+
+        nowPos = (nowPos - firstPos).normalized;
+        lever.anchoredPosition = nowPos * distance;
+
+        direction = nowPos;
+    
+        GetJoystickStay(distance / radius);
+    }
+
+    private void End_Move_Joystick()
+    {
+        GetJoystickUp(!isDraged);
+
+        isStick_Stay = false;
+        nowTouch = -1;
+
+        direction = Vector2.zero;
+        distance = 0;
+
+        lever.anchoredPosition = Vector2.zero;
+        joystick.anchoredPosition = disabledPos;
+    }
+#endif
+    #endregion
+```
+
+* #### 킬로그 풀링 스크립트
+```C#
+private Queue<KillData> killDataQueue = new Queue<KillData>();
+private Queue<KillLog> killLogs = new Queue<KillLog>();
+    ...
+public void AddKillData(UnitInfo killing, UnitInfo killed)
+{
+    killDataQueue.Enqueue(new KillData(killing, killed));
+}
+
+private struct KillData
+{
+  public UnitInfo killing, killed;
+
+  public KillData(UnitInfo killing, UnitInfo killed)
+  {
+    this.killing = killing;
+    this.killed = killed;
+  }
+}
+```
