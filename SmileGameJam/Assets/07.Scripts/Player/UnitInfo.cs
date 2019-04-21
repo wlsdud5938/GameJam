@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public partial class UnitInfo : MonoBehaviour {
+public partial class UnitInfo : MonoBehaviour
+{
 
     private GameObject mainCam;
 
@@ -40,7 +41,7 @@ public partial class UnitInfo : MonoBehaviour {
     {
         mainCam = Camera.main.gameObject;
 
-        animator = transform.GetChild(0).GetComponent<Animator>();    
+        animator = transform.GetChild(0).GetComponent<Animator>();
         rb = transform.GetComponent<Rigidbody>();
         playerAttack = transform.GetComponent<PlayerAttack>();
 
@@ -57,27 +58,13 @@ public partial class UnitInfo : MonoBehaviour {
 
     private void Update()
     {
-        if(healTime > 0)
+        if (healTime > 0)
             healTime -= Time.deltaTime;
-        else if(healthPoint < maxHealthPoint)
+        else if (healthPoint < maxHealthPoint)
         {
             TakeHeal(healValue);
             healTime = 3.0f;
         }
-
-        if (isPoisoned)
-        {
-            poisonTime += Time.deltaTime;
-            healTime = 5.0f;
-            if (poisonTime > 1)
-            {
-                poisonTime = 0;
-                TakeDamage(this, poisonDamage);
-            }
-        }
-
-        if (score >= 10 && !GameDirector.Instance.hasKing)
-            GameDirector.Instance.BeTheKing(this);
     }
 
     private void LateUpdate()
@@ -115,7 +102,6 @@ public partial class UnitInfo : MonoBehaviour {
             if (!isDead && gameObject.tag == "Enemy")
             {
                 isDead = true;
-                Death(owner);
             }
 
             if (gameObject.tag == "Player")
@@ -140,13 +126,5 @@ public partial class UnitInfo : MonoBehaviour {
         maxHealthPoint += health;
         healthPoint += health;
         SetInfo();
-    }
-
-    public void Death(UnitInfo killer)
-    {
-        GameDirector.Instance.DiePlayer(killer,this);
-        animator.SetBool("IsDead", true);
-        rb.velocity = Vector3.zero;
-        Destroy(gameObject, 2);
     }
 }

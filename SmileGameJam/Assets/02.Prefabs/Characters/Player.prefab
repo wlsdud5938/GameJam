@@ -1656,6 +1656,7 @@ MonoBehaviour:
   healTime: 0
   crown: {fileID: 1230206036269032}
   isKing: 0
+  playerAttack: {fileID: 0}
   isPoisoned: 0
 --- !u!114 &114498545429458876
 MonoBehaviour:

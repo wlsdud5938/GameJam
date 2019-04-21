@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class KillLog : MonoBehaviour
 {
     private Animation anim;
-    private int startPos = 345, endPos = 545;
 
     public Image killingImage, killedImage;
     public Text killingText, killedText;

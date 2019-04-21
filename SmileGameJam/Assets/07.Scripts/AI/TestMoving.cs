@@ -64,7 +64,7 @@ public class TestMoving : MonoBehaviour
                 {
                     nowState = State.Chase;
                     target = col.transform;
-                    agent.stoppingDistance = playerGap;
+                    agent.stoppingDistance = Random.Range(1.5f, 3.5f);
                     flag = true;
                     break;
                 }
@@ -104,10 +104,10 @@ public class TestMoving : MonoBehaviour
 
         if (animator.gameObject.activeSelf)
         {
-            if (target && Vector3.SqrMagnitude(transform.position - target.position) <= agent.stoppingDistance * agent.stoppingDistance)
-                animator.SetBool("IsRunning", false);
-            else
+            if (target && Vector3.SqrMagnitude(transform.position - target.position) > agent.stoppingDistance * agent.stoppingDistance + 5)
                 animator.SetBool("IsRunning", true);
+            else if (target && Vector3.SqrMagnitude(transform.position - target.position) <= agent.stoppingDistance * agent.stoppingDistance)
+                animator.SetBool("IsRunning", false);
         }
 
         if (target == player && delay <= 0)
@@ -135,14 +135,14 @@ public class TestMoving : MonoBehaviour
         agent.speed = 0;
         if (power == 0)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1.2f);
             delay = 4;
             startAngle = rotation - 30;
             angleGap = 4;
         }
         else
         {
-            yield return new WaitForSeconds(0.35f);
+            yield return new WaitForSeconds(1.35f);
             delay = 5f;
             startAngle = rotation - 26;
             angleGap = 3.5f;

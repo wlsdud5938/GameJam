@@ -8708,6 +8708,7 @@ MonoBehaviour:
   gameEndTime: 15
   playerCount: 3
   hasKing: 0
+  timeText: {fileID: 0}
   fogList:
   - {fileID: 437361762}
   - {fileID: 1456681080}
@@ -8719,6 +8720,7 @@ MonoBehaviour:
   - {fileID: 285582009}
   safeCollider: {fileID: 2019502892}
   waveTerm: 10
+  firstWaveTerm: 20
   secondWaveTerm: 30
   myPlayer: {fileID: 1708242114}
 --- !u!4 &256137141
@@ -34799,6 +34801,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1789732415}
   dist: {x: 0, y: 15, z: -14}
+  shakeDist: {x: 0, y: 0, z: 0}
 --- !u!20 &1083182321
 Camera:
   m_ObjectHideFlags: 0
@@ -56270,16 +56273,6 @@ Prefab:
       propertyPath: ultButton
       value: 
       objectReference: {fileID: 803347704}
-    - target: {fileID: 54682167891742820, guid: 11a6a74cbd2ec7346b549c166b8a3ef1,
-        type: 2}
-      propertyPath: m_Constraints
-      value: 84
-      objectReference: {fileID: 0}
-    - target: {fileID: 65653657788394288, guid: 11a6a74cbd2ec7346b549c166b8a3ef1,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11a6a74cbd2ec7346b549c166b8a3ef1, type: 2}
   m_IsPrefabAsset: 0

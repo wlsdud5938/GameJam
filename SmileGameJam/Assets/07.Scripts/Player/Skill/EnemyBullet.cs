@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour {
 
-    public float damage = 5;
+    public int damage = 5;
     public float speed = 12;
     public float range;
 
@@ -25,7 +25,7 @@ public class EnemyBullet : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<UnitInfo>().healthPoint -= damage;
+            other.GetComponent<UnitInfo>().TakeDamage(null, damage);
             Destroy(gameObject);
         }
         else if(other.CompareTag("Wall"))
