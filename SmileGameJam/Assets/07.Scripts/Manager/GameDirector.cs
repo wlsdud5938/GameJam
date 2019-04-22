@@ -3,12 +3,19 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class GameDirector : Singleton<GameDirector>
+public class GameDirector : MonoBehaviour
 {
     public float playTime = 0.0f;
     public Text timeText;
 
     public PlayerAttack player;
+
+    public static GameDirector instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Update()
     {

@@ -11,7 +11,6 @@ public class TestMoving : MonoBehaviour
     public Vector3 sight;
 
     public float speed = 5.0f;
-    private float playerGap;
     public float delay = 0;
     public bool isWait = false;
     NavMeshAgent agent;
@@ -29,8 +28,6 @@ public class TestMoving : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = 2.5f;
-
-        playerGap = GetComponent<UnitInfo>().stopDist;
 
         target = wayPoints[Random.Range(0, wayPoints.Length - 1)];
 

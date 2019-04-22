@@ -41,7 +41,6 @@ public abstract class BulletBase : MonoBehaviour{
         if (other.CompareTag("Enemy"))
         {
             other.GetComponent<UnitInfo>().TakeDamage(owner, damage);
-            owner.playerAttack.ChargeUltimate(damage);
             PushToPool();
         }
         else if(other.CompareTag("Box"))

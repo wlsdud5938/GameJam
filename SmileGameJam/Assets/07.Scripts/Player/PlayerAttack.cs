@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour {
@@ -24,31 +22,6 @@ public class PlayerAttack : MonoBehaviour {
     public int chargeSpeed = 20;
 
     public Image chargeBar;
-
-    [Header("Ultimate")]
-    public UltBase nowUltimate;
-    public Image ultimateBar;
-    public Button ultButton;
-
-    private int count = 0;
-    public int ultCount
-    {
-        get
-        {
-            return count;
-        }
-        set
-        {
-            count = Mathf.Clamp(value, 0 , maxUltCount);
-            ultimateBar.fillAmount = (float)count / maxUltCount;
-            if (count >= maxUltCount)
-            {
-                ultimateBar.enabled = false;
-                ultButton.interactable = true;
-            }
-        }
-    }
-    private int maxUltCount = 100;
 
     private UnitInfo unitInfo;
 
@@ -105,28 +78,6 @@ public class PlayerAttack : MonoBehaviour {
             if(index > 0)
             nowSkill.ShowRange(index, transform.position, playerMove.targetRot);
         }
-    }
-
-    public void ChargeUltimate(int damage)
-    {
-        if (isDead) return;
-        ultCount += damage;
-    }
-
-    public void UseUltimate()
-    {
-        if (isDead) return;
-        ultCount = 0;
-        ultButton.interactable = false;
-        ultimateBar.enabled = true;
-        animator.SetBool("IsUltimating", true);
-        Invoke("ShotUltimate", 0.5f);
-        Invoke("FinishUltimate", 0.1f);
-    }
-
-    private void ShotUltimate()
-    {
-        nowUltimate.UseUltimate(muzzle.position, playerMove.targetRot, unitInfo);
     }
 
     private void FinishUltimate()
