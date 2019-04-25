@@ -24,6 +24,7 @@ public abstract class JoystickBase : MonoBehaviour
     }
     #endregion
 
+    public bool isLeftField = false;
     public float radius = 65;
 
     #region Event Function
@@ -45,7 +46,8 @@ public abstract class JoystickBase : MonoBehaviour
             if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId) &&
                 touch.phase == TouchPhase.Began)
             {
-                if (touch.position.x < Screen.width * 0.5f)
+                if ((!isLeftField && touch.position.x > Screen.width * 0.5f) ||
+                    (isLeftField && touch.position.x < Screen.width * 0.5f))
                     Start_Move_Joystick(touch.fingerId);
             }
         }
@@ -145,7 +147,8 @@ public abstract class JoystickBase : MonoBehaviour
     private void TestMovement()
     {
         if (!EventSystem.current.IsPointerOverGameObject() &&
-            Input.GetMouseButtonDown(0))
+            ((!isLeftField && Input.GetMouseButtonDown(1)) ||
+            (isLeftField && Input.GetMouseButtonDown(0))))
         {
             isStick_Stay = true;
             isDraged = false;
@@ -156,7 +159,8 @@ public abstract class JoystickBase : MonoBehaviour
 
             GetJoystickDown();
         }
-        else if (isStick_Stay && Input.GetMouseButton(0))
+        else if (isStick_Stay && ((!isLeftField && Input.GetMouseButton(1)) ||
+                (isLeftField && Input.GetMouseButton(0))))
         {
             nowPos = Input.mousePosition;
 
@@ -172,7 +176,8 @@ public abstract class JoystickBase : MonoBehaviour
 
             GetJoystickStay(distance / radius);
         }
-        else if (isStick_Stay && Input.GetMouseButtonUp(0))
+        else if (isStick_Stay && ((!isLeftField && Input.GetMouseButtonUp(1)) ||
+            (isLeftField && Input.GetMouseButtonUp(0))))
         {
             GetJoystickUp(!isDraged);
 

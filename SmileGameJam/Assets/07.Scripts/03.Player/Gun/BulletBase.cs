@@ -6,7 +6,7 @@ public abstract class BulletBase : MonoBehaviour{
 
     public int damage = 0;
     public float range = 5, speed = 10;
-    private UnitInfo owner;
+    private Player owner;
 
     protected virtual void Update()
     {
@@ -16,7 +16,7 @@ public abstract class BulletBase : MonoBehaviour{
             PushToPool();
     }
 
-    public virtual void SetInformation(int damage, float speed , float range, UnitInfo owner)
+    public virtual void SetInformation(Player owner, int damage, float speed , float range)
     {
         this.damage = damage;
         this.speed = speed;
@@ -30,6 +30,10 @@ public abstract class BulletBase : MonoBehaviour{
         transform.rotation = rotation;
         gameObject.SetActive(true);
     }
+    public void Reuse()
+    {
+        gameObject.SetActive(true);
+    }
 
     public void PushToPool()
     {
@@ -40,7 +44,7 @@ public abstract class BulletBase : MonoBehaviour{
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<UnitInfo>().TakeDamage(owner, damage);
+            other.GetComponent<Monster>().TakeDamage(owner, damage);
             PushToPool();
         }
         else if(other.CompareTag("Box"))

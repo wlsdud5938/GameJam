@@ -48,6 +48,18 @@ public class BulletPooler : MonoBehaviour
         return null;
     }
 
+    public BulletBase ReuseObject(string tag)
+    {
+        if (poolDictionary.ContainsKey(tag))
+        {
+            BulletBase objectToReuse = poolDictionary[tag].Dequeue();
+            objectToReuse.Reuse();
+            return objectToReuse;
+        }
+        Debug.LogError("There is no particle : " + tag);
+        return null;
+    }
+
     public void PushToPool(BulletBase obj)
     {
         poolDictionary[obj.name].Enqueue(obj);
