@@ -35,15 +35,14 @@ public class PlayerMove : JoystickBase
     protected override void GetJoystickStay(float dist)
     {
         targetRot = rotation;
-        if(dist > 0.2f)
-            animator.SetBool("IsRunning", true);
+        animator.SetFloat("RunBlend", dist);
 
         rb.velocity = Quaternion.Euler(0, targetRot, 0) * Vector3.forward * speed * dist;
     }
 
     protected override void GetJoystickUp(bool isClicked)
     {
-        animator.SetBool("IsRunning", false);
+        animator.SetFloat("RunBlend", 0);
         rb.velocity = Vector3.zero;
     }
 }
