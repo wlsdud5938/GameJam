@@ -16904,6 +16904,8 @@ MonoBehaviour:
   gunInventory:
   - {fileID: 1618213302}
   - {fileID: 1185081797}
+  gunImage: {fileID: 132637995}
+  bulletCountText: {fileID: 116064932}
 --- !u!114 &568894444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31809,12 +31811,12 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1185081795}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.12278836, y: -0.12278715, z: -0.69636416, w: 0.6963644}
+  m_LocalPosition: {x: -0.65577173, y: 1.3552588, z: 0.13252635}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1380012862}
-  m_RootOrder: 3
+  m_Father: {fileID: 1864379358}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1185081797
 MonoBehaviour:
@@ -31830,10 +31832,12 @@ MonoBehaviour:
   nowBullet: {fileID: 114448784778136162, guid: e15e1c79697b6f74d9d73d666d067346,
     type: 2}
   poolSize: 100
-  nowTerm: 0
+  isBasic: 0
   bulletTerm: 0.1
   bulletSpeed: 10
   bulletRange: 10
+  nowBulletCount: 0
+  maxBulletCount: 10
   damage: 1
 --- !u!1 &1185114184
 GameObject:
@@ -36529,8 +36533,6 @@ Transform:
   m_Children:
   - {fileID: 568894441}
   - {fileID: 219646844}
-  - {fileID: 1618213301}
-  - {fileID: 1185081796}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -40008,7 +40010,8 @@ Transform:
   m_LocalRotation: {x: -0.00000010663261, y: -0.57357645, z: -0.00000015228716, w: 0.81915206}
   m_LocalPosition: {x: 0.39068377, y: -1.3552587, z: 0.12934762}
   m_LocalScale: {x: 1, y: 0.99999994, z: 0.99999994}
-  m_Children: []
+  m_Children:
+  - {fileID: 1864379358}
   m_Father: {fileID: 1877789983}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -65.584404, y: -36.535713, z: -48.167297}
@@ -43633,12 +43636,12 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1618213300}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.12278836, y: -0.12278715, z: -0.69636416, w: 0.6963644}
+  m_LocalPosition: {x: -0.65577173, y: 1.3552588, z: 0.13252635}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1380012862}
-  m_RootOrder: 2
+  m_Father: {fileID: 1864379358}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1618213302
 MonoBehaviour:
@@ -43655,10 +43658,12 @@ MonoBehaviour:
   nowBullet: {fileID: 114219736321229936, guid: b1e50393e74b95543a8790106ca04b01,
     type: 2}
   poolSize: 150
-  nowTerm: 0
+  isBasic: 1
   bulletTerm: 1
   bulletSpeed: 10
   bulletRange: 6
+  nowBulletCount: 0
+  maxBulletCount: 2
   damage: 5
   angle: 60
   bulletCount: 15
@@ -51154,6 +51159,36 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.32445586, y: -0.04186359, z: 0.00042149425}
     m_Extent: {x: 0.7660116, y: 0.28990072, z: 0.7075044}
   m_DirtyAABB: 0
+--- !u!1 &1864379357
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1864379358}
+  m_Layer: 0
+  m_Name: Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1864379358
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1864379357}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1618213301}
+  - {fileID: 1185081796}
+  m_Father: {fileID: 1486014012}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1864796172
 GameObject:
   m_ObjectHideFlags: 0

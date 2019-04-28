@@ -11,31 +11,32 @@ public abstract class GunBase : MonoBehaviour
     protected string id;
 
     [Header("Information")]
-    public float nowTerm = 0, bulletTerm = 5.0f;
+    public bool isBasic = false;
+
+    public float bulletTerm = 5.0f;
     public float bulletSpeed = 10;
     public float bulletRange = 6;
+
+    public int nowBulletCount, maxBulletCount = 10;
     public int damage = 5;
 
     private void Start()
     {
         id = nowBullet.name;
         BulletPooler.instance.CreatePool(id, nowBullet, poolSize);
+
+        nowBulletCount = maxBulletCount;
     }
 
-    public void GetGunStay(Player owner, Vector3 position, float rotation)
+    public void Shot(Player owner, Vector3 position, float rotation)
     {
-        if(nowTerm > bulletTerm)
-        {
-            UseSkill(owner, position, rotation);
-            nowTerm = 0;
-        }
-        else
-            nowTerm += Time.deltaTime;
-    }
+        if (nowBulletCount <= 0)
+            return;
 
-    public void GetGunUp()
-    {
-        nowTerm = 0;
+        if(!isBasic)
+            nowBulletCount--;
+
+        UseSkill(owner, position, rotation);
     }
 
     protected abstract void UseSkill(Player owner, Vector3 position, float rotation);
