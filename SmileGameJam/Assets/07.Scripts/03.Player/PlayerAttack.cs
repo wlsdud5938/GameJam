@@ -105,19 +105,28 @@ public class PlayerAttack : JoystickBase
     {
         muzzleRot = rotation;
 
-        if (nowTerm <= 0)
+        if(dist >= 1)
         {
-            nowGun.Shot(player, muzzle.position, rotation);
-            SetGunUI();
+            if (nowTerm <= 0)
+            {
+                nowGun.Shot(player, muzzle.position, rotation);
+                SetGunUI();
 
-            if (nowGun.nowBulletCount <= 0)
-                RemoveGun();
+                if (nowGun.nowBulletCount <= 0)
+                    RemoveGun();
 
-            nowTerm = bulletTerm;
-            animator.SetBool("IsAttacking", true);
+                nowTerm = bulletTerm;
+                animator.SetBool("IsAttacking", true);
+            }
+            else
+                nowTerm -= Time.deltaTime;
         }
         else
-            nowTerm -= Time.deltaTime;
+        {
+            muzzleRot = 0;
+            nowTerm = bulletTerm;
+            animator.SetBool("IsAttacking", false);
+        }
     }
 
     protected override void GetJoystickUp(bool isClicked)
