@@ -76,19 +76,24 @@ public class PlayerAttack : JoystickBase
 
 
 
-    public void SetGunInfo()
+    private void SetGunInfo()
     {
         nowTerm = bulletTerm = nowGun.bulletTerm;
         //이미지 교체
         SetGunUI();
     }
 
-    public void SetGunUI()
+    private void SetGunUI()
     {
         if (nowGun.isBasic)
             bulletCountText.text = "∞";
         else
             bulletCountText.text = nowGun.nowBulletCount + "/" + nowGun.maxBulletCount;
+    }
+
+    private void ShotComplete()
+    {
+        animator.SetBool("IsAttacking", false);
     }
 
     protected override void GetJoystickDown()
@@ -109,6 +114,7 @@ public class PlayerAttack : JoystickBase
                 RemoveGun();
 
             nowTerm = bulletTerm;
+            animator.SetBool("IsAttacking", true);
         }
         else
             nowTerm -= Time.deltaTime;
@@ -118,6 +124,7 @@ public class PlayerAttack : JoystickBase
     {
         muzzleRot = 0;
         nowTerm = bulletTerm;
+        animator.SetBool("IsAttacking", false);
     }
 
     private void LateUpdate()
