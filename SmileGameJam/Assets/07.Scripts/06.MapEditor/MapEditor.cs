@@ -12,10 +12,10 @@ namespace MapEditor
         private bool isObjectLayerOpen = false;
 
         public Transform cursor;
-        public GameObject[] objectList;
+        private GameObject[] objectList;
 
-        public int nowIndex = 0;
-        public bool isAutoSave = false;
+        private int nowIndex = 0;
+        private bool isAutoSave = false;
 
         [Header("Obstacle")]
         public Transform tileInventory;
@@ -29,6 +29,16 @@ namespace MapEditor
         public int stage = 1;
         public int subStage = 1;
         public List<RoomData> smallRoomData,mediumRoomData,largeRoomData;
+
+        [Header("Test Play")]
+        private bool isTesting = false;
+
+        public GameObject playMode;
+        public GameObject editMode;
+
+        public MapCamera mapCamera;
+        public CameraManager cameraManager;
+        public Button playButton, stopButton;
 
         [Header("Manager")]
         public JsonManager jsonManager;
@@ -49,6 +59,12 @@ namespace MapEditor
 
         private void Update()
         {
+            if (isTesting)
+            {
+                cursor.gameObject.SetActive(false);
+                return;
+            }
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -190,6 +206,7 @@ namespace MapEditor
         }
         #endregion
 
+        #region Load
         public void LoadMap()
         {
             Debug.Log("Load Map");
@@ -234,6 +251,37 @@ namespace MapEditor
             indexDropdown.ClearOptions();
             indexDropdown.AddOptions(options);
         }
+        #endregion
+
+        #region Test
+        public void TestPlay()
+        {
+            isTesting = true;
+
+            playMode.SetActive(true);
+            editMode.SetActive(false);
+
+            playButton.gameObject.SetActive(false);
+            stopButton.gameObject.SetActive(true);
+
+            mapCamera.enabled = false;
+            cameraManager.enabled = true;
+        }
+        public void TestStop()
+        {
+            isTesting = false;
+
+            playMode.SetActive(false);
+            editMode.SetActive(true);
+
+            playButton.gameObject.SetActive(true);
+            stopButton.gameObject.SetActive(false);
+
+            mapCamera.enabled = true;
+            cameraManager.enabled = false;
+        }
+
+        #endregion
 
         public void AddStage()
         {

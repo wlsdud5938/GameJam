@@ -11,8 +11,8 @@ public class MapCamera : MonoBehaviour {
     private Vector3 previousMousePos;
     
     public float heightSpeed = 0.1f;
-    private float height = 17;
-    private float minHeight = 1, maxHeight = 20;
+    private float height = 22;
+    private float minHeight = 15, maxHeight = 40;
 
     private void Awake()
     {

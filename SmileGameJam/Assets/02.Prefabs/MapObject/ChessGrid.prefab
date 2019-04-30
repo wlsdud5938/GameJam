@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4010546767776726}
-  - component: {fileID: 65291334561293872}
   m_Layer: 0
   m_Name: ChessGrid
   m_TagString: Untagged
@@ -113,15 +112,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1681419012148498}
   m_Mesh: {fileID: 4300000, guid: 827a80271376aa04588f12f0cb157f14, type: 3}
---- !u!65 &65291334561293872
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1297886556548386}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 0.05, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
