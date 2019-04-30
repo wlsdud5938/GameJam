@@ -1,88 +1,90 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class GameData
+namespace MapEditor
 {
-    public List<StageData> stages;
-}
-
-public class StageData
-{
-    public int index = 0;
-    public int subIndex = 0;
-}
-
-[System.Serializable]
-public class RoomData
-{
-    public int width = 10;
-
-    public List<ObstacleData> obstacleData;
-    public List<MonsterData> monsterData;
-}
-
-[System.Serializable]
-public struct ObstacleData
-{
-    public int index;
-
-    public int x, y;
-    public int rotation;
-
-    public ObstacleData(int index, Vector2 position, int rotation)
+    [System.Serializable]
+    public class MapData
     {
-        this.index = index;
-
-        x = Mathf.RoundToInt(position.x);
-        y = Mathf.RoundToInt(position.y);
-
-        this.rotation = rotation;
+        public List<RoomData> smallRoomData;
+        public List<RoomData> mediumRoomData;
+        public List<RoomData> largeRoomData;
     }
 
-    public override bool Equals(object obj)
+    [System.Serializable]
+    public class RoomData
     {
-        if (obj == null) return false;
-        else
+        public int width = 8;
+
+        public List<ObstacleData> obstacleData;
+        public List<MonsterData> monsterData;
+    }
+
+    [System.Serializable]
+    public struct ObstacleData
+    {
+        public int index;
+
+        public int x, z;
+        public int rotation;
+
+        public ObstacleData(int index, Vector3 position, int rotation)
         {
-            ObstacleData t = (ObstacleData)obj;
-            return ((x == t.x) && (y == t.y));
+            this.index = index;
+
+            x = Mathf.RoundToInt(position.x);
+            z = Mathf.RoundToInt(position.z);
+
+            this.rotation = rotation;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            else
+            {
+                ObstacleData t = (ObstacleData)obj;
+                return ((x == t.x) && (z == t.z));
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 
-    public override int GetHashCode()
+    [System.Serializable]
+    public struct MonsterData
     {
-        return base.GetHashCode();
-    }
-}
+        public int index;
 
-[System.Serializable]
-public struct MonsterData
-{
-    public int index;
+        public int x, z;
+        public int rotation;
 
-    public int x, y;
-
-    public MonsterData(int index, Vector2 position)
-    {
-        this.index = index;
-
-        x = Mathf.RoundToInt(position.x);
-        y = Mathf.RoundToInt(position.y);
-    }
-
-    public override bool Equals(object obj)
-    {
-        if (obj == null) return false;
-        else
+        public MonsterData(int index, Vector3 position, int rotation)
         {
-            MonsterData t = (MonsterData)obj;
-            return ((x == t.x) && (y == t.y));
-        }
-    }
+            this.index = index;
 
-    public override int GetHashCode()
-    {
-        return base.GetHashCode();
+            x = Mathf.RoundToInt(position.x);
+            z = Mathf.RoundToInt(position.z);
+
+            this.rotation = rotation;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            else
+            {
+                MonsterData t = (MonsterData)obj;
+                return ((x == t.x) && (z == t.z));
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

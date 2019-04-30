@@ -4,49 +4,52 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
-public class JsonManager : MonoBehaviour
+namespace MapEditor
 {
-    public GameData gameData
+    public class JsonManager : MonoBehaviour
     {
-        get
+        public MapData mapData
         {
-            return LoadJsonFile<GameData>(FilePath);
+            get
+            {
+                return LoadJsonFile<MapData>(FilePath);
+            }
         }
-    }
 
-    private string FilePath = "/GameData.json";
+        private string FilePath = "/MapData.json";
 
-    private void Awake()
-    {
-        FilePath = Application.dataPath + FilePath;
-    }
+        private void Awake()
+        {
+            FilePath = Application.dataPath + FilePath;
+        }
 
-    public void SaveData(GameData data)
-    {
-        CreateJsonFile(FilePath, JsonUtility.ToJson(data, prettyPrint: false));
-    }
+        public void SaveData(MapData data)
+        {
+            CreateJsonFile(FilePath, JsonUtility.ToJson(data, prettyPrint: false));
+        }
 
-    public GameData LoadData()
-    {
-        var data = LoadJsonFile<GameData>(FilePath);
-        return data;
-    }
+        public MapData LoadData()
+        {
+            var data = LoadJsonFile<MapData>(FilePath);
+            return data;
+        }
 
-    void CreateJsonFile(string filePath, string jsonData)
-    {
-        FileStream fileStream = new FileStream(filePath, FileMode.OpenOrCreate);
-        byte[] data = Encoding.UTF8.GetBytes(jsonData);
-        fileStream.Write(data, 0, data.Length);
-        fileStream.Close();
-    }
+        void CreateJsonFile(string filePath, string jsonData)
+        {
+            FileStream fileStream = new FileStream(filePath, FileMode.OpenOrCreate);
+            byte[] data = Encoding.UTF8.GetBytes(jsonData);
+            fileStream.Write(data, 0, data.Length);
+            fileStream.Close();
+        }
 
-    T LoadJsonFile<T>(string filePath)
-    {
-        FileStream fileStream = new FileStream(filePath, FileMode.Open);
-        byte[] data = new byte[fileStream.Length];
-        fileStream.Read(data, 0, data.Length);
-        fileStream.Close();
-        string jsonData = Encoding.UTF8.GetString(data);
-        return JsonUtility.FromJson<T>(jsonData);
+        T LoadJsonFile<T>(string filePath)
+        {
+            FileStream fileStream = new FileStream(filePath, FileMode.Open);
+            byte[] data = new byte[fileStream.Length];
+            fileStream.Read(data, 0, data.Length);
+            fileStream.Close();
+            string jsonData = Encoding.UTF8.GetString(data);
+            return JsonUtility.FromJson<T>(jsonData);
+        }
     }
 }
