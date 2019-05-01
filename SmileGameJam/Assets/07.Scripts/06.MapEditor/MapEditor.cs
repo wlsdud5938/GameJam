@@ -15,7 +15,7 @@ namespace MapEditor
         private GameObject[] objectList;
 
         private int nowIndex = 0;
-        private bool isAutoSave = false;
+        private bool isAutoSave = true;
 
         [Header("Obstacle")]
         public Transform tileInventory;
@@ -71,21 +71,27 @@ namespace MapEditor
             if (Physics.Raycast(ray, out hit))
             {
                 cursor.gameObject.SetActive(true);
-                if (Input.GetMouseButtonDown(0))
+                if (hit.transform.CompareTag("Obstacle"))
                 {
-                    PutObstacle(nowIndex, hit.point);
+                    cursor.gameObject.SetActive(false);
+                    if (Input.GetMouseButtonDown(0))
+                        RemoveObstacle(hit.transform);
                 }
-                else if (!Input.GetMouseButton(0))
+                else
                 {
-                    Vector3 pos = new Vector3(Mathf.RoundToInt(hit.point.x), 0, Mathf.RoundToInt(hit.point.z));
-                    cursor.position = pos;
+                    if (Input.GetMouseButtonDown(0))
+                        PutObstacle(nowIndex, hit.point);
+                    else if (!Input.GetMouseButton(0))
+                    {
+                        Vector3 pos = new Vector3(Mathf.RoundToInt(hit.point.x), 0, Mathf.RoundToInt(hit.point.z));
+                        cursor.position = pos;
+                    }
                 }
             }
             else
             {
                 cursor.gameObject.SetActive(false);
             }
-
 
             if (Input.mouseScrollDelta.y > 0)
             {
@@ -119,6 +125,7 @@ namespace MapEditor
 
                 objectList[i] = Instantiate(objectData.obstacleList[i], cursor);
                 objectList[i].transform.GetChild(0).GetComponent<Renderer>().material.color = new Color(1,0,0,0.2f);
+                objectList[i].GetComponent<BoxCollider>().enabled = false;
                 if (i != 0) objectList[i].SetActive(false);
             }
         }
@@ -137,6 +144,32 @@ namespace MapEditor
                     GameObject newGrid = Instantiate(grid, new Vector3(x * 2 + 0.5f, 0, y * 2 + 0.5f), Quaternion.identity, mapParent);
                 }
             }
+
+            transform.GetComponent<BoxCollider>().size = new Vector3(width * 2, 0.05f, width * 2);
+        }
+
+        private void RemoveObstacle(Transform hit)
+        {
+            Vector3 pos = new Vector3(Mathf.RoundToInt(hit.position.x), 0, Mathf.RoundToInt(hit.position.z));
+            ObstacleData temp = new ObstacleData(0, pos, 0);
+
+            switch (stage)
+            {
+                case 0:
+                    smallRoomData[subStage].obstacleData.Remove(temp);
+                    break;
+                case 1:
+                    mediumRoomData[subStage].obstacleData.Add(temp);
+                    break;
+                case 2:
+                    largeRoomData[subStage].obstacleData.Add(temp);
+                    break;
+            }
+
+            Destroy(hit.gameObject);
+
+            if (isAutoSave)
+                SaveMap();
         }
 
         private void PutObstacle(int id, Vector3 position)
@@ -165,7 +198,6 @@ namespace MapEditor
         {
 
         }
-
 
         #region UI
         public void OpenLayer()

@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Wall
   - Box
+  - Obstacle
   layers:
   - Default
   - TransparentFX

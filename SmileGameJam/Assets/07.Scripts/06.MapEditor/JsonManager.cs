@@ -25,7 +25,7 @@ namespace MapEditor
 
         public void SaveData(MapData data)
         {
-            CreateJsonFile(FilePath, JsonUtility.ToJson(data, prettyPrint: false));
+            CreateJsonFile(FilePath, JsonUtility.ToJson(data, prettyPrint: true));
         }
 
         public MapData LoadData()
@@ -36,7 +36,7 @@ namespace MapEditor
 
         void CreateJsonFile(string filePath, string jsonData)
         {
-            FileStream fileStream = new FileStream(filePath, FileMode.OpenOrCreate);
+            FileStream fileStream = new FileStream(filePath, FileMode.Create);
             byte[] data = Encoding.UTF8.GetBytes(jsonData);
             fileStream.Write(data, 0, data.Length);
             fileStream.Close();
