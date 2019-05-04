@@ -25,7 +25,8 @@ public class CameraManager : MonoBehaviour {
 
     public void LateUpdate()
     {
-        transform.position = target.position + dist + shakeDist;
+        if (target != null)
+            transform.position = target.position + dist + shakeDist;
     }
 
     public void ReboundCamera(float power, Vector3 direction)

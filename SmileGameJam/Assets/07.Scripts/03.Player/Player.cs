@@ -20,6 +20,10 @@ public class Player : MonoBehaviour {
 
     private void Start()
     {
+        healthBarImg = GameObject.Find("HealthBar").GetComponent<Image>();
+        healthText = GameObject.Find("HealthText").GetComponent<Text>();
+        coinText = GameObject.Find("CoinText").GetComponent<Text>();
+
         playerAttack = transform.GetChild(0).GetComponent<PlayerAttack>();
         playerMove = transform.GetChild(0).GetComponent<PlayerMove>();
 

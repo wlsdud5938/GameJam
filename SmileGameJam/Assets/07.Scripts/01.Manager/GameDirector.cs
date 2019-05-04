@@ -1,34 +1,47 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.Collections;
 
 public class GameDirector : MonoBehaviour
 {
+    public delegate void spawn(Vector3 position);
+    public Player player;
     public float playTime = 0.0f;
-    public Text timeText;
 
-    public PlayerAttack player;
+    [Header("Game Start")]
+    private MapGenerator mapGenerator;
+    private CameraManager cameraManager;
 
     public static GameDirector instance;
 
     private void Awake()
     {
         instance = this;
+        cameraManager = GameObject.Find("Main Camera").GetComponent<CameraManager>();
+        mapGenerator = GameObject.Find("MapGenerator").GetComponent<MapGenerator>();
+    }
+
+    private void Start()
+    {
+        GameStart();
     }
 
     private void Update()
     {
         playTime += Time.deltaTime;
     }
-    
-    IEnumerator BoomText(int start)
+
+    public void GameStart()
     {
-        Transform timeTr = timeText.transform;
-        for (int i = start; i < 10; i++)
-        {
-            timeTr.localScale = Vector3.one * 0.1f * i;
-            yield return null;
-        }
-        yield return new WaitForSeconds(1);
+        spawn spawnEvent = new spawn(SpawnPlayer);
+        StartCoroutine(mapGenerator.MapGenerate(spawnEvent));
+    }
+    
+    public void SpawnPlayer(Vector3 position)
+    {
+        player = Instantiate(player, position, Quaternion.identity);
+        cameraManager.enabled = true;
+        cameraManager.target = player.transform;
     }
 }

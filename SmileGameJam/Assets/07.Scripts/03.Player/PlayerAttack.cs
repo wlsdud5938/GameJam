@@ -31,10 +31,18 @@ public class PlayerAttack : JoystickBase
     private Animator animator;
     private Player player;
 
-    private void Start()
+    private void Awake()
     {
         player = transform.GetComponent<Player>();
         animator = transform.GetComponent<Animator>();
+        joystick = GameObject.Find("AttackJoyStick").GetComponent<RectTransform>();
+        gunImage = GameObject.Find("GunImg").GetComponent<Image>();
+        bulletCountText = GameObject.Find("BulletInfo").GetComponent<Text>();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
         SetGunInfo();
     }
 
@@ -73,7 +81,6 @@ public class PlayerAttack : JoystickBase
 
         SetGunInfo();
     }
-
 
 
     private void SetGunInfo()
