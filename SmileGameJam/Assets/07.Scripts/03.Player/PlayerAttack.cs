@@ -31,10 +31,18 @@ public class PlayerAttack : JoystickBase
     private Animator animator;
     private Player player;
 
-    private void Start()
+    private void Awake()
     {
         player = transform.GetComponent<Player>();
         animator = transform.GetComponent<Animator>();
+        joystick = GameObject.Find("AttackJoyStick").GetComponent<RectTransform>();
+        gunImage = GameObject.Find("GunImg").GetComponent<Image>();
+        bulletCountText = GameObject.Find("BulletInfo").GetComponent<Text>();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
         SetGunInfo();
     }
 
@@ -75,7 +83,6 @@ public class PlayerAttack : JoystickBase
     }
 
 
-
     private void SetGunInfo()
     {
         nowTerm = bulletTerm = nowGun.bulletTerm;
@@ -105,19 +112,28 @@ public class PlayerAttack : JoystickBase
     {
         muzzleRot = rotation;
 
-        if (nowTerm <= 0)
+        if(dist >= 1)
         {
-            nowGun.Shot(player, muzzle.position, rotation);
-            SetGunUI();
+            if (nowTerm <= 0)
+            {
+                nowGun.Shot(player, muzzle.position, rotation);
+                SetGunUI();
 
-            if (nowGun.nowBulletCount <= 0)
-                RemoveGun();
+                if (nowGun.nowBulletCount <= 0)
+                    RemoveGun();
 
-            nowTerm = bulletTerm;
-            animator.SetBool("IsAttacking", true);
+                nowTerm = bulletTerm;
+                animator.SetBool("IsAttacking", true);
+            }
+            else
+                nowTerm -= Time.deltaTime;
         }
         else
-            nowTerm -= Time.deltaTime;
+        {
+            muzzleRot = 0;
+            nowTerm = bulletTerm;
+            animator.SetBool("IsAttacking", false);
+        }
     }
 
     protected override void GetJoystickUp(bool isClicked)

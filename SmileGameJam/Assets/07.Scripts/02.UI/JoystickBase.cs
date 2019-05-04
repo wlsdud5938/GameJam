@@ -28,7 +28,7 @@ public abstract class JoystickBase : MonoBehaviour
     public float radius = 65;
 
     #region Event Function
-    protected virtual void Awake()
+    protected virtual void Start()
     {
         lever = joystick.GetChild(0).GetComponent<RectTransform>();
         disabledPos = new Vector2(joystick.anchoredPosition.x, joystick.anchoredPosition.y);

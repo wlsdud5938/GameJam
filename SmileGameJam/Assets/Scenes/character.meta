@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:SmileGameJam/Assets/Scenes/character.meta
 guid: eb1a627ef520ecb4aa8c15a6218d7e01
+=======
+guid: 0def7eb03febf864bba7eef3daa283d0
+>>>>>>> e344924649e3145a5a0e78575b14079a31ad98f7:SmileGameJam/Assets/07.Scripts/06.MapEditor.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

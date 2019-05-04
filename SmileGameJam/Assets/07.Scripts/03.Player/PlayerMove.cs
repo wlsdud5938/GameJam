@@ -16,10 +16,16 @@ public class PlayerMove : JoystickBase
     public Animator animator;
     private Rigidbody rb;
 
-    private void Start()
+    private void Awake()
     {
         rb = transform.parent.GetComponent<Rigidbody>();
         animator = transform.GetComponent<Animator>();
+        joystick = GameObject.Find("MoveJoyStick").GetComponent<RectTransform>();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
     }
 
     protected override void Update()
