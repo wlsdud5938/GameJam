@@ -874,7 +874,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 281047005}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.1699276, y: -7.2909603, z: -2.4954147}
+  m_LocalPosition: {x: 0, y: 100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1949431743}
@@ -976,7 +976,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 292890067}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: -4.1699276, y: 57.290962, z: 2.4954147}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 281047006}
@@ -1368,7 +1368,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 863502532}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.1699276, y: 7.2909603, z: 2.4954147}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 281047006}
@@ -1433,7 +1433,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1524905149}
   m_Father: {fileID: 1212671670}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1470,7 +1471,12 @@ MonoBehaviour:
   obstacleList:
   - {fileID: 1084720419854040, guid: a9effc2189aee244abdf007f614add56, type: 2}
   - {fileID: 1162353789036298, guid: 17c4316e24a6b7c41a8dcea3ff29e611, type: 2}
-  - {fileID: 1681554419641348, guid: 1fd8d3d4074e5f9499e788e878c3736e, type: 2}
+  - {fileID: 1138012737362820, guid: 418385189938cc84f89b10ecddf4bd57, type: 2}
+  - {fileID: 1330425083205446, guid: 45b27f1723e801a4ab25a5478c9f40bc, type: 2}
+  - {fileID: 1378454769746618, guid: 7cb76e958715e034c9c4ec2040367929, type: 2}
+  - {fileID: 1643933098927522, guid: 4c532d7cc89fea342843c60532fd36bb, type: 2}
+  - {fileID: 1984676541560158, guid: 536b6ac257b85a848b58827e6d8b8081, type: 2}
+  - {fileID: 1173650047404460, guid: 9451e30795e971c4b993dea286023fdb, type: 2}
   monsterList: []
 --- !u!114 &885430512
 MonoBehaviour:
@@ -1857,6 +1863,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1524905148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1524905149}
+  - component: {fileID: 1524905150}
+  m_Layer: 0
+  m_Name: CorriderGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1524905149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1524905148}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 885430509}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1524905150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1524905148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aefa093b5752394bb9753dd191c8aa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  straightCorridor: {fileID: 1523321499691456, guid: e2b18b5c0fb33b64cb036fc2476f3b79,
+    type: 2}
+  cornerCorridor: {fileID: 1270382526997370, guid: 28199d89850955244bf342111c72a7ce,
+    type: 2}
 --- !u!1 &1895713692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1950,7 +2000,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1949431742}
   m_LocalRotation: {x: 0.14190185, y: -0.89238024, z: 0.39273775, w: 0.17110959}
-  m_LocalPosition: {x: -4.1699276, y: 10.29096, z: 2.4954147}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 281047006}

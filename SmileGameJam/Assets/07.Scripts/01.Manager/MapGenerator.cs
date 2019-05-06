@@ -25,12 +25,13 @@ public class MapGenerator : MonoBehaviour {
     [Header("Manager")]
     private JsonManager jsonManager;
     private ObjectData objectData;
-    //private PrimAlgorithm primAlgorithm;
+    private CorridorGenerator corridorGenerator;
 
     private void Awake()
     {
         jsonManager = GetComponent<JsonManager>();
         objectData = GetComponent<ObjectData>();
+        corridorGenerator = transform.GetChild(0).GetComponent<CorridorGenerator>();
 
         obstacleList = new GameObject[objectData.obstacleList.Length];
         for (int i = 0; i < obstacleList.Length; i++)
@@ -45,62 +46,67 @@ public class MapGenerator : MonoBehaviour {
     public IEnumerator MapGenerate(GameDirector.spawn spawnEvent)
     {
         Vector2 position = new Vector2();
-        smallRoomList = new List<Room>(); smallroomPosition = new Transform[smallRoomCount * 2];
-        mediumRoomList = new List<Room>(); mediumroomPosition = new Transform[mediumRoomCount * 2];
-        largeRoomList = new List<Room>(); largeroomPosition = new Transform[largeRoomCount * 2];
+        smallRoomList = new List<Room>(); smallroomPosition = new Transform[smallRoomCount +3];
+        mediumRoomList = new List<Room>(); mediumroomPosition = new Transform[mediumRoomCount + 3];
+        largeRoomList = new List<Room>(); largeroomPosition = new Transform[largeRoomCount + 3];
 
-        for (int i = 0; i < smallRoomCount * 2; i++)
+        for (int i = 0; i < smallRoomCount +3; i++)
         {
             position = new Vector3(Random.Range(leftDown.x, rightUp.x), Random.Range(leftDown.y, rightUp.y), 0);
             GameObject newObj = Instantiate(roomObj, position, Quaternion.identity);
-            newObj.transform.localScale = new Vector2(8, 8) * 2;
+            newObj.transform.localScale = new Vector2(4, 4) * 2;
             smallroomPosition[i] = newObj.transform;
         }
-        for (int i = 0; i < largeRoomCount * 2; i++)
+        for (int i = 0; i < largeRoomCount +3; i++)
         {
             position = new Vector3(Random.Range(leftDown.x, rightUp.x), Random.Range(leftDown.y, rightUp.y), 0);
             GameObject newObj = Instantiate(roomObj, position, Quaternion.identity);
-            newObj.transform.localScale = new Vector2(20, 20) * 2;
+            newObj.transform.localScale = new Vector2(6, 6) * 2;
             largeroomPosition[i] = newObj.transform;
         }
-        for (int i = 0; i < mediumRoomCount * 2; i++)
+        for (int i = 0; i < mediumRoomCount + 3; i++)
         {
             position = new Vector3(Random.Range(leftDown.x, rightUp.x), Random.Range(leftDown.y, rightUp.y), 0);
             GameObject newObj = Instantiate(roomObj, position, Quaternion.identity);
-            newObj.transform.localScale = new Vector2(14, 14) * 2;
+            newObj.transform.localScale = new Vector2(5, 5) * 2;
             mediumroomPosition[i] = newObj.transform;
         }
 
         yield return new WaitForSeconds(4.5f);
 
-        for (int i = 0; i < smallRoomCount * 2; i++)
+        for (int i = 0; i < smallRoomCount + 3; i++)
         {
             if (i < smallRoomCount)
             {
                 position = new Vector2(Mathf.RoundToInt(smallroomPosition[i].transform.position.x), Mathf.RoundToInt(smallroomPosition[i].transform.position.y));
-                smallRoomList.Add(RoomGenerate(position, new Vector2(8, 8), 0));
+                smallRoomList.Add(RoomGenerate(position, new Vector2(4, 4), 0));
+                corridorGenerator.AddVertex(position,4);
             }
             Destroy(smallroomPosition[i].gameObject);
         }
-        for (int i = 0; i < mediumRoomCount * 2; i++)
+        for (int i = 0; i < mediumRoomCount + 3; i++)
         {
             if (i < mediumRoomCount)
             {
                 position = new Vector2(Mathf.RoundToInt(mediumroomPosition[i].transform.position.x), Mathf.RoundToInt(mediumroomPosition[i].transform.position.y));
-                mediumRoomList.Add(RoomGenerate(position, new Vector2(14, 14), 1));
+                mediumRoomList.Add(RoomGenerate(position, new Vector2(5, 5), 1));
+                corridorGenerator.AddVertex(position - new Vector2(1,1),5);
             }
             Destroy(mediumroomPosition[i].gameObject);
         }
-        for (int i = 0; i < largeRoomCount * 2; i++)
+        for (int i = 0; i < largeRoomCount + 3; i++)
         {
             if (i < largeRoomCount)
             {
                 position = new Vector2(Mathf.RoundToInt(largeroomPosition[i].transform.position.x), Mathf.RoundToInt(largeroomPosition[i].transform.position.y));
-                largeRoomList.Add(RoomGenerate(position, new Vector2(20, 20), 2));
+                largeRoomList.Add(RoomGenerate(position, new Vector2(6, 6), 2));
+                corridorGenerator.AddVertex(position,6);
             }
             Destroy(largeroomPosition[i].gameObject);
         }
         startRoom = smallRoomList[0].obj.transform;
+
+        corridorGenerator.CorridorGenerate();
         spawnEvent(startRoom.position);
 
         smallroomPosition = null;
@@ -120,16 +126,23 @@ public class MapGenerator : MonoBehaviour {
         GameObject newGround = new GameObject("Ground");
         newGround.transform.SetParent(newRoom.transform);
         newGround.transform.localPosition = Vector3.zero;
+        
+        int start = width % 2 == 0 ? width / 2 : width / 2 + 1;
+        int end = width / 2;
 
-        newGround.AddComponent<BoxCollider>().size = new Vector3(width * 2, 0.1f, width * 2);
-        for (int x = -width / 2; x < width / 2; x++)
+        for (int x = -start; x < end; x++)
         {
-            for (int y = -width / 2; y < width / 2; y++)
+            for (int y = -start; y < end; y++)
             {
-                Vector3 pos = newRoom.transform.position + new Vector3(x * 2 + 0.5f, 0, y * 2 + 0.5f);
+                Vector3 pos = newRoom.transform.position + new Vector3(x * 2 + 1, 0, y * 2 + 1);
                 GameObject newGrid = Instantiate(grid, pos, Quaternion.identity, newGround.transform);
             }
         }
+        newGround.AddComponent<BoxCollider>().size = new Vector3(width * 2, 0.1f, width * 2);
+        if (width % 2 == 0)
+            newGround.GetComponent<BoxCollider>().center = new Vector3(0, 0, 0);
+        else
+            newGround.GetComponent<BoxCollider>().center = new Vector3(-1, 0, -1);
 
         GameObject newObstacle = new GameObject("Obstacles");
         newObstacle.transform.SetParent(newRoom.transform);
@@ -180,10 +193,12 @@ public class Room
     public GameObject obj;
     public int index = 0;
     public static int i = 0;
+    public Vector3 position;
 
     public Room(GameObject obj)
     {
         index = ++i;
+
         this.obj = obj;
     }
 }
