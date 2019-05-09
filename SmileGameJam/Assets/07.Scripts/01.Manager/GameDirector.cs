@@ -6,7 +6,7 @@ using System.Collections;
 public class GameDirector : MonoBehaviour
 {
     public delegate void spawn(Vector3 position);
-    public Player player;
+    public GameObject player;
     public float playTime = 0.0f;
 
     [Header("Game Start")]
