@@ -1,20 +1,30 @@
 ﻿using UnityEngine.EventSystems;
 using UnityEngine;
+using UnityEngine.Events;
+using System;
 
-public abstract class JoystickBase : MonoBehaviour
+[Serializable]
+public class JoystickStay : UnityEvent<float, float> { }
+[Serializable]
+public class JoystickUp : UnityEvent<bool> { }
+
+public class Joystick : MonoBehaviour
 {
-    #region Protected Field
-    public RectTransform joystick;
+    private const float radius = 65;
+    #region Private Field
+    private RectTransform joystick;
     private RectTransform lever;
+
+    private Vector2 disabledPos, firstPos, nowPos;
+    private bool isStick_Stay = false, isMoved = false;
+    private int nowTouch = -1;
     #endregion
 
-    #region Private Field
-    private Vector2 disabledPos, firstPos, nowPos;
-    private bool isStick_Stay = false;
-    private bool isDraged = false;
-    private int nowTouch = -1;
-    protected float distance { get; private set; }
-    protected Vector3 direction { get; private set; }
+    public bool isLeftField = false;
+
+    #region Protected Field
+    protected float distance;
+    protected Vector3 direction;
     protected float rotation
     {
         get
@@ -24,12 +34,16 @@ public abstract class JoystickBase : MonoBehaviour
     }
     #endregion
 
-    public bool isLeftField = false;
-    public float radius = 65;
+    #region Call Event
+    public UnityEvent GetJoystickDown;
+    public JoystickStay GetJoystickStay;
+    public JoystickUp GetJoystickUp;
+    #endregion
 
     #region Event Function
     protected virtual void Start()
     {
+        joystick = transform.GetComponent<RectTransform>();
         lever = joystick.GetChild(0).GetComponent<RectTransform>();
         disabledPos = new Vector2(joystick.anchoredPosition.x, joystick.anchoredPosition.y);
     }
@@ -70,7 +84,7 @@ public abstract class JoystickBase : MonoBehaviour
             switch (Input.GetTouch(nowTouch).phase)
             {
                 case TouchPhase.Moved:
-                    isDraged = true;
+                    isMoved = true;
                     Stay_Move_Joystick();
                     break;
                 case TouchPhase.Began:
@@ -88,32 +102,26 @@ public abstract class JoystickBase : MonoBehaviour
     }
     #endregion
 
-    #region Call Event
-    protected abstract void GetJoystickDown();
-    protected abstract void GetJoystickStay(float dist);
-    protected abstract void GetJoystickUp(bool isClicked);
-    #endregion
-
     #region UNITY_ANDROID Function
 #if UNITY_ANDROID
     private void Start_Move_Joystick(int touch)
     {
         nowTouch = touch;
         isStick_Stay = true;
-        isDraged = false;
+        isMoved = false;
         
         //시작 점, 조이스틱위치 초기화
         firstPos = joystick.position = Input.GetTouch(touch).position;
         nowPos = firstPos;
 
-        GetJoystickDown();
+        GetJoystickDown.Invoke();
     }
 
     private void Stay_Move_Joystick()
     {
         nowPos = Input.GetTouch(nowTouch).position;
         
-        if (Vector2.SqrMagnitude(nowPos - firstPos) > 0.1f) isDraged = true;
+        if (Vector2.SqrMagnitude(nowPos - firstPos) > 0.1f) isMoved = true;
 
         distance = Vector3.Distance(nowPos, firstPos);
         distance = (distance < radius) ? distance : radius;
@@ -123,12 +131,12 @@ public abstract class JoystickBase : MonoBehaviour
 
         direction = nowPos;
     
-        GetJoystickStay(distance / radius);
+        GetJoystickStay.Invoke(distance / radius, rotation);
     }
 
     private void End_Move_Joystick()
     {
-        GetJoystickUp(!isDraged);
+        GetJoystickUp.Invoke(isMoved);
 
         isStick_Stay = false;
         nowTouch = -1;
@@ -151,20 +159,20 @@ public abstract class JoystickBase : MonoBehaviour
             (isLeftField && Input.GetMouseButtonDown(0))))
         {
             isStick_Stay = true;
-            isDraged = false;
+            isMoved = false;
 
             //시작 점, 조이스틱위치 초기화
             firstPos = joystick.position = Input.mousePosition;
             nowPos = firstPos;
 
-            GetJoystickDown();
+            GetJoystickDown.Invoke();
         }
         else if (isStick_Stay && ((!isLeftField && Input.GetMouseButton(1)) ||
                 (isLeftField && Input.GetMouseButton(0))))
         {
             nowPos = Input.mousePosition;
 
-            if (Vector2.SqrMagnitude(nowPos - firstPos) > 0.1f) isDraged = true;
+            if (Vector2.SqrMagnitude(nowPos - firstPos) > 0.1f) isMoved = true;
 
             distance = Vector3.Distance(nowPos, firstPos);
             distance = (distance < radius) ? distance : radius;
@@ -174,12 +182,12 @@ public abstract class JoystickBase : MonoBehaviour
 
             direction = nowPos;
 
-            GetJoystickStay(distance / radius);
+            GetJoystickStay.Invoke(distance / radius, rotation);
         }
         else if (isStick_Stay && ((!isLeftField && Input.GetMouseButtonUp(1)) ||
             (isLeftField && Input.GetMouseButtonUp(0))))
         {
-            GetJoystickUp(!isDraged);
+            GetJoystickUp.Invoke(isMoved);
 
             isStick_Stay = false;
             nowTouch = -1;

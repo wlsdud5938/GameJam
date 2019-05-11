@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-public class RifleBullet : BulletBase {
+public class PlayerBullet : BulletBase {
 
     protected override void Update()
     {

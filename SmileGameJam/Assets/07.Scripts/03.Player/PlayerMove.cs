@@ -1,54 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.EventSystems;
 
-public class PlayerMove : JoystickBase
+public partial class Player : MonoBehaviour
 {
-    public Transform target;
-
-    public float speed = 5;
     public float rotSpeed = 3;
-
     public float targetRot = 0;
 
-    public Animator animator;
-    private Rigidbody rb;
+    [Header("Roll")]
+    public float rollPower = 30;
+    public float rollDelay = 0.5f;
+    private bool isRolling = false;
+    private float rollTime = 0.35f, rollnowDelay;
 
-    private void Awake()
-    {
-        rb = transform.parent.GetComponent<Rigidbody>();
-        animator = transform.GetComponent<Animator>();
-        joystick = GameObject.Find("MoveJoyStick").GetComponent<RectTransform>();
-    }
-
-    protected override void Start()
-    {
-        base.Start();
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-        target.rotation = Quaternion.Slerp(target.rotation, Quaternion.Euler(0, targetRot, 0), Time.deltaTime * rotSpeed);
-    }
-
-    protected override void GetJoystickDown()
-    {
-    }
-
-    protected override void GetJoystickStay(float dist)
+    public void MoveJoystickStay(float dist, float rotation)
     {
         targetRot = rotation;
         animator.SetFloat("RunBlend", dist);
 
-        rb.velocity = Quaternion.Euler(0, targetRot, 0) * Vector3.forward * speed * dist;
+        if (!isRolling)
+        {
+            rb.velocity = Quaternion.Euler(0, targetRot, 0) * Vector3.forward * moveSpeed * dist;
+            animator.speed = moveSpeed * 0.3f;
+        }
     }
 
-    protected override void GetJoystickUp(bool isClicked)
+    public void MoveJoystickUp(bool isMoved)
     {
         animator.SetFloat("RunBlend", 0);
+        if (!isRolling)
+            rb.velocity = Vector3.zero;
+    }
+
+    public void Roll()
+    {
+        if(rollnowDelay <= 0)
+        StartCoroutine(RollAnim());   
+    }
+
+    IEnumerator RollAnim()
+    {
+        isRolling = true;
+        rb.AddForce(Quaternion.Euler(0, targetRot, 0) * Vector3.forward * rollPower, ForceMode.Impulse);
+        yield return new WaitForSeconds(rollTime);
+        isRolling = false;
         rb.velocity = Vector3.zero;
+        rollnowDelay = rollDelay;
     }
 }

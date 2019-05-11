@@ -3,43 +3,87 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour {
-
-    [Header("UI")]
-    public Image healthBarImg;
-    public Text healthText;
-    public Text coinText;
+public partial class Player : MonoBehaviour {
 
     [Header("Information")]
-    public int maxHealthPoint = 100;
-    public int healthPoint = 100;
+    public GunBase nowGun;
     public int coin = 0;
+    public float moveSpeed = 3.5f;
+    private int maxHealthPoint, healthPoint;
 
-    private PlayerAttack playerAttack;
-    private PlayerMove playerMove;
+    private GameObject[] hearts;
+    private Text coinText;
+    private Image gunImage;
+    private Text bulletCountText;
+
+    public float invincibilityDelay = 0.2f;
+    private float invincibilityTime;
+
+    private Transform playerTr;
+
+    private Rigidbody rb;
+    private Animator animator;
+
+    private void Awake()
+    {
+        playerTr = transform;
+        muzzle = transform.GetChild(1);
+        rb = transform.GetComponent<Rigidbody>();
+        animator = transform.GetChild(0).GetComponent<Animator>();
+
+        coinText = GameObject.Find("CoinText").GetComponent<Text>();
+        gunImage = GameObject.Find("GunImg").GetComponent<Image>();
+        bulletCountText = GameObject.Find("BulletInfo").GetComponent<Text>();
+
+        Transform healthTr = GameObject.Find("Health").transform;
+        hearts = new GameObject[healthTr.childCount];
+        for (int i = 0; i < healthTr.childCount; i++)
+            hearts[i] = healthTr.GetChild(i).gameObject;
+        maxHealthPoint = healthPoint = healthTr.childCount;
+
+        nowGun = gunInventory[0];
+    }
 
     private void Start()
     {
-        healthBarImg = GameObject.Find("HealthBar").GetComponent<Image>();
-        healthText = GameObject.Find("HealthText").GetComponent<Text>();
-        coinText = GameObject.Find("CoinText").GetComponent<Text>();
-
-        playerAttack = transform.GetChild(0).GetComponent<PlayerAttack>();
-        playerMove = transform.GetChild(0).GetComponent<PlayerMove>();
-
         SetInfo();
+        SetGunInfo();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F)) TakeDamage(null, 1);
+        if (Input.GetKeyDown(KeyCode.G)) TakeHeal(1);
+        if (Input.GetKeyDown(KeyCode.Space)) Roll();
+
+        if (!isRolling)
+            playerTr.rotation = Quaternion.Slerp(playerTr.rotation, Quaternion.Euler(0, targetRot, 0), Time.deltaTime * rotSpeed);
+        if (rollnowDelay > 0)
+            rollnowDelay -= Time.deltaTime;
+        if (invincibilityTime > 0)
+            invincibilityTime -= Time.deltaTime;
+
+        if (nowTerm > 0)
+            nowTerm -= Time.deltaTime;
     }
 
     private void SetInfo()
     {
-        healthBarImg.fillAmount = (float)healthPoint / maxHealthPoint;
-        healthText.text = healthPoint.ToString();
-
+        for(int i = 0; i < maxHealthPoint; i++)
+        {
+            if (i < healthPoint)
+                hearts[i].SetActive(true);
+            else
+                hearts[i].SetActive(false);
+        }
         coinText.text = coin.ToString();
     }
 
     public void TakeDamage(Monster owner, int damage)
     {
+        if (isRolling || invincibilityTime > 0) return;
+
+        invincibilityTime = invincibilityDelay;
         healthPoint = Mathf.Clamp(healthPoint - damage, 0, maxHealthPoint);
 
         if (healthPoint <= 0)

@@ -2,15 +2,14 @@
 
 public class ShotGun : GunBase {
 
-    public float angle = 60;
+    private float angle = 60;
     public int bulletCount = 10;
 
     protected override void UseSkill(Player owner, Vector3 position, float rotation)
     {
+        angle *= accurancy;
         float startAngle = rotation - angle * 0.5f;
         float angleGap = angle / bulletCount;
-
-        CameraManager.instance.ReboundCamera(0.15f, Quaternion.Euler(0, rotation, 0) * Vector3.forward);
 
         for (int i = 0; i < bulletCount; i++)
         {
@@ -18,8 +17,18 @@ public class ShotGun : GunBase {
                 BulletPooler.instance.ReuseObject(id, position, Quaternion.Euler(0, startAngle + angleGap * i + UnityEngine.Random.Range(-0.1f, 0.1f), 0));
 
             float speed = bulletSpeed + Random.Range(-1.5f, 1.5f);
-            float range = bulletRange + Random.Range(-0.3f, 0.2f);
-            newBullet.SetInformation(owner, damage, speed, range);
+            float range = this.range + Random.Range(-0.3f, 0.2f);
+            newBullet.SetInformation(owner, attack, speed, range);
+        }
+
+        switch (shake)
+        {
+            case Shake.반대로:
+                CameraManager.instance.ReboundCamera(0.15f, Quaternion.Euler(0, rotation, 0) * Vector3.forward);
+                break;
+            case Shake.랜덤으로:
+                CameraManager.instance.ReboundCamera(0.15f, Quaternion.Euler(0, Random.Range(0,360), 0) * Vector3.forward);
+                break;
         }
     }
 }

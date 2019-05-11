@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
-public class PlayerAttack : JoystickBase
+public partial class Player : MonoBehaviour
 {
     [Header("Muzzle")]
     public Transform muzzle;
@@ -19,37 +18,9 @@ public class PlayerAttack : JoystickBase
     }
 
     [Header("Gun")]
-    public int index = 0, maxCount = 2;
-    public GunBase nowGun;
     public GunBase[] gunInventory;
-
-    [Header("Gun Info")]
-    public Image gunImage;
-    public Text bulletCountText;
+    public int index = 0, maxCount = 2;
     private float nowTerm = 0, bulletTerm;
-
-    private Animator animator;
-    private Player player;
-
-    private void Awake()
-    {
-        player = transform.GetComponent<Player>();
-        animator = transform.GetComponent<Animator>();
-        joystick = GameObject.Find("AttackJoyStick").GetComponent<RectTransform>();
-        gunImage = GameObject.Find("GunImg").GetComponent<Image>();
-        bulletCountText = GameObject.Find("BulletInfo").GetComponent<Text>();
-    }
-
-    protected override void Start()
-    {
-        base.Start();
-        SetGunInfo();
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-    }
 
     public void SwitchGun()
     {
@@ -85,17 +56,23 @@ public class PlayerAttack : JoystickBase
 
     private void SetGunInfo()
     {
-        nowTerm = bulletTerm = nowGun.bulletTerm;
+        if (nowGun == null)
+            return;
+        nowTerm = 0;
+        bulletTerm = nowGun.shotDelay;
         //이미지 교체
         SetGunUI();
     }
 
     private void SetGunUI()
     {
+        if (nowGun == null)
+            return;
+
         if (nowGun.isBasic)
             bulletCountText.text = "∞";
         else
-            bulletCountText.text = nowGun.nowBulletCount + "/" + nowGun.maxBulletCount;
+            bulletCountText.text = nowGun.nowCapacity + "/" + nowGun.maxCapacity;
     }
 
     private void ShotComplete()
@@ -103,43 +80,38 @@ public class PlayerAttack : JoystickBase
         animator.SetBool("IsAttacking", false);
     }
 
-    protected override void GetJoystickDown()
+    public void AttackJoystickStay(float dist, float rotation)
     {
         muzzleRot = rotation;
-    }
-
-    protected override void GetJoystickStay(float dist)
-    {
-        muzzleRot = rotation;
+        if (nowGun == null)
+            return;
 
         if(dist >= 1)
         {
             if (nowTerm <= 0)
             {
-                nowGun.Shot(player, muzzle.position, rotation);
+                nowGun.Shot(this, muzzle.position, rotation);
                 SetGunUI();
 
-                if (nowGun.nowBulletCount <= 0)
+                if (nowGun.nowCapacity <= 0)
                     RemoveGun();
 
                 nowTerm = bulletTerm;
                 animator.SetBool("IsAttacking", true);
             }
-            else
-                nowTerm -= Time.deltaTime;
         }
         else
         {
             muzzleRot = 0;
-            nowTerm = bulletTerm;
+            //nowTerm = 0;
             animator.SetBool("IsAttacking", false);
         }
     }
 
-    protected override void GetJoystickUp(bool isClicked)
+    public void AttackJoystickUp(bool isMoved)
     {
         muzzleRot = 0;
-        nowTerm = bulletTerm;
+        //nowTerm = 0;
         animator.SetBool("IsAttacking", false);
     }
 

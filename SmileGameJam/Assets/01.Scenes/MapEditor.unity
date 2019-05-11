@@ -4864,7 +4864,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 20, y: 0.05, z: 20}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.5, y: 0, z: -0.5}
 --- !u!1 &1112380824
 GameObject:
   m_ObjectHideFlags: 0
@@ -8087,7 +8087,12 @@ MonoBehaviour:
   obstacleList:
   - {fileID: 1084720419854040, guid: a9effc2189aee244abdf007f614add56, type: 2}
   - {fileID: 1162353789036298, guid: 17c4316e24a6b7c41a8dcea3ff29e611, type: 2}
-  - {fileID: 1681554419641348, guid: 1fd8d3d4074e5f9499e788e878c3736e, type: 2}
+  - {fileID: 1138012737362820, guid: 418385189938cc84f89b10ecddf4bd57, type: 2}
+  - {fileID: 1330425083205446, guid: 45b27f1723e801a4ab25a5478c9f40bc, type: 2}
+  - {fileID: 1378454769746618, guid: 7cb76e958715e034c9c4ec2040367929, type: 2}
+  - {fileID: 1643933098927522, guid: 4c532d7cc89fea342843c60532fd36bb, type: 2}
+  - {fileID: 1984676541560158, guid: 536b6ac257b85a848b58827e6d8b8081, type: 2}
+  - {fileID: 1173650047404460, guid: 9451e30795e971c4b993dea286023fdb, type: 2}
   monsterList: []
 --- !u!1 &2139554582
 GameObject:

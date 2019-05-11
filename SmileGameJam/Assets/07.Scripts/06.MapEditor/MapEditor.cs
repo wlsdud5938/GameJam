@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace MapEditor
@@ -52,7 +53,7 @@ namespace MapEditor
         private void Start()
         {
             TileSetting();
-            RoomSetting(8);
+            RoomSetting(4);
 
             LoadRoomData();
         }
@@ -68,8 +69,8 @@ namespace MapEditor
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
-            {
+            if (Physics.Raycast(ray, out hit) && !EventSystem.current.IsPointerOverGameObject())
+            { 
                 cursor.gameObject.SetActive(true);
                 if (hit.transform.CompareTag("Obstacle"))
                 {
@@ -93,17 +94,20 @@ namespace MapEditor
                 cursor.gameObject.SetActive(false);
             }
 
-            if (Input.mouseScrollDelta.y > 0)
+            if (!Input.GetKey(KeyCode.LeftAlt))
             {
-                objectList[nowIndex].SetActive(false);
-                nowIndex = (nowIndex + 1 >= objectList.Length) ? 0 : nowIndex + 1;
-                objectList[nowIndex].SetActive(true);
-            }
-            else if (Input.mouseScrollDelta.y < 0)
-            {
-                objectList[nowIndex].SetActive(false);
-                nowIndex = (nowIndex - 1 < 0) ? objectList.Length - 1 : nowIndex - 1;
-                objectList[nowIndex].SetActive(true);
+                if (Input.mouseScrollDelta.y > 0)
+                {
+                    objectList[nowIndex].SetActive(false);
+                    nowIndex = (nowIndex + 1 >= objectList.Length) ? 0 : nowIndex + 1;
+                    objectList[nowIndex].SetActive(true);
+                }
+                else if (Input.mouseScrollDelta.y < 0)
+                {
+                    objectList[nowIndex].SetActive(false);
+                    nowIndex = (nowIndex - 1 < 0) ? objectList.Length - 1 : nowIndex - 1;
+                    objectList[nowIndex].SetActive(true);
+                }
             }
         }
 
@@ -137,14 +141,20 @@ namespace MapEditor
             Destroy(mapParent.gameObject);
             mapParent = new GameObject("Map").transform;
 
-            for (int x = -width / 2; x < width / 2; x++)
+            int start = width % 2 == 0 ? width / 2 : width / 2 + 1;
+            int end = width % 2 == 0 ? width / 2 : width / 2;
+
+            for (int x = -start; x < end; x++)
             {
-                for (int y = -width / 2; y < width / 2; y++)
+                for (int y = -start; y < end; y++)
                 {
                     GameObject newGrid = Instantiate(grid, new Vector3(x * 2 + 0.5f, 0, y * 2 + 0.5f), Quaternion.identity, mapParent);
                 }
             }
-
+            if (width % 2 == 0)
+                transform.GetComponent<BoxCollider>().center = new Vector3(-0.5f, 0, -0.5f);
+            else
+                transform.GetComponent<BoxCollider>().center = new Vector3(-1.5f, 0, -1.5f);
             transform.GetComponent<BoxCollider>().size = new Vector3(width * 2, 0.05f, width * 2);
         }
 
@@ -159,10 +169,10 @@ namespace MapEditor
                     smallRoomData[subStage].obstacleData.Remove(temp);
                     break;
                 case 1:
-                    mediumRoomData[subStage].obstacleData.Add(temp);
+                    mediumRoomData[subStage].obstacleData.Remove(temp);
                     break;
                 case 2:
-                    largeRoomData[subStage].obstacleData.Add(temp);
+                    largeRoomData[subStage].obstacleData.Remove(temp);
                     break;
             }
 
@@ -364,15 +374,15 @@ namespace MapEditor
             switch (stage)
             {
                 case 0:
-                    RoomSetting(8);
+                    RoomSetting(4);
                     for (int i = 0; i < smallRoomData.Count; i++) options.Add(i.ToString());
                     break;
                 case 1:
-                    RoomSetting(14);
+                    RoomSetting(5);
                     for (int i = 0; i < mediumRoomData.Count; i++) options.Add(i.ToString());
                     break;
                 case 2:
-                    RoomSetting(20);
+                    RoomSetting(6);
                     for (int i = 0; i < largeRoomData.Count; i++) options.Add(i.ToString());
                     break;
             }
