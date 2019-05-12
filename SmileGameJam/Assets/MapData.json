@@ -74,6 +74,36 @@
                     "x": -3,
                     "z": -2,
                     "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": -4,
+                    "z": -4,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": -4,
+                    "z": -3,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": -4,
+                    "z": 3,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": 3,
+                    "z": 3,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": 3,
+                    "z": -4,
+                    "rotation": 0
                 }
             ],
             "monsterData": []
@@ -120,6 +150,30 @@
                 {
                     "index": 0,
                     "x": -1,
+                    "z": -4,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": -4,
+                    "z": 3,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": 3,
+                    "z": 3,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": 3,
+                    "z": -4,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": -4,
                     "z": -4,
                     "rotation": 0
                 }
@@ -310,6 +364,30 @@
                     "x": -1,
                     "z": 1,
                     "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": -6,
+                    "z": -6,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": 3,
+                    "z": 3,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": 3,
+                    "z": -6,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": -6,
+                    "z": 3,
+                    "rotation": 0
                 }
             ],
             "monsterData": []
@@ -363,6 +441,24 @@
                     "index": 3,
                     "x": -3,
                     "z": -1,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": -6,
+                    "z": 3,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": 3,
+                    "z": 3,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": -6,
+                    "z": -6,
                     "rotation": 0
                 }
             ],
@@ -540,6 +636,24 @@
                     "x": -3,
                     "z": 4,
                     "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": 5,
+                    "z": 5,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": 5,
+                    "z": -6,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": -6,
+                    "z": 5,
+                    "rotation": 0
                 }
             ],
             "monsterData": []
@@ -575,6 +689,18 @@
                     "index": 0,
                     "x": 1,
                     "z": -6,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": -6,
+                    "z": -6,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": 5,
+                    "z": 5,
                     "rotation": 0
                 }
             ],

@@ -11,6 +11,8 @@ public partial class Player : MonoBehaviour {
     public float moveSpeed = 3.5f;
     private int maxHealthPoint, healthPoint;
 
+    public bool canAttack = true;
+
     private GameObject[] hearts;
     private Text coinText;
     private Image gunImage;
@@ -35,13 +37,16 @@ public partial class Player : MonoBehaviour {
         gunImage = GameObject.Find("GunImg").GetComponent<Image>();
         bulletCountText = GameObject.Find("BulletInfo").GetComponent<Text>();
 
-        Transform healthTr = GameObject.Find("Health").transform;
-        hearts = new GameObject[healthTr.childCount];
-        for (int i = 0; i < healthTr.childCount; i++)
-            hearts[i] = healthTr.GetChild(i).gameObject;
-        maxHealthPoint = healthPoint = healthTr.childCount;
+        if (canAttack)
+        {
+            Transform healthTr = GameObject.Find("Health").transform;
+            hearts = new GameObject[healthTr.childCount];
+            for (int i = 0; i < healthTr.childCount; i++)
+                hearts[i] = healthTr.GetChild(i).gameObject;
+            maxHealthPoint = healthPoint = healthTr.childCount;
 
-        nowGun = gunInventory[0];
+            nowGun = gunInventory[0];
+        }
     }
 
     private void Start()

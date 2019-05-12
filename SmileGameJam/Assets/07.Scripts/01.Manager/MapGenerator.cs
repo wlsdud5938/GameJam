@@ -8,6 +8,7 @@ public class MapGenerator : MonoBehaviour {
     [Header("Map Data")]
     public Transform mapParent;
     public GameObject roomObj;
+    public GameObject smallRoomObj, mediumRoomObj, largeRoomObj;
     public Vector2 leftDown, rightUp;
 
     [Range(0, 15)]
@@ -31,7 +32,7 @@ public class MapGenerator : MonoBehaviour {
     {
         jsonManager = GetComponent<JsonManager>();
         objectData = GetComponent<ObjectData>();
-        corridorGenerator = transform.GetChild(0).GetComponent<CorridorGenerator>();
+        corridorGenerator = GameObject.Find("CorriderGenerator").GetComponent<CorridorGenerator>();
 
         obstacleList = new GameObject[objectData.obstacleList.Length];
         for (int i = 0; i < obstacleList.Length; i++)
@@ -45,7 +46,7 @@ public class MapGenerator : MonoBehaviour {
 
     public IEnumerator MapGenerate(GameDirector.spawn spawnEvent)
     {
-        Vector2 position = new Vector2();
+        Vector3 position = new Vector3();
         smallRoomList = new List<Room>(); smallroomPosition = new Transform[smallRoomCount +3];
         mediumRoomList = new List<Room>(); mediumroomPosition = new Transform[mediumRoomCount + 3];
         largeRoomList = new List<Room>(); largeroomPosition = new Transform[largeRoomCount + 3];
@@ -78,8 +79,8 @@ public class MapGenerator : MonoBehaviour {
         {
             if (i < smallRoomCount)
             {
-                position = new Vector2(Mathf.RoundToInt(smallroomPosition[i].transform.position.x), Mathf.RoundToInt(smallroomPosition[i].transform.position.y));
-                smallRoomList.Add(RoomGenerate(position, new Vector2(4, 4), 0));
+                position = new Vector3(Mathf.RoundToInt(smallroomPosition[i].transform.position.x),0, Mathf.RoundToInt(smallroomPosition[i].transform.position.y));
+                smallRoomList.Add(RoomGenerate(Instantiate(smallRoomObj, position, Quaternion.identity, mapParent), 0));
                 corridorGenerator.AddVertex(position,4);
             }
             Destroy(smallroomPosition[i].gameObject);
@@ -88,9 +89,9 @@ public class MapGenerator : MonoBehaviour {
         {
             if (i < mediumRoomCount)
             {
-                position = new Vector2(Mathf.RoundToInt(mediumroomPosition[i].transform.position.x), Mathf.RoundToInt(mediumroomPosition[i].transform.position.y));
-                mediumRoomList.Add(RoomGenerate(position, new Vector2(5, 5), 1));
-                corridorGenerator.AddVertex(position - new Vector2(1,1),5);
+                position = new Vector3(Mathf.RoundToInt(mediumroomPosition[i].transform.position.x),0, Mathf.RoundToInt(mediumroomPosition[i].transform.position.y));
+                mediumRoomList.Add(RoomGenerate(Instantiate(mediumRoomObj, position, Quaternion.identity, mapParent), 1));
+                corridorGenerator.AddVertex(position,5);
             }
             Destroy(mediumroomPosition[i].gameObject);
         }
@@ -98,8 +99,8 @@ public class MapGenerator : MonoBehaviour {
         {
             if (i < largeRoomCount)
             {
-                position = new Vector2(Mathf.RoundToInt(largeroomPosition[i].transform.position.x), Mathf.RoundToInt(largeroomPosition[i].transform.position.y));
-                largeRoomList.Add(RoomGenerate(position, new Vector2(6, 6), 2));
+                position = new Vector3(Mathf.RoundToInt(largeroomPosition[i].transform.position.x),0, Mathf.RoundToInt(largeroomPosition[i].transform.position.y));
+                largeRoomList.Add(RoomGenerate(Instantiate(largeRoomObj, position, Quaternion.identity, mapParent), 2));
                 corridorGenerator.AddVertex(position,6);
             }
             Destroy(largeroomPosition[i].gameObject);
@@ -108,48 +109,12 @@ public class MapGenerator : MonoBehaviour {
 
         corridorGenerator.CorridorGenerate();
         spawnEvent(startRoom.position);
-
-        smallroomPosition = null;
-        mediumroomPosition = null;
-        largeroomPosition = null;
     }
 
-    private Room RoomGenerate(Vector2 position, Vector2 scale, int size)
+    private Room RoomGenerate(GameObject room, int size)
     {
-        int width = Mathf.RoundToInt(scale.x);
-        int height = Mathf.RoundToInt(scale.y);
-
-        GameObject newRoom = new GameObject("Room");
-        newRoom.transform.position = new Vector3(position.x, 0, position.y);
-        newRoom.transform.SetParent(mapParent);
-
-        GameObject newGround = new GameObject("Ground");
-        newGround.transform.SetParent(newRoom.transform);
-        newGround.transform.localPosition = Vector3.zero;
-        
-        int start = width % 2 == 0 ? width / 2 : width / 2 + 1;
-        int end = width / 2;
-
-        for (int x = -start; x < end; x++)
-        {
-            for (int y = -start; y < end; y++)
-            {
-                Vector3 pos = newRoom.transform.position + new Vector3(x * 2 + 1, 0, y * 2 + 1);
-                GameObject newGrid = Instantiate(grid, pos, Quaternion.identity, newGround.transform);
-            }
-        }
-        newGround.AddComponent<BoxCollider>().size = new Vector3(width * 2, 0.1f, width * 2);
-        if (width % 2 == 0)
-            newGround.GetComponent<BoxCollider>().center = new Vector3(0, 0, 0);
-        else
-            newGround.GetComponent<BoxCollider>().center = new Vector3(-1, 0, -1);
-
-        GameObject newObstacle = new GameObject("Obstacles");
-        newObstacle.transform.SetParent(newRoom.transform);
-        newObstacle.transform.localPosition = Vector3.zero;
-        ObstacleGenerate(newObstacle.transform, size);
-
-        return new Room(newRoom);
+        ObstacleGenerate(room.transform.GetChild(1).transform, size);
+        return new Room(room);
     }
 
     public void ObstacleGenerate(Transform parent, int size)

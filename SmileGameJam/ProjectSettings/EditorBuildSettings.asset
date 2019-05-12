@@ -6,21 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/01.Scenes/WaitScene.unity
+    path: Assets/01.Scenes/01StartScene.unity
     guid: 598e12c8aa4906a4a91f921a38acebfe
   - enabled: 1
-    path: Assets/01.Scenes/StartScene.unity
-    guid: 95fbb09f1dace8948b3847641d9b3ccf
+    path: Assets/01.Scenes/02Lobby.unity
+    guid: 4b9b3151c13f4da49a4a84a84d0de6c7
   - enabled: 1
-    path: Assets/01.Scenes/MainScene.unity
-    guid: 8b2757e0f5ccd4e4a9db2539ab0b9e17
-  - enabled: 1
-    path: Assets/01.Scenes/LostScene.unity
-    guid: 413004c667e77074ebb9308258494047
-  - enabled: 1
-    path: Assets/01.Scenes/WinScene.unity
-    guid: 09655720dce941044a728cbfe5c99719
-  - enabled: 1
-    path: Assets/01.Scenes/MainScene 1.unity
-    guid: 15199ad99b53b6342b33dcc9efbaa960
+    path: Assets/01.Scenes/03IngameScene.unity
+    guid: b297b8f2387ccf94d91c2a0826330d5a
   m_configObjects: {}
