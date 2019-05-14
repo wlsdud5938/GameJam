@@ -45,10 +45,10 @@ public class Agrid : MonoBehaviour
 
         grid = new Node[gridSizeX, gridSizeY];
 
-        Vector3 worldBottomLeft = gridLeftDown;
-        for (int x = Mathf.RoundToInt(gridLeftDown.x); x < gridSizeX; x++)
+        Vector3 worldBottomLeft = new Vector3(gridLeftDown.x, 0, gridLeftDown.y);
+        for (int x = 0; x < gridSizeX; x++)
         {
-            for (int y = Mathf.RoundToInt(gridLeftDown.y); y < gridSizeY; y++)
+            for (int y = 0; y < gridSizeY; y++)
             {
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
                 bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask));
@@ -68,7 +68,7 @@ public class Agrid : MonoBehaviour
             }
         }
 
-        BlurPenaltyMap(3);
+        //BlurPenaltyMap(3);
     }
 
     void BlurPenaltyMap(int blurSize)
@@ -96,7 +96,7 @@ public class Agrid : MonoBehaviour
             }
         }
 
-        for (int x = 0; x < gridSizeY; x++)
+        for (int x = 0; x < gridSizeX; x++)
         {
             for (int y = -kernelExtents; y <= kernelExtents; y++)
             {
@@ -112,6 +112,7 @@ public class Agrid : MonoBehaviour
                 int removeIndex = Mathf.Clamp(y - kernelExtents - 1, 0, gridSizeY);
                 int addIndex = Mathf.Clamp(y + kernelExtents, 0, gridSizeY - 1);
 
+                Debug.Log(gridSizeX + " : " + x);
                 penaltyVerticalPass[x, y] = penaltyVerticalPass[x, y - 1] - penaltyHorizontalPass[x, removeIndex]
                     + penaltyHorizontalPass[x, addIndex];
                 blurredPenalty = Mathf.RoundToInt((float)penaltyVerticalPass[x, y] / (kernelSize * kernelSize));
@@ -136,8 +137,8 @@ public class Agrid : MonoBehaviour
         for (int x = -1; x <= 1; x++)
         {
             for (int y = -1; y <= 1; y++)
-            {
-                if (x == 0 && y == 0)
+            { 
+                if (x != 0 && y != 0)
                     continue;
 
                 int checkX = node.gridX + x;
@@ -168,7 +169,8 @@ public class Agrid : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube((gridLeftDown + gridRightUp)* 0.5f, new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
+        Vector3 pos = new Vector3(gridLeftDown.x + gridRightUp.x, 0, gridLeftDown.y + gridRightUp.y);
+        Gizmos.DrawWireCube(pos * 0.5f, new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
 
         if (grid != null && displayGridGizmos)
         {

@@ -70,82 +70,169 @@ public class CorridorGenerator : MonoBehaviour {
             }
         }
         //Corridor Generate
-        astar.grid.CreateGrid(new Vector2(gridLeftDown.x, gridLeftDown.y), new Vector2(gridRightUp.x, gridRightUp.y));
         for (int i = 1; i < vertexes.Count; i++)
         {
             if (vertexes[i].connectVertex != null)
             {
-                Vector3[] waypoints = astar.FindPath(vertexes[i].position, vertexes[i].connectVertex.position);
+                Debug.DrawLine(vertexes[i].position + Vector3.up * 2, vertexes[i].connectVertex.position + Vector3.up * 2, Color.blue, 20);
+
+                Vector3 startPoint = vertexes[i].position;
+                Vector3 endPoint = vertexes[i].connectVertex.position;
+
+                int xDir = Mathf.RoundToInt(endPoint.x - startPoint.x);
+                int yDir = Mathf.RoundToInt(endPoint.z - startPoint.z);
+
+                if (Random.Range(0, 2) == 0)
+                {
+                    int x = 0;
+
+                    if (xDir > 0)
+                    {
+                        for (; x < xDir; x += 2)
+                        {
+                            if (x < vertexes[i].width + 2) continue;
+                            if (yDir == 0 && x > xDir - vertexes[i].connectVertex.width - 2) continue;
+                            GameObject newRoad = Instantiate(straightCorridor, startPoint + new Vector3(x, 0, 0), Quaternion.identity);
+                            newRoad.transform.SetParent(transform);
+                        }
+                    }
+                    else
+                    {
+                        for (; x > xDir; x -= 2)
+                        {
+                            if (x > -vertexes[i].width - 2) continue;
+                            if (yDir == 0 && x < xDir + vertexes[i].connectVertex.width + 2) continue;
+                            GameObject newRoad = Instantiate(straightCorridor, startPoint + new Vector3(x, 0, 0), Quaternion.identity);
+                            newRoad.transform.SetParent(transform);
+                        }
+                    }
+
+                    bool isCorner = false;
+                    if (yDir > 0)
+                    {
+                        if (xDir != 0 && yDir != 0)
+                        {
+                            if (xDir > 0)
+                            {
+                                GameObject newRoad = Instantiate(cornerCorridor, startPoint + new Vector3(x, 0, 0), Quaternion.Euler(0, 90, 0));
+                                newRoad.transform.SetParent(transform);
+                            }
+                            else
+                            {
+                                GameObject newRoad = Instantiate(cornerCorridor, startPoint + new Vector3(x, 0, 0), Quaternion.Euler(0, 180, 0));
+                                newRoad.transform.SetParent(transform);
+                            }
+                            isCorner = true;
+                        }
+                        for (int y = 2; y < yDir; y += 2)
+                        {
+                            if (!isCorner && y < vertexes[i].width + 2) continue;
+                            if (y > yDir - vertexes[i].connectVertex.width - 2) continue;
+                            GameObject newRoad = Instantiate(straightCorridor, startPoint + new Vector3(x, 0, y), Quaternion.Euler(0, 90, 0));
+                            newRoad.transform.SetParent(transform);
+                        }
+                    }
+                    else
+                    {
+                        if (xDir != 0 && yDir != 0)
+                        {
+                            if (xDir > 0)
+                            {
+                                GameObject newRoad = Instantiate(cornerCorridor, startPoint + new Vector3(x, 0, 0), Quaternion.Euler(0, 0, 0));
+                                newRoad.transform.SetParent(transform);
+                            }
+                            else
+                            {
+                                GameObject newRoad = Instantiate(cornerCorridor, startPoint + new Vector3(x, 0, 0), Quaternion.Euler(0, 270, 0));
+                                newRoad.transform.SetParent(transform);
+                            }
+                            isCorner = true;
+                        }
+                        for (int y = -2; y > yDir; y -= 2)
+                        {
+                            if (!isCorner && y > -vertexes[i].width - 2) continue;
+                            if (y < yDir + vertexes[i].connectVertex.width + 2) continue;
+                            GameObject newRoad = Instantiate(straightCorridor, startPoint + new Vector3(x, 0, y), Quaternion.Euler(0, 90, 0));
+                            newRoad.transform.SetParent(transform);
+                        }
+                    }
+                }
+                else
+                {
+                    int y = 0;
+
+                    if (yDir > 0)
+                    {
+                        for (; y < yDir; y += 2)
+                        {
+                            if (y < vertexes[i].width + 2) continue;
+                            if (xDir == 0 && y > yDir - vertexes[i].connectVertex.width - 2) continue;
+                            GameObject newRoad = Instantiate(straightCorridor, startPoint + new Vector3(0, 0, y), Quaternion.Euler(0, 90, 0));
+                            newRoad.transform.SetParent(transform);
+                        }
+                    }
+                    else
+                    {
+                        for (; y > yDir; y -= 2)
+                        {
+                            if (y > -vertexes[i].width - 2) continue;
+                            if (xDir == 0 && y < yDir + vertexes[i].connectVertex.width + 2) continue;
+                            GameObject newRoad = Instantiate(straightCorridor, startPoint + new Vector3(0, 0, y), Quaternion.Euler(0, 90, 0));
+                            newRoad.transform.SetParent(transform);
+                        }
+                    }
+
+                    bool isCorner = false;
+                    if (xDir > 0)
+                    {
+                        if (xDir != 0 && yDir != 0)
+                        {
+                            if (yDir > 0)
+                            {
+                                GameObject newRoad = Instantiate(cornerCorridor, startPoint + new Vector3(0, 0, y), Quaternion.Euler(0, 270, 0));
+                                newRoad.transform.SetParent(transform);
+                            }
+                            else
+                            {
+                                GameObject newRoad = Instantiate(cornerCorridor, startPoint + new Vector3(0, 0, y), Quaternion.Euler(0, 180, 0));
+                                newRoad.transform.SetParent(transform);
+                            }
+                            isCorner = true;
+                        }
+                        for (int x = 2; x < xDir; x += 2)
+                        {
+                            if (!isCorner && x < vertexes[i].width + 2) continue;
+                            if (x > xDir - vertexes[i].connectVertex.width - 2) continue;
+                            GameObject newRoad = Instantiate(straightCorridor, startPoint + new Vector3(x, 0, y), Quaternion.identity);
+                            newRoad.transform.SetParent(transform);
+                        }
+                    }
+                    else
+                    {
+                        if (xDir != 0 && yDir != 0)
+                        {
+                            if (yDir > 0)
+                            {
+                                GameObject newRoad = Instantiate(cornerCorridor, startPoint + new Vector3(0, 0, y), Quaternion.Euler(0, 0, 0));
+                                newRoad.transform.SetParent(transform);
+                            }
+                            else
+                            {
+                                GameObject newRoad = Instantiate(cornerCorridor, startPoint + new Vector3(0, 0, y), Quaternion.Euler(0, 90, 0));
+                                newRoad.transform.SetParent(transform);
+                            }
+                            isCorner = true;
+                        }
+                        for (int x = -2; x > xDir; x -= 2)
+                        {
+                            if (!isCorner && x > -vertexes[i].width - 2) continue;
+                            if (x < xDir + vertexes[i].connectVertex.width + 2) continue;
+                            GameObject newRoad = Instantiate(straightCorridor, startPoint + new Vector3(x, 0, y), Quaternion.identity);
+                            newRoad.transform.SetParent(transform);
+                        }
+                    }
+                }
             }
-
-            ////Corridor Generate
-            //for (int i = 1; i < vertexes.Count; i++)
-            //{
-            //    if (vertexes[i].connectVertex != null)
-            //    {
-            //        float xDiff = Mathf.Sign(vertexes[i].connectVertex.position.x - vertexes[i].position.x);
-            //        float yDiff = Mathf.Sign(vertexes[i].connectVertex.position.z - vertexes[i].position.z);
-            //        float x;
-
-            //        if (xDiff > 0)
-            //        {
-            //            for (x = vertexes[i].position.x; x < vertexes[i].connectVertex.position.x; x += 2)
-            //            {
-            //                GameObject newRoad =
-            //                    Instantiate(straightCorridor, new Vector3(x, 0, vertexes[i].position.z), Quaternion.Euler(0, 0, 0));
-            //                newRoad.transform.SetParent(transform);
-            //            }
-            //        }
-            //        else
-            //        {
-            //            for (x = vertexes[i].position.x; x > vertexes[i].connectVertex.position.x; x -= 2)
-            //            {
-            //                GameObject newRoad =
-            //                Instantiate(straightCorridor, new Vector3(x, 0, vertexes[i].position.z), Quaternion.Euler(0, 0, 0));
-            //                newRoad.transform.SetParent(transform);
-            //            }
-            //        }
-
-            //        if (yDiff > 0)
-            //        {
-            //            for (float y = vertexes[i].position.z; y < vertexes[i].connectVertex.position.z; y += 2)
-            //            {
-            //                if (y == vertexes[i].position.z)
-            //                {
-            //                    float rotation = xDiff > 0 ? 90 : 180;
-            //                    GameObject newRoad =
-            //                        Instantiate(cornerCorridor, new Vector3(x, 0, y), Quaternion.Euler(0, rotation, 0));
-            //                    newRoad.transform.SetParent(transform);
-            //                }
-            //                else
-            //                {
-            //                    GameObject newRoad =
-            //                        Instantiate(straightCorridor, new Vector3(x, 0, y), Quaternion.Euler(0, 90, 0));
-            //                    newRoad.transform.SetParent(transform);
-            //                }
-            //            }
-            //        }
-            //        else
-            //        {
-            //            for (float y = vertexes[i].position.z; y > vertexes[i].connectVertex.position.z; y -= 2)
-            //            {
-            //                if (y == vertexes[i].position.z)
-            //                {
-            //                    float rotation = xDiff > 0 ? 0 : 270;
-            //                    GameObject newRoad =
-            //                        Instantiate(cornerCorridor, new Vector3(x, 0, y), Quaternion.Euler(0, rotation, 0));
-            //                    newRoad.transform.SetParent(transform);
-            //                }
-            //                else
-            //                {
-            //                    GameObject newRoad =
-            //                    Instantiate(straightCorridor, new Vector3(x, 0, y), Quaternion.Euler(0, 90, 0));
-            //                    newRoad.transform.SetParent(transform);
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
         }
     }
 

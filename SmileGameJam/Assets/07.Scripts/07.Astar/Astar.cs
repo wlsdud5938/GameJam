@@ -22,14 +22,14 @@ public class Astar : MonoBehaviour
 
         if (startNode.walkable && targetNode.walkable)
         {
-            List<Node> openSet = new List<Node>(grid.MaxSize);  //열린 노드 힙 생성
+            Heap<Node> openSet = new Heap<Node>(grid.MaxSize);  //열린 노드 힙 생성
             HashSet<Node> closedSet = new HashSet<Node>();      //닫힌 노드 해쉬셋 생성
             openSet.Add(startNode);     //시작 노드를 열린 노드에 추가
 
             Node currentNode = null;
             while (openSet.Count > 0) //열린 노드가 없을때까지
             {
-                //currentNode = openSet.RemoveFirst(); //현 노드는 열린 노드 힙 첫 번째로 뽑아온 걸로
+                currentNode = openSet.RemoveFirst(); //현 노드는 열린 노드 힙 첫 번째로 뽑아온 걸로
                 closedSet.Add(currentNode); //닫힌 노드에 추가
 
                 if (currentNode.Equals(targetNode)) //현 노드가 타겟이면

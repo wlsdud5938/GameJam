@@ -15,7 +15,6 @@ public class MapGenerator : MonoBehaviour {
     public int smallRoomCount, mediumRoomCount,largeRoomCount;
 
     private Transform[] smallroomPosition, mediumroomPosition, largeroomPosition;
-    private List<Room> smallRoomList, mediumRoomList, largeRoomList;
     private Transform startRoom;
 
     [Header("Object Data")]
@@ -47,63 +46,51 @@ public class MapGenerator : MonoBehaviour {
     public IEnumerator MapGenerate(GameDirector.spawn spawnEvent)
     {
         Vector3 position = new Vector3();
-        smallRoomList = new List<Room>(); smallroomPosition = new Transform[smallRoomCount +3];
-        mediumRoomList = new List<Room>(); mediumroomPosition = new Transform[mediumRoomCount + 3];
-        largeRoomList = new List<Room>(); largeroomPosition = new Transform[largeRoomCount + 3];
+        List<Room> smallRoomList, mediumRoomList, largeRoomList;
+        smallRoomList = new List<Room>(); 
+        mediumRoomList = new List<Room>();
+        largeRoomList = new List<Room>();    
 
-        for (int i = 0; i < smallRoomCount +3; i++)
+        int count = Mathf.NextPowerOfTwo(smallRoomCount + mediumRoomCount + largeRoomCount + 4);
+        int sqr = (int)Mathf.Sqrt(count);
+        int[] rooms = new int[count];
+        
+        for (int i = 0; i < smallRoomCount ; i++)
+            rooms[i] = 1;
+        for (int i = 0; i < mediumRoomCount; i++)
+            rooms[smallRoomCount + i] = 2;
+        for (int i = 0; i < largeRoomCount ; i++)
+            rooms[smallRoomCount + mediumRoomCount + i] = 3;
+
+        for (int x = 0; x < count; x++)
         {
-            position = new Vector3(Random.Range(leftDown.x, rightUp.x), Random.Range(leftDown.y, rightUp.y), 0);
-            GameObject newObj = Instantiate(roomObj, position, Quaternion.identity);
-            newObj.transform.localScale = new Vector2(4, 4) * 2;
-            smallroomPosition[i] = newObj.transform;
-        }
-        for (int i = 0; i < largeRoomCount +3; i++)
-        {
-            position = new Vector3(Random.Range(leftDown.x, rightUp.x), Random.Range(leftDown.y, rightUp.y), 0);
-            GameObject newObj = Instantiate(roomObj, position, Quaternion.identity);
-            newObj.transform.localScale = new Vector2(6, 6) * 2;
-            largeroomPosition[i] = newObj.transform;
-        }
-        for (int i = 0; i < mediumRoomCount + 3; i++)
-        {
-            position = new Vector3(Random.Range(leftDown.x, rightUp.x), Random.Range(leftDown.y, rightUp.y), 0);
-            GameObject newObj = Instantiate(roomObj, position, Quaternion.identity);
-            newObj.transform.localScale = new Vector2(5, 5) * 2;
-            mediumroomPosition[i] = newObj.transform;
+            int r = Random.Range(0, count);
+            int temp = rooms[x];
+            rooms[x] = rooms[ r];
+            rooms[r] = temp;
         }
 
-        yield return new WaitForSeconds(4.5f);
+        //yield return new WaitForSeconds(4.5f);
+        yield return null;
 
-        for (int i = 0; i < smallRoomCount + 3; i++)
+        for (int x = 0; x < count; x++)
         {
-            if (i < smallRoomCount)
+            position = new Vector3(x % sqr, 0, x / sqr) * 18;
+            switch (rooms[x])
             {
-                position = new Vector3(Mathf.RoundToInt(smallroomPosition[i].transform.position.x),0, Mathf.RoundToInt(smallroomPosition[i].transform.position.y));
-                smallRoomList.Add(RoomGenerate(Instantiate(smallRoomObj, position, Quaternion.identity, mapParent), 0));
-                corridorGenerator.AddVertex(position,4);
+                case 1:
+                    smallRoomList.Add(RoomGenerate(Instantiate(smallRoomObj, position, Quaternion.identity, mapParent), 0));
+                    corridorGenerator.AddVertex(position, 4);
+                    break;
+                case 2:
+                    mediumRoomList.Add(RoomGenerate(Instantiate(mediumRoomObj, position, Quaternion.identity, mapParent), 1));
+                    corridorGenerator.AddVertex(position, 5);
+                    break;
+                case 3:
+                    largeRoomList.Add(RoomGenerate(Instantiate(largeRoomObj, position, Quaternion.identity, mapParent), 2));
+                    corridorGenerator.AddVertex(position, 6);
+                    break;
             }
-            Destroy(smallroomPosition[i].gameObject);
-        }
-        for (int i = 0; i < mediumRoomCount + 3; i++)
-        {
-            if (i < mediumRoomCount)
-            {
-                position = new Vector3(Mathf.RoundToInt(mediumroomPosition[i].transform.position.x),0, Mathf.RoundToInt(mediumroomPosition[i].transform.position.y));
-                mediumRoomList.Add(RoomGenerate(Instantiate(mediumRoomObj, position, Quaternion.identity, mapParent), 1));
-                corridorGenerator.AddVertex(position,5);
-            }
-            Destroy(mediumroomPosition[i].gameObject);
-        }
-        for (int i = 0; i < largeRoomCount + 3; i++)
-        {
-            if (i < largeRoomCount)
-            {
-                position = new Vector3(Mathf.RoundToInt(largeroomPosition[i].transform.position.x),0, Mathf.RoundToInt(largeroomPosition[i].transform.position.y));
-                largeRoomList.Add(RoomGenerate(Instantiate(largeRoomObj, position, Quaternion.identity, mapParent), 2));
-                corridorGenerator.AddVertex(position,6);
-            }
-            Destroy(largeroomPosition[i].gameObject);
         }
         startRoom = smallRoomList[0].obj.transform;
 

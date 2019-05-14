@@ -926,7 +926,7 @@ MonoBehaviour:
       m_Bits: 0
     terrainPenalty: 0
   obstacleProximityPenalty: 10
-  astar: {fileID: 0}
+  astar: {fileID: 1524905152}
 --- !u!114 &1524905152
 MonoBehaviour:
   m_ObjectHideFlags: 0
