@@ -8,29 +8,9 @@ public class CorridorGenerator : MonoBehaviour {
 
     public GameObject straightCorridor;
     public GameObject cornerCorridor;
-    
-    private Astar astar;
-    private Vector2 gridLeftDown = Vector3.zero, gridRightUp = Vector3.zero;
 
-    private void Awake()
-    {
-        astar = GetComponent<Astar>();
-    }
-
-    public void AddVertex(Vector3 position, float width) {
-        vertexes.Add(new Vertex(position, width));
-
-        Debug.DrawRay(position + new Vector3(width,0, width), Vector3.up * 10, Color.red, 10);
-        Debug.DrawRay(position - new Vector3(width,0, width), Vector3.up * 10, Color.red, 10);
-        if (gridLeftDown.x > position.x - width)
-            gridLeftDown = new Vector2(position.x - width, gridLeftDown.y);
-        if (gridLeftDown.y > position.z - width)
-            gridLeftDown = new Vector2(gridLeftDown.x, position.z - width);
-
-        if (gridRightUp.x < position.x + width)
-            gridRightUp = new Vector2(position.x + width, gridRightUp.y);
-        if (gridRightUp.y < position.z + width)
-            gridRightUp = new Vector2(gridRightUp.x, position.z + width);
+    public void AddVertex(Room room, Vector3 position, float width) {
+        vertexes.Add(new Vertex(room, position, width));
     }
 
     public void CorridorGenerate()
@@ -156,6 +136,40 @@ public class CorridorGenerator : MonoBehaviour {
                             newRoad.transform.SetParent(transform);
                         }
                     }
+
+                    if (xDir > 0)
+                    {
+                        vertexes[i].room.Open(2);
+                        if (yDir > 0)
+                            vertexes[i].connectVertex.room.Open(1);
+                        else if (yDir < 0)
+                            vertexes[i].connectVertex.room.Open(0);
+                        else
+                            vertexes[i].connectVertex.room.Open(3);
+                    }
+                    else if (xDir < 0)
+                    {
+                        vertexes[i].room.Open(3);
+                        if (yDir > 0)
+                            vertexes[i].connectVertex.room.Open(1);
+                        else if (yDir < 0)
+                            vertexes[i].connectVertex.room.Open(0);
+                        else
+                            vertexes[i].connectVertex.room.Open(2);
+                    }
+                    else
+                    {
+                        if (yDir > 0)
+                        {
+                            vertexes[i].room.Open(0);
+                            vertexes[i].connectVertex.room.Open(1);
+                        }
+                        else
+                        {
+                            vertexes[i].room.Open(1);
+                            vertexes[i].connectVertex.room.Open(0);
+                        }
+                    }
                 }
                 else
                 {
@@ -231,6 +245,40 @@ public class CorridorGenerator : MonoBehaviour {
                             newRoad.transform.SetParent(transform);
                         }
                     }
+
+                    if (yDir > 0)
+                    {
+                        vertexes[i].room.Open(0);
+                        if (xDir > 0)
+                            vertexes[i].connectVertex.room.Open(3);
+                        else if (xDir < 0)
+                            vertexes[i].connectVertex.room.Open(2);
+                        else
+                            vertexes[i].connectVertex.room.Open(1);
+                    }
+                    else if (yDir < 0)
+                    {
+                        vertexes[i].room.Open(1);
+                        if (xDir > 0)
+                            vertexes[i].connectVertex.room.Open(3);
+                        else if (xDir < 0)
+                            vertexes[i].connectVertex.room.Open(2);
+                        else
+                            vertexes[i].connectVertex.room.Open(0);
+                    }
+                    else
+                    {
+                        if (xDir > 0)
+                        {
+                            vertexes[i].room.Open(2);
+                            vertexes[i].connectVertex.room.Open(3);
+                        }
+                        else
+                        {
+                            vertexes[i].room.Open(3);
+                            vertexes[i].connectVertex.room.Open(2);
+                        }
+                    }
                 }
             }
         }
@@ -242,11 +290,13 @@ public class CorridorGenerator : MonoBehaviour {
         public bool isVisited;
 
         public Vertex connectVertex;
+        public Room room;
         public float nowWeight = float.MaxValue;
         public float width;
 
-        public Vertex(Vector3 position, float width)
+        public Vertex(Room room, Vector3 position, float width)
         {
+            this.room = room;
             isVisited = false;
 
             this.width = width;

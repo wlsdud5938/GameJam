@@ -8,6 +8,8 @@ public class LobbyManager : MonoBehaviour
     public Joystick moveJoystick;
     public Button skillButton;
 
+    public CameraManager cameraManager;
+
     public void StartToGame()
     {
         SceneManager.LoadScene(2);
@@ -38,6 +40,8 @@ public class LobbyManager : MonoBehaviour
             moveJoystick.GetJoystickUp.AddListener(nowPlayer.MoveJoystickUp);
             skillButton.onClick.AddListener(nowPlayer.Roll);
         }
+
+        cameraManager.target = nowPlayer.transform;
     }
 
     private void Update()

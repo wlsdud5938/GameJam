@@ -8,7 +8,7 @@ public class MapGenerator : MonoBehaviour {
     [Header("Map Data")]
     public Transform mapParent;
     public GameObject roomObj;
-    public GameObject smallRoomObj, mediumRoomObj, largeRoomObj;
+    public Room smallRoomObj, mediumRoomObj, largeRoomObj;
     public Vector2 leftDown, rightUp;
 
     [Range(0, 15)]
@@ -69,8 +69,7 @@ public class MapGenerator : MonoBehaviour {
             rooms[x] = rooms[ r];
             rooms[r] = temp;
         }
-
-        //yield return new WaitForSeconds(4.5f);
+       
         yield return null;
 
         for (int x = 0; x < count; x++)
@@ -79,29 +78,32 @@ public class MapGenerator : MonoBehaviour {
             switch (rooms[x])
             {
                 case 1:
-                    smallRoomList.Add(RoomGenerate(Instantiate(smallRoomObj, position, Quaternion.identity, mapParent), 0));
-                    corridorGenerator.AddVertex(position, 4);
+                    Room newRoom = RoomGenerate(Instantiate(smallRoomObj, position, Quaternion.identity, mapParent), 0);
+                    smallRoomList.Add(newRoom);
+                    corridorGenerator.AddVertex(newRoom,position, 4);
                     break;
                 case 2:
-                    mediumRoomList.Add(RoomGenerate(Instantiate(mediumRoomObj, position, Quaternion.identity, mapParent), 1));
-                    corridorGenerator.AddVertex(position, 5);
+                    newRoom = RoomGenerate(Instantiate(mediumRoomObj, position, Quaternion.identity, mapParent), 1);
+                    mediumRoomList.Add(newRoom);
+                    corridorGenerator.AddVertex(newRoom, position, 5);
                     break;
                 case 3:
-                    largeRoomList.Add(RoomGenerate(Instantiate(largeRoomObj, position, Quaternion.identity, mapParent), 2));
-                    corridorGenerator.AddVertex(position, 6);
+                    newRoom = RoomGenerate(Instantiate(largeRoomObj, position, Quaternion.identity, mapParent), 2);
+                    largeRoomList.Add(newRoom );
+                    corridorGenerator.AddVertex(newRoom, position, 6);
                     break;
             }
         }
-        startRoom = smallRoomList[0].obj.transform;
+        startRoom = smallRoomList[0].transform;
 
         corridorGenerator.CorridorGenerate();
         spawnEvent(startRoom.position);
     }
 
-    private Room RoomGenerate(GameObject room, int size)
+    private Room RoomGenerate(Room room, int size)
     {
         ObstacleGenerate(room.transform.GetChild(1).transform, size);
-        return new Room(room);
+        return room;
     }
 
     public void ObstacleGenerate(Transform parent, int size)
@@ -137,20 +139,5 @@ public class MapGenerator : MonoBehaviour {
         smallRoomData = jsonManager.LoadData().smallRoomData;
         mediumRoomData = jsonManager.LoadData().mediumRoomData;
         largeRoomData = jsonManager.LoadData().largeRoomData;
-    }
-}
-
-public class Room
-{
-    public GameObject obj;
-    public int index = 0;
-    public static int i = 0;
-    public Vector3 position;
-
-    public Room(GameObject obj)
-    {
-        index = ++i;
-
-        this.obj = obj;
     }
 }

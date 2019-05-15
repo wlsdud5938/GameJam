@@ -18,7 +18,7 @@ public class GameDirector : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        cameraManager = GameObject.Find("Main Camera").GetComponent<CameraManager>();
+        cameraManager = Camera.main.GetComponent<CameraManager>();
         mapGenerator = GameObject.Find("MapGenerator").GetComponent<MapGenerator>();
     }
 
@@ -42,6 +42,6 @@ public class GameDirector : MonoBehaviour
     {
         player = Instantiate(player, position, Quaternion.identity);
         cameraManager.enabled = true;
-        cameraManager.target = player.transform;
+        cameraManager.target = GameObject.Find("Player").transform;
     }
 }
