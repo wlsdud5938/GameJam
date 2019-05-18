@@ -44,7 +44,7 @@ public class Room : MonoBehaviour
                     if(monsters[i].wave == nowWave)
                     {
                         Instantiate(ObjectData.instance.monsterList[monsters[i].index - obstacleCount], 
-                            new Vector3(monsters[i].x, 0, monsters[i].z)+ transform.position, Quaternion.Euler(0, 90 * monsters[i].rotation, 0));
+                            new Vector3(monsters[i].x, 0, monsters[i].z)+ transform.GetChild(1).transform.position, Quaternion.Euler(0, 90 * monsters[i].rotation, 0));
                         monsterCount++;
                     }
                 }
