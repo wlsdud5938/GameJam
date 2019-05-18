@@ -209,12 +209,12 @@ public class Joystick : MonoBehaviour
         if (on)
         {
             joystick.GetComponent<Image>().color = new Color(1,1,1,1);
-            lever.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            lever.GetComponent<Image>().color = new Color(1, 1, 1, 0.62f);
         }
         else
         {
-            joystick.GetComponent<Image>().color = new Color(0.8f, 0.8f, 0.8f, 0.8f);
-            lever.GetComponent<Image>().color = new Color(0.8f, 0.8f, 0.8f, 0.8f);
+            joystick.GetComponent<Image>().color = new Color(1, 1, 1, 0.8f);
+            lever.GetComponent<Image>().color = new Color(1, 1, 1, 0.3f);
         }
         isActive = on;
     }

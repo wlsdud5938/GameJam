@@ -40,7 +40,13 @@ public partial class Player : MonoBehaviour
     public void Roll()
     {
         if (!isRolling)
+        {
             isRolling = true;
+            animator.SetLayerWeight(1, 0);
+            animator.SetLayerWeight(2, 0);
+            animator.SetLayerWeight(3, 1);
+            animator.SetBool("IsRolling", true);
+        }
     }
 
     public void RollAnim()
@@ -55,6 +61,10 @@ public partial class Player : MonoBehaviour
         else if (rollnowDelay > rollDelay) //구르기 후딜레이 시작
         {
             rb.velocity = Vector3.zero;
+            animator.SetLayerWeight(1, 1);
+            animator.SetLayerWeight(2, 0.5f);
+            animator.SetLayerWeight(3, 0);
+            animator.SetBool("IsRolling", false);
         }
         else if (rollnowDelay < rollDelay * rollJumpPercent)
         {
