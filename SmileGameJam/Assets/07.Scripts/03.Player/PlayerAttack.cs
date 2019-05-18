@@ -20,7 +20,7 @@ public partial class Player : MonoBehaviour
     [Header("Gun")]
     public GunBase[] gunInventory;
     public int index = 0, maxCount = 2;
-    private float nowTerm = 0, bulletTerm;
+    private float nowTerm = 0;
 
     public void SwitchGun()
     {
@@ -59,7 +59,6 @@ public partial class Player : MonoBehaviour
         if (nowGun == null)
             return;
         nowTerm = 0;
-        bulletTerm = nowGun.shotDelay;
         //이미지 교체
         SetGunUI();
     }
@@ -96,7 +95,7 @@ public partial class Player : MonoBehaviour
                 if (nowGun.nowCapacity <= 0)
                     RemoveGun();
 
-                nowTerm = bulletTerm;
+                nowTerm = nowGun.shotDelay;
                 animator.SetBool("IsAttacking", true);
             }
         }
