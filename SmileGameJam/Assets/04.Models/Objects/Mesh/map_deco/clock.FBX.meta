@@ -4,11 +4,56 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Box001
+    100004: Box003
+    100006: Box004
+    100008: Cylinder034
+    100010: Object007
+    100012: Object008
+    100014: Plane004
+    100016: Plane007
+    100018: "\xA1\xA1\xD7\xFD\xD7\xFB"
+    100020: "\xD7\xFE\xD7\xFC"
     400000: //RootNode
+    400002: Box001
+    400004: Box003
+    400006: Box004
+    400008: Cylinder034
+    400010: Object007
+    400012: Object008
+    400014: Plane004
+    400016: Plane007
+    400018: "\xA1\xA1\xD7\xFD\xD7\xFB"
+    400020: "\xD7\xFE\xD7\xFC"
     2100000: 01 - Default
+    2100002: 21 - Default
+    2100004: No Name
     2300000: //RootNode
+    2300002: Box001
+    2300004: Box003
+    2300006: Box004
+    2300008: Cylinder034
+    2300010: Object007
+    2300012: Object008
+    2300014: Plane004
+    2300016: Plane007
     3300000: //RootNode
+    3300002: Box001
+    3300004: Box003
+    3300006: Box004
+    3300008: Cylinder034
+    3300010: Object007
+    3300012: Object008
+    3300014: Plane004
+    3300016: Plane007
     4300000: Plane004
+    4300002: Cylinder034
+    4300004: Plane007
+    4300006: Object007
+    4300008: Object008
+    4300010: Box001
+    4300012: Box003
+    4300014: Box004
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -72,7 +117,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
