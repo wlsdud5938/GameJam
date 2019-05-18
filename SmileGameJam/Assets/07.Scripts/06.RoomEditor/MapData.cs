@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 namespace MapEditor
@@ -58,13 +59,15 @@ namespace MapEditor
     public struct MonsterData
     {
         public int index;
+        public int wave;
 
         public int x, z;
         public int rotation;
 
-        public MonsterData(int index, Vector3 position, int rotation)
+        public MonsterData(int index,int wave, Vector3 position, int rotation)
         {
             this.index = index;
+            this.wave = wave;
 
             x = Mathf.RoundToInt(position.x);
             z = Mathf.RoundToInt(position.z);
@@ -85,6 +88,16 @@ namespace MapEditor
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Index : + ");
+            sb.Append(index);
+            sb.Append("wave : + ");
+            sb.Append(wave);
+            return sb.ToString();
         }
     }
 }

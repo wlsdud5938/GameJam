@@ -12,7 +12,7 @@ namespace MapEditor
         public Dropdown dataDropdown, indexDropdown;
         private bool isObjectLayerOpen = false;
 
-        public Transform cursor;
+        public Transform cursor,monsterCursor;
         private GameObject[] objectList;
 
         private int nowIndex = 0;
@@ -21,6 +21,14 @@ namespace MapEditor
         [Header("Obstacle")]
         public Transform tileInventory;
         public Button objectTile;
+        private int obstacleCount;
+
+        [Header("Monster")]
+        public RectTransform monsterEditor;
+        public Dropdown waveDropdown;
+        private bool isSelected = false;
+        private Transform selectedMonster;
+        public int selectedIndex;
 
         [Header("Map Grid")]
         public GameObject grid;
@@ -68,24 +76,39 @@ namespace MapEditor
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit) && !EventSystem.current.IsPointerOverGameObject())
-            { 
-                cursor.gameObject.SetActive(true);
-                if (hit.transform.CompareTag("Obstacle"))
+            if ( Physics.Raycast(ray, out hit) && !EventSystem.current.IsPointerOverGameObject())
+            {
+                if (isSelected && Input.GetMouseButtonDown(0))
+                    CloseMonsterEditor();
+                if (!isSelected)
                 {
-                    cursor.gameObject.SetActive(false);
-                    if (Input.GetMouseButtonDown(0))
-                        RemoveObstacle(hit.transform);
-                }
-                else
-                {
-                    if (Input.GetMouseButtonDown(0))
-                        PutObstacle(nowIndex, hit.point);
-                    else if (!Input.GetMouseButton(0))
+                    cursor.gameObject.SetActive(true);
+                    if (hit.transform.CompareTag("Obstacle"))
                     {
-                        Vector3 pos = new Vector3(Mathf.RoundToInt(hit.point.x), 0, Mathf.RoundToInt(hit.point.z));
-                        cursor.position = pos;
+                        cursor.gameObject.SetActive(false);
+                        if (Input.GetMouseButtonDown(0))
+                            RemoveObstacle(hit.transform);
+                    }
+                    else if (hit.transform.CompareTag("Monster"))
+                    {
+                        cursor.gameObject.SetActive(false);
+                        if (Input.GetMouseButtonDown(0))
+                            SelectMonster(hit.transform);
+                    }
+                    else
+                    {
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            if (nowIndex < obstacleCount)
+                                PutObstacle(nowIndex, hit.point);
+                            else
+                                PutMonster(nowIndex, hit.point);
+                        }
+                        else if (!Input.GetMouseButton(0))
+                        {
+                            Vector3 pos = new Vector3(Mathf.RoundToInt(hit.point.x), 0, Mathf.RoundToInt(hit.point.z));
+                            cursor.position = pos;
+                        }
                     }
                 }
             }
@@ -94,7 +117,7 @@ namespace MapEditor
                 cursor.gameObject.SetActive(false);
             }
 
-            if (!Input.GetKey(KeyCode.LeftAlt))
+            if (!isSelected && !Input.GetKey(KeyCode.LeftAlt))
             {
                 if (Input.mouseScrollDelta.y > 0)
                 {
@@ -111,9 +134,94 @@ namespace MapEditor
             }
         }
 
+        public void SelectMonster(Transform monster)
+        {
+            isSelected = true;
+
+            monsterCursor.position = new Vector3(monster.position.x, 0, monster.position.z);
+            cursor.gameObject.SetActive(false);
+            monsterCursor.gameObject.SetActive(true);
+
+            selectedMonster = monster;
+            Vector3 pos = new Vector3(Mathf.RoundToInt(selectedMonster.position.x), 0, Mathf.RoundToInt(selectedMonster.position.z));
+            MonsterData temp = new MonsterData(0, 0, pos, 0);
+
+            switch (stage)
+            {
+                case 0:
+                    selectedIndex = smallRoomData[subStage].monsterData.FindIndex(m => m.x == temp.x && m.z == temp.z);
+                    waveDropdown.value = smallRoomData[subStage].monsterData[selectedIndex].wave;
+                    break;
+                case 1:
+                    selectedIndex = mediumRoomData[subStage].monsterData.FindIndex(m => m.x == temp.x && m.z == temp.z);
+                    waveDropdown.value = mediumRoomData[subStage].monsterData[selectedIndex].wave;
+                    break;
+                case 2:
+                    selectedIndex = largeRoomData[subStage].monsterData.FindIndex(m => m.x == temp.x && m.z == temp.z);
+                    waveDropdown.value = largeRoomData[subStage].monsterData[selectedIndex].wave;
+                    break;
+            }
+            monsterEditor.anchoredPosition = new Vector2(0, 0);
+        }
+
+        public void CloseMonsterEditor()
+        {
+            monsterCursor.gameObject.SetActive(false);
+            isSelected = false;
+            selectedMonster = null;
+            monsterEditor.anchoredPosition = new Vector2(100, 0);
+        }
+
+        public void SetWave(int wave)
+        {
+            switch (stage)
+            {
+                case 0:
+                    MonsterData temp = smallRoomData[subStage].monsterData[selectedIndex];
+                    smallRoomData[subStage].monsterData[selectedIndex] = new MonsterData(temp.index, wave, new Vector3(temp.x, 0, temp.z), temp.rotation);
+                    break;
+                case 1:
+                    temp = mediumRoomData[subStage].monsterData[selectedIndex];
+                    mediumRoomData[subStage].monsterData[selectedIndex] = new MonsterData(temp.index, wave, new Vector3(temp.x, 0, temp.z), temp.rotation);
+                    break;
+                case 2:
+                    temp = largeRoomData[subStage].monsterData[selectedIndex];
+                    largeRoomData[subStage].monsterData[selectedIndex] = new MonsterData(temp.index, wave, new Vector3(temp.x, 0, temp.z), temp.rotation);
+                    break;
+            }
+
+            if (isAutoSave)
+                SaveMap();
+        }
+
+        public void RemoveMonster()
+        {
+            Vector3 pos = new Vector3(Mathf.RoundToInt(selectedMonster.position.x), 0, Mathf.RoundToInt(selectedMonster.position.z));
+            MonsterData temp = new MonsterData(0, 0, pos, 0);
+
+            switch (stage)
+            {
+                case 0:
+                    smallRoomData[subStage].monsterData.Remove(temp);
+                    break;
+                case 1:
+                    mediumRoomData[subStage].monsterData.Remove(temp);
+                    break;
+                case 2:
+                    largeRoomData[subStage].monsterData.Remove(temp);
+                    break;
+            }
+
+            Destroy(selectedMonster.gameObject);
+
+            if (isAutoSave)
+                SaveMap();
+        }
+
+        #region RoomSetting;
         public void TileSetting()
         {
-            objectList = new GameObject[objectData.obstacleList.Length];
+            objectList = new GameObject[objectData.obstacleList.Length + objectData.monsterList.Length];
 
             for (int i = 0; i < objectData.obstacleList.Length; i++)
             {
@@ -128,9 +236,29 @@ namespace MapEditor
                 newTile.transform.GetChild(1).GetComponent<Text>().text = objectData.obstacleList[index].name;
 
                 objectList[i] = Instantiate(objectData.obstacleList[i], cursor);
-                objectList[i].transform.GetChild(0).GetComponent<Renderer>().material.color = new Color(1,0,0,0.2f);
+                objectList[i].transform.GetChild(0).GetComponent<Renderer>().material.color = new Color(1, 0, 0, 0.2f);
                 objectList[i].GetComponent<BoxCollider>().enabled = false;
                 if (i != 0) objectList[i].SetActive(false);
+            }
+
+            obstacleCount = objectData.obstacleList.Length;
+            for (int i = 0; i < objectData.monsterList.Length; i++)
+            {
+                Button newTile = Instantiate(objectTile, tileInventory);
+                int index = i + obstacleCount;
+                newTile.onClick.AddListener(() =>
+                {
+                    objectList[nowIndex].SetActive(false);
+                    nowIndex = index;
+                    objectList[nowIndex].SetActive(true);
+                    Debug.Log(index);
+                });
+                newTile.transform.GetChild(1).GetComponent<Text>().text = objectData.monsterList[i].name;
+
+                objectList[i + obstacleCount] = Instantiate(objectData.monsterList[i], cursor);
+                objectList[i + obstacleCount].transform.GetChild(0).GetComponent<Renderer>().material.color = new Color(1, 0, 0, 0.2f);
+                objectList[i + obstacleCount].GetComponent<BoxCollider>().enabled = false;
+                objectList[i + obstacleCount].SetActive(false);
             }
         }
 
@@ -148,7 +276,7 @@ namespace MapEditor
             {
                 for (int y = -start; y < end; y++)
                 {
-                    GameObject newGrid = Instantiate(grid, new Vector3(x * 2 + 0.5f, 0, y * 2 + 0.5f), Quaternion.identity, mapParent);
+                    Instantiate(grid, new Vector3(x * 2 + 0.5f, 0, y * 2 + 0.5f), Quaternion.identity, mapParent);
                 }
             }
             if (width % 2 == 0)
@@ -157,6 +285,7 @@ namespace MapEditor
                 transform.GetComponent<BoxCollider>().center = new Vector3(-1.5f, 0, -1.5f);
             transform.GetComponent<BoxCollider>().size = new Vector3(width * 2, 0.05f, width * 2);
         }
+        #endregion;
 
         private void RemoveObstacle(Transform hit)
         {
@@ -206,7 +335,24 @@ namespace MapEditor
 
         private void PutMonster(int id, Vector3 position)
         {
+            Vector3 pos = new Vector3(Mathf.RoundToInt(position.x), 0, Mathf.RoundToInt(position.z));
+            Instantiate(objectData.monsterList[id - obstacleCount], pos, Quaternion.identity, objectParent);
 
+            switch (stage)
+            {
+                case 0:
+                    smallRoomData[subStage].monsterData.Add(new MonsterData(id, 0, pos, 0));
+                    break;
+                case 1:
+                    mediumRoomData[subStage].monsterData.Add(new MonsterData(id, 0, pos, 0));
+                    break;
+                case 2:
+                    largeRoomData[subStage].monsterData.Add(new MonsterData(id, 0, pos, 0));
+                    break;
+            }
+
+            if (isAutoSave)
+                SaveMap();
         }
 
         #region UI
@@ -214,12 +360,12 @@ namespace MapEditor
         {
             if (isObjectLayerOpen)
             {
-                objectLayer.anchoredPosition = new Vector2(-50, 0);
+                objectLayer.anchoredPosition = new Vector2(0, 0);
                 arrow.localEulerAngles = new Vector3(0, 0, -270);
             }
             else
             {
-                objectLayer.anchoredPosition = new Vector2(-50, 100);
+                objectLayer.anchoredPosition = new Vector2(0, 100);
                 arrow.localEulerAngles = new Vector3(0, 0, -90);
             }
 
@@ -240,9 +386,10 @@ namespace MapEditor
         public void LoadRoomData()
         {
             Debug.Log("Load From JsonData");
-            smallRoomData = jsonManager.LoadData().smallRoomData;
-            mediumRoomData = jsonManager.LoadData().mediumRoomData;
-            largeRoomData = jsonManager.LoadData().largeRoomData;
+            MapData mapData = jsonManager.LoadData();
+            smallRoomData = mapData.smallRoomData;
+            mediumRoomData = mapData.mediumRoomData;
+            largeRoomData = mapData.largeRoomData;
 
             LoadMap();
         }
@@ -264,7 +411,7 @@ namespace MapEditor
                         Instantiate(objectData.obstacleList[o.index],
                             new Vector3(o.x, 0, o.z), Quaternion.Euler(0, 90 * o.rotation, 0), objectParent);
                     foreach (MonsterData m in smallRoomData[subStage].monsterData)
-                        Instantiate(objectData.obstacleList[m.index],
+                        Instantiate(objectData.monsterList[m.index - obstacleCount],
                             new Vector3(m.x, 0, m.z), Quaternion.Euler(0, 90 * m.rotation, 0), objectParent);
 
                     for (int i = 0; i < smallRoomData.Count; i++) options.Add(i.ToString());
@@ -274,7 +421,7 @@ namespace MapEditor
                         Instantiate(objectData.obstacleList[o.index],
                             new Vector3(o.x, 0, o.z), Quaternion.Euler(0, 90 * o.rotation, 0), objectParent);
                     foreach (MonsterData m in mediumRoomData[subStage].monsterData)
-                        Instantiate(objectData.obstacleList[m.index],
+                        Instantiate(objectData.monsterList[m.index - obstacleCount],
                             new Vector3(m.x, 0, m.z), Quaternion.Euler(0, 90 * m.rotation, 0), objectParent);
 
                     for (int i = 0; i < mediumRoomData.Count; i++) options.Add(i.ToString());
@@ -284,7 +431,7 @@ namespace MapEditor
                         Instantiate(objectData.obstacleList[o.index],
                             new Vector3(o.x, 0, o.z), Quaternion.Euler(0, 90 * o.rotation, 0), objectParent);
                     foreach (MonsterData m in largeRoomData[subStage].monsterData)
-                        Instantiate(objectData.obstacleList[m.index],
+                        Instantiate(objectData.monsterList[m.index - obstacleCount],
                             new Vector3(m.x, 0, m.z), Quaternion.Euler(0, 90 * m.rotation, 0), objectParent);
 
                     for (int i = 0; i < largeRoomData.Count; i++) options.Add(i.ToString());
@@ -369,6 +516,7 @@ namespace MapEditor
         public void SetStage(int stage)
         {
             this.stage = stage;
+            SetSubstage(0);
 
             List<string> options = new List<string>();
             switch (stage)
@@ -378,11 +526,11 @@ namespace MapEditor
                     for (int i = 0; i < smallRoomData.Count; i++) options.Add(i.ToString());
                     break;
                 case 1:
-                    RoomSetting(5);
+                    RoomSetting(6);
                     for (int i = 0; i < mediumRoomData.Count; i++) options.Add(i.ToString());
                     break;
                 case 2:
-                    RoomSetting(6);
+                    RoomSetting(7);
                     for (int i = 0; i < largeRoomData.Count; i++) options.Add(i.ToString());
                     break;
             }

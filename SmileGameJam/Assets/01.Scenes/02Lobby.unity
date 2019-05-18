@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 1, g: 1, b: 1, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -231,8 +231,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1.7
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -363,7 +363,7 @@ Camera:
   m_GameObject: {fileID: 62246406}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
@@ -1944,6 +1944,36 @@ CapsuleCollider:
   m_Height: 2.39
   m_Direction: 2
   m_Center: {x: -0.000001206994, y: 0.0000018961176, z: 0.047104787}
+--- !u!1 &468708785 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100074, guid: d56b3608b13401741861a36f64b05322,
+    type: 3}
+  m_PrefabInternal: {fileID: 468708763}
+--- !u!136 &468708786
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 468708785}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 14
+  m_Direction: 0
+  m_Center: {x: 0, y: 4.41, z: 0}
+--- !u!65 &468708787
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 468708785}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12.5, y: 1.15, z: 1}
+  m_Center: {x: 0, y: 4.2, z: 6.55}
 --- !u!1 &505539349
 GameObject:
   m_ObjectHideFlags: 0
@@ -3168,7 +3198,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &825729858
 Transform:
   m_ObjectHideFlags: 0
@@ -4110,8 +4140,11 @@ MonoBehaviour:
   maxCount: 0
   rotSpeed: 15
   targetRot: 0
-  rollPower: 30
-  rollDelay: 0.5
+  rollPower: 5
+  rollJumpPower: 3
+  rollDelay: 0.3
+  rollCancelDelay: 0.1
+  rollJumpPercent: 0.3
 --- !u!4 &1080415675
 Transform:
   m_ObjectHideFlags: 0
@@ -4314,7 +4347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1136114789
 Transform:
   m_ObjectHideFlags: 0
@@ -4921,8 +4954,11 @@ MonoBehaviour:
   maxCount: 0
   rotSpeed: 15
   targetRot: 0
-  rollPower: 30
-  rollDelay: 0.5
+  rollPower: 5
+  rollJumpPower: 3
+  rollDelay: 0.3
+  rollCancelDelay: 0.1
+  rollJumpPercent: 0.3
 --- !u!4 &1348996132
 Transform:
   m_ObjectHideFlags: 0
@@ -4995,9 +5031,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 20
+  m_Color: {r: 1, g: 0.19339621, b: 0.19339621, a: 1}
+  m_Intensity: 1.91
+  m_Range: 30
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -7760,7 +7796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1779594009
 Transform:
   m_ObjectHideFlags: 0
@@ -8337,8 +8373,11 @@ MonoBehaviour:
   maxCount: 0
   rotSpeed: 15
   targetRot: 0
-  rollPower: 30
-  rollDelay: 0.5
+  rollPower: 5
+  rollJumpPower: 3
+  rollDelay: 0.3
+  rollCancelDelay: 0.1
+  rollJumpPercent: 0.3
 --- !u!4 &1946112008
 Transform:
   m_ObjectHideFlags: 0

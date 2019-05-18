@@ -768,7 +768,12 @@ MonoBehaviour:
   - {fileID: 1643933098927522, guid: 4c532d7cc89fea342843c60532fd36bb, type: 2}
   - {fileID: 1984676541560158, guid: 536b6ac257b85a848b58827e6d8b8081, type: 2}
   - {fileID: 1173650047404460, guid: 9451e30795e971c4b993dea286023fdb, type: 2}
-  monsterList: []
+  monsterList:
+  - {fileID: 1603339757348320, guid: 091a46f0fefed754d9d20c353e8d2d5b, type: 2}
+  - {fileID: 1637033597230032, guid: 12149236fce9f31418d5297acbb86f6f, type: 2}
+  - {fileID: 1026241412479780, guid: c9814a7e106a2a040b52fbebd828ac94, type: 2}
+  - {fileID: 1857592830404552, guid: f00b0a165732f684b9f59056333b86b4, type: 2}
+  - {fileID: 1179512639739818, guid: ed3f3cf9e5cc69145845d3d8aa843bed, type: 2}
   playerBullet: {fileID: 114448784778136162, guid: e15e1c79697b6f74d9d73d666d067346,
     type: 2}
 --- !u!114 &885430512
@@ -864,8 +869,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1524905149}
   - component: {fileID: 1524905150}
-  - component: {fileID: 1524905152}
-  - component: {fileID: 1524905151}
   m_Layer: 0
   m_Name: CorriderGenerator
   m_TagString: Untagged
@@ -897,32 +900,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aefa093b5752394bb9753dd191c8aa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  straightCorridor: {fileID: 1523321499691456, guid: e2b18b5c0fb33b64cb036fc2476f3b79,
+  upCorridor: {fileID: 1351535145154742, guid: a20a509ec0f9c6e4aa9197424bcb4e67, type: 2}
+  rightCorridor: {fileID: 1523321499691456, guid: e2b18b5c0fb33b64cb036fc2476f3b79,
     type: 2}
   cornerCorridor: {fileID: 1270382526997370, guid: 28199d89850955244bf342111c72a7ce,
     type: 2}
---- !u!114 &1524905151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1524905148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6664e9368540f84baf9577b9638398c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1524905152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1524905148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa3e7e1284b07014b94ea3dfd37ff08b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1606867400
 GameObject:
   m_ObjectHideFlags: 0
