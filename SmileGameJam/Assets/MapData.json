@@ -30,12 +30,6 @@
                 {
                     "index": 0,
                     "x": 1,
-                    "z": -2,
-                    "rotation": 0
-                },
-                {
-                    "index": 0,
-                    "x": 1,
                     "z": -4,
                     "rotation": 0
                 },
@@ -107,12 +101,6 @@
                 },
                 {
                     "index": 0,
-                    "x": 1,
-                    "z": 1,
-                    "rotation": 0
-                },
-                {
-                    "index": 0,
                     "x": 0,
                     "z": -1,
                     "rotation": 0
@@ -140,6 +128,12 @@
                     "x": -1,
                     "z": 0,
                     "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": 1,
+                    "z": 2,
+                    "rotation": 0
                 }
             ],
             "monsterData": [
@@ -152,7 +146,7 @@
                 },
                 {
                     "index": 8,
-                    "wave": 1,
+                    "wave": 0,
                     "x": -2,
                     "z": 1,
                     "rotation": 0

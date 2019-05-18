@@ -12,7 +12,7 @@ namespace MapEditor
         public Dropdown dataDropdown, indexDropdown;
         private bool isObjectLayerOpen = false;
 
-        public Transform cursor;
+        public Transform cursor,monsterCursor;
         private GameObject[] objectList;
 
         private int nowIndex = 0;
@@ -91,7 +91,7 @@ namespace MapEditor
                     }
                     else if (hit.transform.CompareTag("Monster"))
                     {
-                        cursor.gameObject.SetActive(true);
+                        cursor.gameObject.SetActive(false);
                         if (Input.GetMouseButtonDown(0))
                             SelectMonster(hit.transform);
                     }
@@ -137,7 +137,10 @@ namespace MapEditor
         public void SelectMonster(Transform monster)
         {
             isSelected = true;
+
+            monsterCursor.position = new Vector3(monster.position.x, 0, monster.position.z);
             cursor.gameObject.SetActive(false);
+            monsterCursor.gameObject.SetActive(true);
 
             selectedMonster = monster;
             Vector3 pos = new Vector3(Mathf.RoundToInt(selectedMonster.position.x), 0, Mathf.RoundToInt(selectedMonster.position.z));
@@ -150,6 +153,7 @@ namespace MapEditor
 
         public void CloseMonsterEditor()
         {
+            monsterCursor.gameObject.SetActive(false);
             isSelected = false;
             selectedMonster = null;
             monsterEditor.anchoredPosition = new Vector2(100, 0);
