@@ -2,7 +2,6 @@
 
 public class Room : MonoBehaviour
 {
-    public Vector3 position;
     public GameObject[] enterances,walls;
 
     public void Open(int r)

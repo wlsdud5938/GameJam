@@ -864,8 +864,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1524905149}
   - component: {fileID: 1524905150}
-  - component: {fileID: 1524905152}
-  - component: {fileID: 1524905151}
   m_Layer: 0
   m_Name: CorriderGenerator
   m_TagString: Untagged
@@ -897,32 +895,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aefa093b5752394bb9753dd191c8aa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  straightCorridor: {fileID: 1523321499691456, guid: e2b18b5c0fb33b64cb036fc2476f3b79,
+  upCorridor: {fileID: 1351535145154742, guid: a20a509ec0f9c6e4aa9197424bcb4e67, type: 2}
+  rightCorridor: {fileID: 1523321499691456, guid: e2b18b5c0fb33b64cb036fc2476f3b79,
     type: 2}
   cornerCorridor: {fileID: 1270382526997370, guid: 28199d89850955244bf342111c72a7ce,
     type: 2}
---- !u!114 &1524905151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1524905148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6664e9368540f84baf9577b9638398c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1524905152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1524905148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa3e7e1284b07014b94ea3dfd37ff08b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1606867400
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,29 +47,28 @@ public class MapGenerator : MonoBehaviour {
     {
         Vector3 position = new Vector3();
         List<Room> smallRoomList, mediumRoomList, largeRoomList;
-        smallRoomList = new List<Room>(); 
+        smallRoomList = new List<Room>();
         mediumRoomList = new List<Room>();
-        largeRoomList = new List<Room>();    
+        largeRoomList = new List<Room>();
 
         int count = Mathf.NextPowerOfTwo(smallRoomCount + mediumRoomCount + largeRoomCount + 4);
         int sqr = (int)Mathf.Sqrt(count);
         int[] rooms = new int[count];
-        
-        for (int i = 0; i < smallRoomCount ; i++)
+
+        for (int i = 0; i < smallRoomCount; i++)
             rooms[i] = 1;
         for (int i = 0; i < mediumRoomCount; i++)
             rooms[smallRoomCount + i] = 2;
-        for (int i = 0; i < largeRoomCount ; i++)
+        for (int i = 0; i < largeRoomCount; i++)
             rooms[smallRoomCount + mediumRoomCount + i] = 3;
 
         for (int x = 0; x < count; x++)
         {
             int r = Random.Range(0, count);
             int temp = rooms[x];
-            rooms[x] = rooms[ r];
+            rooms[x] = rooms[r];
             rooms[r] = temp;
         }
-       
         yield return null;
 
         for (int x = 0; x < count; x++)
@@ -80,7 +79,7 @@ public class MapGenerator : MonoBehaviour {
                 case 1:
                     Room newRoom = RoomGenerate(Instantiate(smallRoomObj, position, Quaternion.identity, mapParent), 0);
                     smallRoomList.Add(newRoom);
-                    corridorGenerator.AddVertex(newRoom,position, 4);
+                    corridorGenerator.AddVertex(newRoom, position, 4);
                     break;
                 case 2:
                     newRoom = RoomGenerate(Instantiate(mediumRoomObj, position, Quaternion.identity, mapParent), 1);
@@ -89,12 +88,40 @@ public class MapGenerator : MonoBehaviour {
                     break;
                 case 3:
                     newRoom = RoomGenerate(Instantiate(largeRoomObj, position, Quaternion.identity, mapParent), 2);
-                    largeRoomList.Add(newRoom );
+                    largeRoomList.Add(newRoom);
                     corridorGenerator.AddVertex(newRoom, position, 6);
                     break;
             }
         }
+
         startRoom = smallRoomList[0].transform;
+        Room nextRoom = smallRoomList[0];
+        float dist = 0;
+
+        foreach (Room r in smallRoomList)
+        {
+            if (dist < Vector3.SqrMagnitude(r.transform.position - startRoom.position))
+            {
+                dist = Vector3.SqrMagnitude(r.transform.position - startRoom.position);
+                nextRoom = r;
+            }
+        }
+        foreach (Room r in mediumRoomList)
+        {
+            if (dist < Vector3.SqrMagnitude(r.transform.position - startRoom.position))
+            {
+                dist = Vector3.SqrMagnitude(r.transform.position - startRoom.position);
+                nextRoom = r;
+            }
+        }
+        foreach (Room r in largeRoomList)
+        {
+            if (dist < Vector3.SqrMagnitude(r.transform.position - startRoom.position))
+            {
+                dist = Vector3.SqrMagnitude(r.transform.position - startRoom.position);
+                nextRoom = r;
+            }
+        }
 
         corridorGenerator.CorridorGenerate();
         spawnEvent(startRoom.position);

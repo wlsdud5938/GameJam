@@ -2710,8 +2710,11 @@ MonoBehaviour:
   maxCount: 1
   rotSpeed: 15
   targetRot: 0
-  rollPower: 30
-  rollDelay: 0.5
+  rollPower: 5
+  rollJumpPower: 3
+  rollDelay: 0.3
+  rollCancelDelay: 0.15
+  rollJumpPercent: 0.3
 --- !u!136 &136234556543470034
 CapsuleCollider:
   m_ObjectHideFlags: 1

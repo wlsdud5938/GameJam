@@ -6,7 +6,7 @@ public class CorridorGenerator : MonoBehaviour {
 
     private List<Vertex> vertexes = new List<Vertex>();
 
-    public GameObject straightCorridor;
+    public GameObject upCorridor,rightCorridor;
     public GameObject cornerCorridor;
 
     public void AddVertex(Room room, Vector3 position, float width) {
@@ -49,6 +49,7 @@ public class CorridorGenerator : MonoBehaviour {
                 }
             }
         }
+
         //Corridor Generate
         for (int i = 1; i < vertexes.Count; i++)
         {
@@ -72,7 +73,7 @@ public class CorridorGenerator : MonoBehaviour {
                         {
                             if (x < vertexes[i].width + 2) continue;
                             if (yDir == 0 && x > xDir - vertexes[i].connectVertex.width - 2) continue;
-                            GameObject newRoad = Instantiate(straightCorridor, startPoint + new Vector3(x, 0, 0), Quaternion.identity);
+                            GameObject newRoad = Instantiate(rightCorridor, startPoint + new Vector3(x, 0, 0), Quaternion.identity);
                             newRoad.transform.SetParent(transform);
                         }
                     }
@@ -82,7 +83,7 @@ public class CorridorGenerator : MonoBehaviour {
                         {
                             if (x > -vertexes[i].width - 2) continue;
                             if (yDir == 0 && x < xDir + vertexes[i].connectVertex.width + 2) continue;
-                            GameObject newRoad = Instantiate(straightCorridor, startPoint + new Vector3(x, 0, 0), Quaternion.identity);
+                            GameObject newRoad = Instantiate(rightCorridor, startPoint + new Vector3(x, 0, 0), Quaternion.identity);
                             newRoad.transform.SetParent(transform);
                         }
                     }
@@ -108,7 +109,7 @@ public class CorridorGenerator : MonoBehaviour {
                         {
                             if (!isCorner && y < vertexes[i].width + 2) continue;
                             if (y > yDir - vertexes[i].connectVertex.width - 2) continue;
-                            GameObject newRoad = Instantiate(straightCorridor, startPoint + new Vector3(x, 0, y), Quaternion.Euler(0, 90, 0));
+                            GameObject newRoad = Instantiate(upCorridor, startPoint + new Vector3(x, 0, y), Quaternion.identity);
                             newRoad.transform.SetParent(transform);
                         }
                     }
@@ -132,7 +133,7 @@ public class CorridorGenerator : MonoBehaviour {
                         {
                             if (!isCorner && y > -vertexes[i].width - 2) continue;
                             if (y < yDir + vertexes[i].connectVertex.width + 2) continue;
-                            GameObject newRoad = Instantiate(straightCorridor, startPoint + new Vector3(x, 0, y), Quaternion.Euler(0, 90, 0));
+                            GameObject newRoad = Instantiate(upCorridor, startPoint + new Vector3(x, 0, y), Quaternion.identity);
                             newRoad.transform.SetParent(transform);
                         }
                     }
@@ -181,7 +182,7 @@ public class CorridorGenerator : MonoBehaviour {
                         {
                             if (y < vertexes[i].width + 2) continue;
                             if (xDir == 0 && y > yDir - vertexes[i].connectVertex.width - 2) continue;
-                            GameObject newRoad = Instantiate(straightCorridor, startPoint + new Vector3(0, 0, y), Quaternion.Euler(0, 90, 0));
+                            GameObject newRoad = Instantiate(upCorridor, startPoint + new Vector3(0, 0, y), Quaternion.identity);
                             newRoad.transform.SetParent(transform);
                         }
                     }
@@ -191,7 +192,7 @@ public class CorridorGenerator : MonoBehaviour {
                         {
                             if (y > -vertexes[i].width - 2) continue;
                             if (xDir == 0 && y < yDir + vertexes[i].connectVertex.width + 2) continue;
-                            GameObject newRoad = Instantiate(straightCorridor, startPoint + new Vector3(0, 0, y), Quaternion.Euler(0, 90, 0));
+                            GameObject newRoad = Instantiate(upCorridor, startPoint + new Vector3(0, 0, y), Quaternion.identity);
                             newRoad.transform.SetParent(transform);
                         }
                     }
@@ -217,7 +218,7 @@ public class CorridorGenerator : MonoBehaviour {
                         {
                             if (!isCorner && x < vertexes[i].width + 2) continue;
                             if (x > xDir - vertexes[i].connectVertex.width - 2) continue;
-                            GameObject newRoad = Instantiate(straightCorridor, startPoint + new Vector3(x, 0, y), Quaternion.identity);
+                            GameObject newRoad = Instantiate(rightCorridor, startPoint + new Vector3(x, 0, y), Quaternion.identity);
                             newRoad.transform.SetParent(transform);
                         }
                     }
@@ -241,7 +242,7 @@ public class CorridorGenerator : MonoBehaviour {
                         {
                             if (!isCorner && x > -vertexes[i].width - 2) continue;
                             if (x < xDir + vertexes[i].connectVertex.width + 2) continue;
-                            GameObject newRoad = Instantiate(straightCorridor, startPoint + new Vector3(x, 0, y), Quaternion.identity);
+                            GameObject newRoad = Instantiate(rightCorridor, startPoint + new Vector3(x, 0, y), Quaternion.identity);
                             newRoad.transform.SetParent(transform);
                         }
                     }

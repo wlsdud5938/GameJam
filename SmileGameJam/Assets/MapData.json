@@ -104,9 +104,60 @@
                     "x": 3,
                     "z": -4,
                     "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": 1,
+                    "z": 1,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": 0,
+                    "z": -1,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": -4,
+                    "z": 0,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": -3,
+                    "z": 0,
+                    "rotation": 0
+                },
+                {
+                    "index": 1,
+                    "x": -1,
+                    "z": -1,
+                    "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": -1,
+                    "z": 0,
+                    "rotation": 0
                 }
             ],
-            "monsterData": []
+            "monsterData": [
+                {
+                    "index": 8,
+                    "wave": 2,
+                    "x": -1,
+                    "z": 1,
+                    "rotation": 0
+                },
+                {
+                    "index": 8,
+                    "wave": 1,
+                    "x": -2,
+                    "z": 1,
+                    "rotation": 0
+                }
+            ]
         },
         {
             "width": 8,
@@ -179,6 +230,33 @@
                 }
             ],
             "monsterData": []
+        },
+        {
+            "width": 8,
+            "obstacleData": [
+                {
+                    "index": 0,
+                    "x": -2,
+                    "z": -1,
+                    "rotation": 0
+                }
+            ],
+            "monsterData": [
+                {
+                    "index": 10,
+                    "wave": 0,
+                    "x": 1,
+                    "z": 0,
+                    "rotation": 0
+                },
+                {
+                    "index": 10,
+                    "wave": 0,
+                    "x": 0,
+                    "z": -2,
+                    "rotation": 0
+                }
+            ]
         }
     ],
     "mediumRoomData": [

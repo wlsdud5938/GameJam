@@ -618,7 +618,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5cb71b7b2a50d3498ba470f505734ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingPanel: {fileID: 0}
 --- !u!4 &2015384665
 Transform:
   m_ObjectHideFlags: 0

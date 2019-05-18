@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public partial class Player : MonoBehaviour {
@@ -61,10 +59,17 @@ public partial class Player : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.G)) TakeHeal(1);
         if (Input.GetKeyDown(KeyCode.Space)) Roll();
 
-        if (!isRolling)
+
+        if (isRolling)
+        {
+            RollAnim();
+        }
+        else
+        {
             playerTr.rotation = Quaternion.Slerp(playerTr.rotation, Quaternion.Euler(0, targetRot, 0), Time.deltaTime * rotSpeed);
-        if (rollnowDelay > 0)
-            rollnowDelay -= Time.deltaTime;
+            if (!isMoving)
+                rb.velocity = Vector3.zero;
+        }
         if (invincibilityTime > 0)
             invincibilityTime -= Time.deltaTime;
 
