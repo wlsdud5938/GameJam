@@ -5,11 +5,16 @@ ModelImporter:
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: No Name
+    2100000: 01 - Default
     2300000: //RootNode
     3300000: //RootNode
     4300000: Cylinder001
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 01 - Default
+    second: {fileID: 2100000, guid: e1679e800a7c20444b1a503053da21b6, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -40,7 +45,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.45
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
