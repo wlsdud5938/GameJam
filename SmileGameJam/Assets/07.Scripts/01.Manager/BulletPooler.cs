@@ -24,8 +24,11 @@ public class BulletPooler : MonoBehaviour
 
     public void CreatePool(string name, BulletBase prefab, int size)
     {
-        poolDictionary.Add(name, new Queue<BulletBase>());
-        parentDictionary.Add(name, new GameObject(name + "Pool").transform);
+        if (!poolDictionary.ContainsKey(name))
+        {
+            poolDictionary.Add(name, new Queue<BulletBase>());
+            parentDictionary.Add(name, new GameObject(name + "Pool").transform);
+        }
 
         for (int i = 0; i < size; i++)
         {

@@ -1,5 +1,6 @@
 ﻿using UnityEngine.EventSystems;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using System;
 
@@ -21,6 +22,7 @@ public class Joystick : MonoBehaviour
     #endregion
 
     public bool isLeftField = false;
+    public bool isActive = true;
 
     #region Protected Field
     protected float distance;
@@ -50,6 +52,7 @@ public class Joystick : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (!isActive) return;
 #if UNITY_EDITOR
         TestMovement();
 #endif
@@ -167,8 +170,21 @@ public class Joystick : MonoBehaviour
 
             GetJoystickDown.Invoke();
         }
-        else if (isStick_Stay && ((!isLeftField && Input.GetMouseButton(1)) ||
-                (isLeftField && Input.GetMouseButton(0))))
+        else if (isStick_Stay && ((!isLeftField && Input.GetMouseButtonUp(1)) ||
+            (isLeftField && Input.GetMouseButtonUp(0))))
+        {
+            GetJoystickUp.Invoke(isMoved);
+
+            isStick_Stay = false;
+            nowTouch = -1;
+
+            direction = Vector2.zero;
+            distance = 0;
+
+            lever.anchoredPosition = Vector2.zero;
+            joystick.anchoredPosition = disabledPos;
+        }
+        else if (isStick_Stay)
         {
             nowPos = Input.mousePosition;
 
@@ -184,21 +200,22 @@ public class Joystick : MonoBehaviour
 
             GetJoystickStay.Invoke(distance / radius, rotation);
         }
-        else if (isStick_Stay && ((!isLeftField && Input.GetMouseButtonUp(1)) ||
-            (isLeftField && Input.GetMouseButtonUp(0))))
-        {
-            GetJoystickUp.Invoke(isMoved);
-
-            isStick_Stay = false;
-            nowTouch = -1;
-
-            direction = Vector2.zero;
-            distance = 0;
-
-            lever.anchoredPosition = Vector2.zero;
-            joystick.anchoredPosition = disabledPos;
-        }
     }
 #endif
     #endregion
+
+    public void JoystickActive(bool on)
+    {
+        if (on)
+        {
+            joystick.GetComponent<Image>().color = new Color(1,1,1,1);
+            lever.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        }
+        else
+        {
+            joystick.GetComponent<Image>().color = new Color(0.8f, 0.8f, 0.8f, 0.8f);
+            lever.GetComponent<Image>().color = new Color(0.8f, 0.8f, 0.8f, 0.8f);
+        }
+        isActive = on;
+    }
 }

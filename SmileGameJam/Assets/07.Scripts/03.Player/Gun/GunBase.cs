@@ -30,7 +30,7 @@ public abstract class GunBase : MonoBehaviour
     private void Start()
     {
         nowBullet = ObjectData.instance.playerBullet;
-        id = this.name;
+        id = name;
         BulletPooler.instance.CreatePool(id, nowBullet, poolSize);
 
         nowCapacity = maxCapacity;
