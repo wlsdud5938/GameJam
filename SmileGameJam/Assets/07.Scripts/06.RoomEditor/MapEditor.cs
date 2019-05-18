@@ -145,9 +145,22 @@ namespace MapEditor
             selectedMonster = monster;
             Vector3 pos = new Vector3(Mathf.RoundToInt(selectedMonster.position.x), 0, Mathf.RoundToInt(selectedMonster.position.z));
             MonsterData temp = new MonsterData(0, 0, pos, 0);
-            selectedIndex = smallRoomData[subStage].monsterData.FindIndex(m => m.x == temp.x && m.z == temp.z);
 
-            waveDropdown.value = smallRoomData[subStage].monsterData[selectedIndex].wave;
+            switch (stage)
+            {
+                case 0:
+                    selectedIndex = smallRoomData[subStage].monsterData.FindIndex(m => m.x == temp.x && m.z == temp.z);
+                    waveDropdown.value = smallRoomData[subStage].monsterData[selectedIndex].wave;
+                    break;
+                case 1:
+                    selectedIndex = mediumRoomData[subStage].monsterData.FindIndex(m => m.x == temp.x && m.z == temp.z);
+                    waveDropdown.value = mediumRoomData[subStage].monsterData[selectedIndex].wave;
+                    break;
+                case 2:
+                    selectedIndex = largeRoomData[subStage].monsterData.FindIndex(m => m.x == temp.x && m.z == temp.z);
+                    waveDropdown.value = largeRoomData[subStage].monsterData[selectedIndex].wave;
+                    break;
+            }
             monsterEditor.anchoredPosition = new Vector2(0, 0);
         }
 
@@ -161,8 +174,21 @@ namespace MapEditor
 
         public void SetWave(int wave)
         {
-            MonsterData temp = smallRoomData[subStage].monsterData[selectedIndex];
-            smallRoomData[subStage].monsterData[selectedIndex] = new MonsterData(temp.index, wave, new Vector3(temp.x, 0, temp.z), temp.rotation);
+            switch (stage)
+            {
+                case 0:
+                    MonsterData temp = smallRoomData[subStage].monsterData[selectedIndex];
+                    smallRoomData[subStage].monsterData[selectedIndex] = new MonsterData(temp.index, wave, new Vector3(temp.x, 0, temp.z), temp.rotation);
+                    break;
+                case 1:
+                    temp = mediumRoomData[subStage].monsterData[selectedIndex];
+                    mediumRoomData[subStage].monsterData[selectedIndex] = new MonsterData(temp.index, wave, new Vector3(temp.x, 0, temp.z), temp.rotation);
+                    break;
+                case 2:
+                    temp = largeRoomData[subStage].monsterData[selectedIndex];
+                    largeRoomData[subStage].monsterData[selectedIndex] = new MonsterData(temp.index, wave, new Vector3(temp.x, 0, temp.z), temp.rotation);
+                    break;
+            }
 
             if (isAutoSave)
                 SaveMap();
@@ -250,7 +276,7 @@ namespace MapEditor
             {
                 for (int y = -start; y < end; y++)
                 {
-                    GameObject newGrid = Instantiate(grid, new Vector3(x * 2 + 0.5f, 0, y * 2 + 0.5f), Quaternion.identity, mapParent);
+                    Instantiate(grid, new Vector3(x * 2 + 0.5f, 0, y * 2 + 0.5f), Quaternion.identity, mapParent);
                 }
             }
             if (width % 2 == 0)
@@ -490,6 +516,7 @@ namespace MapEditor
         public void SetStage(int stage)
         {
             this.stage = stage;
+            SetSubstage(0);
 
             List<string> options = new List<string>();
             switch (stage)

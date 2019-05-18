@@ -13,14 +13,14 @@ public class MapGenerator : MonoBehaviour {
 
     [Range(0, 15)]
     public int smallRoomCount, mediumRoomCount,largeRoomCount;
-
-    private Transform[] smallroomPosition, mediumroomPosition, largeroomPosition;
+    
     private Transform startRoom;
 
     [Header("Object Data")]
     public GameObject grid;
     private GameObject[] obstacleList;
     private List<RoomData> smallRoomData, mediumRoomData, largeRoomData;
+    private List<Room> smallRoomList, mediumRoomList, largeRoomList;
 
     [Header("Manager")]
     private JsonManager jsonManager;
@@ -46,7 +46,6 @@ public class MapGenerator : MonoBehaviour {
     public IEnumerator MapGenerate(GameDirector.spawn spawnEvent)
     {
         Vector3 position = new Vector3();
-        List<Room> smallRoomList, mediumRoomList, largeRoomList;
         smallRoomList = new List<Room>();
         mediumRoomList = new List<Room>();
         largeRoomList = new List<Room>();
@@ -84,12 +83,12 @@ public class MapGenerator : MonoBehaviour {
                 case 2:
                     newRoom = RoomGenerate(Instantiate(mediumRoomObj, position, Quaternion.identity, mapParent), 1);
                     mediumRoomList.Add(newRoom);
-                    corridorGenerator.AddVertex(newRoom, position, 5);
+                    corridorGenerator.AddVertex(newRoom, position, 6);
                     break;
                 case 3:
                     newRoom = RoomGenerate(Instantiate(largeRoomObj, position, Quaternion.identity, mapParent), 2);
                     largeRoomList.Add(newRoom);
-                    corridorGenerator.AddVertex(newRoom, position, 6);
+                    corridorGenerator.AddVertex(newRoom, position, 7);
                     break;
             }
         }
@@ -129,12 +128,16 @@ public class MapGenerator : MonoBehaviour {
 
     private Room RoomGenerate(Room room, int size)
     {
-        ObstacleGenerate(room.transform.GetChild(1).transform, size);
+        if (smallRoomList.Count > 0)
+            ObstacleGenerate(room, room.transform.GetChild(1).transform, size);
+        else
+            room.isCleared = true;
         return room;
     }
 
-    public void ObstacleGenerate(Transform parent, int size)
+    public void ObstacleGenerate(Room room, Transform parent, int size)
     {
+        int obstacleCount = objectData.obstacleList.Length;
         switch (size)
         {
             case 0:
@@ -142,21 +145,24 @@ public class MapGenerator : MonoBehaviour {
                 foreach (ObstacleData o in smallRoomData[r].obstacleData)
                     Instantiate(objectData.obstacleList[o.index], parent.position + new Vector3(o.x, 0, o.z), Quaternion.Euler(0, 90 * o.rotation, 0), parent);
                 foreach (MonsterData m in smallRoomData[r].monsterData)
-                    Instantiate(objectData.obstacleList[m.index], parent.position +  new Vector3(m.x, 0, m.z), Quaternion.Euler(0, 90 * m.rotation, 0), parent);
+                    room.monsters.Add(m);
+                //    Instantiate(objectData.monsterList[m.index - obstacleCount], parent.position + new Vector3(m.x, 0, m.z), Quaternion.Euler(0, 90 * m.rotation, 0), parent);
                 break;
             case 1:
                 r = Random.Range(0, mediumRoomData.Count);
                 foreach (ObstacleData o in mediumRoomData[r].obstacleData)
                     Instantiate(objectData.obstacleList[o.index], parent.position + new Vector3(o.x, 0, o.z), Quaternion.Euler(0, 90 * o.rotation, 0), parent);
                 foreach (MonsterData m in mediumRoomData[r].monsterData)
-                    Instantiate(objectData.obstacleList[m.index], parent.position + new Vector3(m.x, 0, m.z), Quaternion.Euler(0, 90 * m.rotation, 0), parent);
+                    room.monsters.Add(m);
+                //    Instantiate(objectData.monsterList[m.index - obstacleCount], parent.position + new Vector3(m.x, 0, m.z), Quaternion.Euler(0, 90 * m.rotation, 0), parent);
                 break;
             case 2:
                 r = Random.Range(0, largeRoomData.Count);
                 foreach (ObstacleData o in largeRoomData[r].obstacleData)
                     Instantiate(objectData.obstacleList[o.index], parent.position + new Vector3(o.x, 0, o.z), Quaternion.Euler(0, 90 * o.rotation, 0), parent);
                 foreach (MonsterData m in largeRoomData[r].monsterData)
-                    Instantiate(objectData.obstacleList[m.index], parent.position + new Vector3(m.x, 0, m.z), Quaternion.Euler(0, 90 * m.rotation, 0), parent);
+                    room.monsters.Add(m);
+                //    Instantiate(objectData.monsterList[m.index - obstacleCount], parent.position + new Vector3(m.x, 0, m.z), Quaternion.Euler(0, 90 * m.rotation, 0), parent);
                 break;
         }
     }

@@ -14,7 +14,7 @@ public partial class Player : MonoBehaviour
     public float rollDelay = 0.5f, rollCancelDelay = 0.1f, rollJumpPercent = 0.6f;
 
     private bool isRolling = false;
-    private float rollTime = 0.35f, rollnowDelay;
+    private float rollnowDelay;
 
     public void MoveJoystickStay(float dist, float rotation)
     {

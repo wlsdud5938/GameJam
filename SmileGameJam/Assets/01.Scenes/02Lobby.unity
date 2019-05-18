@@ -4140,8 +4140,11 @@ MonoBehaviour:
   maxCount: 0
   rotSpeed: 15
   targetRot: 0
-  rollPower: 30
-  rollDelay: 0.5
+  rollPower: 5
+  rollJumpPower: 3
+  rollDelay: 0.3
+  rollCancelDelay: 0.1
+  rollJumpPercent: 0.3
 --- !u!4 &1080415675
 Transform:
   m_ObjectHideFlags: 0
@@ -4951,8 +4954,11 @@ MonoBehaviour:
   maxCount: 0
   rotSpeed: 15
   targetRot: 0
-  rollPower: 30
-  rollDelay: 0.5
+  rollPower: 5
+  rollJumpPower: 3
+  rollDelay: 0.3
+  rollCancelDelay: 0.1
+  rollJumpPercent: 0.3
 --- !u!4 &1348996132
 Transform:
   m_ObjectHideFlags: 0
@@ -8367,8 +8373,11 @@ MonoBehaviour:
   maxCount: 0
   rotSpeed: 15
   targetRot: 0
-  rollPower: 30
-  rollDelay: 0.5
+  rollPower: 5
+  rollJumpPower: 3
+  rollDelay: 0.3
+  rollCancelDelay: 0.1
+  rollJumpPercent: 0.3
 --- !u!4 &1946112008
 Transform:
   m_ObjectHideFlags: 0
