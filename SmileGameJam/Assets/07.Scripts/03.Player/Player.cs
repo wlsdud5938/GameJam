@@ -63,6 +63,7 @@ public partial class Player : MonoBehaviour {
         if (isRolling)
         {
             RollAnim();
+            playerTr.rotation = Quaternion.Euler(0, targetRot, 0);
         }
         else
         {

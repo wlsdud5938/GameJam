@@ -5,7 +5,8 @@ using UnityEngine;
 public class ObjectData : MonoBehaviour
 {
     public GameObject[] obstacleList;
-    public GameObject[] monsterList;
+    public Monster[] monsterList;
+    public GunBase[] gunList;
 
     public BulletBase playerBullet;
 

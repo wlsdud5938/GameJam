@@ -42,16 +42,17 @@ public abstract class BulletBase : MonoBehaviour{
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        Debug.Log(other.name);
+        if (other.CompareTag("Monster"))
         {
             other.GetComponent<Monster>().TakeDamage(owner, damage);
             PushToPool();
         }
-        else if(other.CompareTag("Box"))
-        {
-            other.GetComponent<DestroyBox>().TakeDamage(damage);
-            PushToPool();
-        }
+        //else if(other.CompareTag("Box"))
+        //{
+        //    other.GetComponent<DestroyBox>().TakeDamage(damage);
+        //    PushToPool();
+        //}
         else if(other.CompareTag("Wall"))
         {
             PushToPool();

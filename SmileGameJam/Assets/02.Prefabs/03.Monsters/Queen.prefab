@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4897006297190928}
   - component: {fileID: 65642290072873796}
+  - component: {fileID: 114589296562268156}
   m_Layer: 0
   m_Name: Queen
   m_TagString: Monster
@@ -125,3 +126,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &114589296562268156
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1179512639739818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a6cfcecfb853448a5faf86f048522d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basicHP: 100
+  stageMulti: 0.1

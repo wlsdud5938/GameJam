@@ -735,7 +735,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapParent: {fileID: 1512401833}
-  roomObj: {fileID: 1683803696212472, guid: 39c4518254ee76d4caff4258507e914c, type: 2}
   smallRoomObj: {fileID: 114951717611428716, guid: 4f89d0e444cff0c4486fc6137342e64e,
     type: 2}
   mediumRoomObj: {fileID: 114456274209932502, guid: 6a8fb4a0c279fa94c859e1e672ec2d80,
@@ -747,7 +746,6 @@ MonoBehaviour:
   smallRoomCount: 3
   mediumRoomCount: 5
   largeRoomCount: 2
-  grid: {fileID: 1297886556548386, guid: 3eb93e94d339e3844b19bbf925b29172, type: 2}
 --- !u!114 &885430511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -760,20 +758,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleList:
-  - {fileID: 1084720419854040, guid: a9effc2189aee244abdf007f614add56, type: 2}
+  - {fileID: 1435870535969914, guid: 16118b2fedc3d924ab1ee182b3a29467, type: 2}
   - {fileID: 1162353789036298, guid: 17c4316e24a6b7c41a8dcea3ff29e611, type: 2}
   - {fileID: 1138012737362820, guid: 418385189938cc84f89b10ecddf4bd57, type: 2}
   - {fileID: 1330425083205446, guid: 45b27f1723e801a4ab25a5478c9f40bc, type: 2}
   - {fileID: 1378454769746618, guid: 7cb76e958715e034c9c4ec2040367929, type: 2}
   - {fileID: 1643933098927522, guid: 4c532d7cc89fea342843c60532fd36bb, type: 2}
   - {fileID: 1984676541560158, guid: 536b6ac257b85a848b58827e6d8b8081, type: 2}
+  - {fileID: 1493594048270220, guid: 9f61da1b7e698d842a16cecfcd665abd, type: 2}
   - {fileID: 1173650047404460, guid: 9451e30795e971c4b993dea286023fdb, type: 2}
+  - {fileID: 1781118950375522, guid: b0b7004ed70a5b743a331bc54ccfbeeb, type: 2}
+  - {fileID: 1752513445565362, guid: d1a7806e6cd88f641b1f4fd1f5a2b810, type: 2}
   monsterList:
-  - {fileID: 1603339757348320, guid: 091a46f0fefed754d9d20c353e8d2d5b, type: 2}
-  - {fileID: 1637033597230032, guid: 12149236fce9f31418d5297acbb86f6f, type: 2}
-  - {fileID: 1026241412479780, guid: c9814a7e106a2a040b52fbebd828ac94, type: 2}
-  - {fileID: 1857592830404552, guid: f00b0a165732f684b9f59056333b86b4, type: 2}
-  - {fileID: 1179512639739818, guid: ed3f3cf9e5cc69145845d3d8aa843bed, type: 2}
+  - {fileID: 114015235717339620, guid: 091a46f0fefed754d9d20c353e8d2d5b, type: 2}
+  - {fileID: 114171648793284268, guid: 12149236fce9f31418d5297acbb86f6f, type: 2}
+  - {fileID: 114113538266289708, guid: f00b0a165732f684b9f59056333b86b4, type: 2}
+  - {fileID: 114897817578158188, guid: c9814a7e106a2a040b52fbebd828ac94, type: 2}
+  - {fileID: 114589296562268156, guid: ed3f3cf9e5cc69145845d3d8aa843bed, type: 2}
+  gunList:
+  - {fileID: 114416334903881350, guid: b0a1bdcc076778549a3f47b119b7f5e4, type: 2}
+  - {fileID: 114558055434426296, guid: ff9476aec1b9ac8429d080f5ad312763, type: 2}
   playerBullet: {fileID: 114448784778136162, guid: e15e1c79697b6f74d9d73d666d067346,
     type: 2}
 --- !u!114 &885430512

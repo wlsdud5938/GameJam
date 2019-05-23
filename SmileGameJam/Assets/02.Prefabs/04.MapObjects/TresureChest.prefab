@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4044217417681344}
   - component: {fileID: 65809312532285146}
   - component: {fileID: 65187660682870046}
+  - component: {fileID: 114653856651209050}
   m_Layer: 0
   m_Name: TresureChest
   m_TagString: Untagged
@@ -132,9 +133,21 @@ BoxCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1801629975461390}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 612516f4e107ccb4ba480d85e00562e4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.75, y: 1, z: 1.55}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &114653856651209050
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1801629975461390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c17ede904a83d64f9b124e16b8f3be6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasItem: {fileID: 1517099976144426, guid: 03f56b75eb4c5ac4482c25bdcd8fc7cb, type: 2}

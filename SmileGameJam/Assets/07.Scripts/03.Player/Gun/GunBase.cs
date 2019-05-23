@@ -20,7 +20,7 @@ public abstract class GunBase : MonoBehaviour
     public int attack = 5;
     public int maxCapacity = 10, nowCapacity = 10;
     public float bulletSpeed = 10;
-    public float shotDelay = 5.0f;
+    public float shotDelay = 0.5f;
     public float accurancy, range = 6;
 
     [Header("[Shake]")]

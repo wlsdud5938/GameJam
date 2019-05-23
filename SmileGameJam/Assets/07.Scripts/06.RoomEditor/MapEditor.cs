@@ -255,7 +255,7 @@ namespace MapEditor
                 });
                 newTile.transform.GetChild(1).GetComponent<Text>().text = objectData.monsterList[i].name;
 
-                objectList[i + obstacleCount] = Instantiate(objectData.monsterList[i], cursor);
+                objectList[i + obstacleCount] = Instantiate(objectData.monsterList[i].gameObject, cursor);
                 objectList[i + obstacleCount].transform.GetChild(0).GetComponent<Renderer>().material.color = new Color(1, 0, 0, 0.2f);
                 objectList[i + obstacleCount].GetComponent<BoxCollider>().enabled = false;
                 objectList[i + obstacleCount].SetActive(false);

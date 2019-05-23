@@ -2607,15 +2607,17 @@ MonoBehaviour:
   canAttack: 1
   invincibilityDelay: 2
   muzzle: {fileID: 4995851959742138}
+  hand: {fileID: 4653467904396608}
   gunInventory:
   - {fileID: 114482280706457892}
+  - {fileID: 0}
   index: 0
   maxCount: 1
   rotSpeed: 15
   targetRot: 0
   rollPower: 5
   rollJumpPower: 3
-  rollDelay: 0.3
+  rollDelay: 0.42
   rollCancelDelay: 0.15
   rollJumpPercent: 0.3
 --- !u!136 &136234556543470034

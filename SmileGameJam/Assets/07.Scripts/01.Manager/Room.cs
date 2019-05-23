@@ -9,6 +9,8 @@ public class Room : MonoBehaviour
     public List<MonsterData> monsters = new List<MonsterData>();
 
     public bool isEntered = false, isCleared = false;
+
+    public int nowStage = 1;
     public int nowWave = 0;
     public int monsterCount;
 
@@ -43,8 +45,9 @@ public class Room : MonoBehaviour
                     Debug.Log(monsters[i].wave);
                     if(monsters[i].wave == nowWave)
                     {
-                        Instantiate(ObjectData.instance.monsterList[monsters[i].index - obstacleCount], 
+                        Monster newMonster = Instantiate(ObjectData.instance.monsterList[monsters[i].index - obstacleCount], 
                             new Vector3(monsters[i].x, 0, monsters[i].z)+ transform.GetChild(1).transform.position, Quaternion.Euler(0, 90 * monsters[i].rotation, 0));
+                        newMonster.SetInfo(nowStage, this);
                         monsterCount++;
                     }
                 }
@@ -64,7 +67,6 @@ public class Room : MonoBehaviour
             if (openWalls[i])
                 walls[i].SetActive(true);
         }
-
         Debug.Log("I must...");
     }
 

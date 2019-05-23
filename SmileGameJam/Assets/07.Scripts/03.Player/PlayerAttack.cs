@@ -4,6 +4,7 @@ public partial class Player : MonoBehaviour
 {
     [Header("Muzzle")]
     public Transform muzzle;
+    public Transform hand;
     private float rot = 0;
     private float muzzleRot
     {
@@ -19,47 +20,43 @@ public partial class Player : MonoBehaviour
 
     [Header("Gun")]
     public GunBase[] gunInventory;
-    public int index = 0, maxCount = 2;
+    public int index = 0;
     private float nowTerm = 0;
 
-    public void SwitchGun()
+    private void OnTriggerEnter(Collider other)
     {
-        index = index + 1 >= maxCount ? 0 : index + 1;
-        nowGun = gunInventory[index];
-
-        SetGunInfo();
+        if (other.CompareTag("Gun"))
+        {
+            GetGun(other.GetComponent<GunItem>().index);
+            Destroy(other.gameObject);
+        }
     }
 
     public void GetGun(int id)
     {
-        //총 잡기
-        //gunInventory[1] = gunData[id];
-
-        maxCount++;
+        GunBase newGun = Instantiate(ObjectData.instance.gunList[id], transform.position, Quaternion.identity, hand);
+        gunInventory[1] = newGun;
+        nowGun = gunInventory[index = 1];
 
         SetGunInfo();
     }
 
     public void RemoveGun()
     {
-        index = 0;
-        nowGun = gunInventory[index];
+        nowGun = gunInventory[index = 0];
 
         Destroy(gunInventory[1].gameObject);
         gunInventory[1] = null;
 
-        maxCount--;
-
         SetGunInfo();
     }
-
 
     private void SetGunInfo()
     {
         if (nowGun == null)
             return;
         nowTerm = 0;
-        //이미지 교체
+
         SetGunUI();
     }
 

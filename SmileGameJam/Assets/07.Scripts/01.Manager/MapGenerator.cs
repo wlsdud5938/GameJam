@@ -7,7 +7,6 @@ public class MapGenerator : MonoBehaviour {
     
     [Header("Map Data")]
     public Transform mapParent;
-    public GameObject roomObj;
     public Room smallRoomObj, mediumRoomObj, largeRoomObj;
     public Vector2 leftDown, rightUp;
 
@@ -17,7 +16,6 @@ public class MapGenerator : MonoBehaviour {
     private Transform startRoom;
 
     [Header("Object Data")]
-    public GameObject grid;
     private GameObject[] obstacleList;
     private List<RoomData> smallRoomData, mediumRoomData, largeRoomData;
     private List<Room> smallRoomList, mediumRoomList, largeRoomList;

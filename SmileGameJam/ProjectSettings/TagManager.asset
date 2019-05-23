@@ -5,12 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Item
-  - SpawnPoint
-  - Enemy
   - Wall
   - Box
   - Obstacle
   - Monster
+  - Gun
   layers:
   - Default
   - TransparentFX
