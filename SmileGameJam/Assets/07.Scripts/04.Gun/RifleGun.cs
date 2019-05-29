@@ -14,14 +14,14 @@ public class RifleGun : GunBase
         else
         {
             rotation += Random.Range(-accurancy, accurancy);
-            BulletBase newBullet = BulletPooler.instance.ReuseObject(id, position, Quaternion.Euler(0, rotation, 0));
+            Projectile newBullet = BulletPooler.instance.ReuseObject(id, position, Quaternion.Euler(0, rotation, 0));
             newBullet.SetInformation(owner, attack, bulletSpeed, range);
         }
     }
 
     IEnumerator ShotAnim(Player owner, Vector3 position, float rotation)
     {
-        BulletBase newBullet;
+        Projectile newBullet;
         for (int i = 0; i < bulletCount - 1; i++)
         {
             rotation += Random.Range(-accurancy, accurancy);

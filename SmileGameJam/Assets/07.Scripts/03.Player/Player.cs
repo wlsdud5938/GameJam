@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public partial class Player : MonoBehaviour {
-
+public partial class Player : MonoBehaviour, IDamageable
+{
     [Header("Information")]
-    public GunBase nowGun;
     public int coin = 0;
     public float moveSpeed = 3.5f;
     private int maxHealthPoint, healthPoint;
@@ -59,7 +58,6 @@ public partial class Player : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.G)) TakeHeal(1);
         if (Input.GetKeyDown(KeyCode.Space)) Roll();
 
-
         if (isRolling)
         {
             RollAnim();
@@ -90,7 +88,13 @@ public partial class Player : MonoBehaviour {
         coinText.text = coin.ToString();
     }
 
-    public void TakeDamage(Monster owner, int damage)
+    public void GetCoin(int coin)
+    {
+        this.coin += coin;
+        SetInfo();
+    }
+
+    public void TakeDamage(IDamageable attacker, int damage)
     {
         if (isRolling || invincibilityTime > 0) return;
 
@@ -99,7 +103,7 @@ public partial class Player : MonoBehaviour {
 
         if (healthPoint <= 0)
         {
-            Debug.Log("Death");
+            Death(attacker);
         }
         SetInfo();
     }
@@ -110,9 +114,8 @@ public partial class Player : MonoBehaviour {
         SetInfo();
     }
 
-    public void GetCoin(int coin)
+    public void Death(IDamageable killer)
     {
-        this.coin += coin;
-        SetInfo();
+        Debug.Log(gameObject.name + "is Killed by " + killer.ToString());
     }
 }

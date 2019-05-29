@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : MonoBehaviour {
-
+public class Monster : MonoBehaviour, IDamageable
+{
     [Header("Information")]
     private int maxHealthPoint = 100;
     public int healthPoint = 100;
@@ -28,19 +28,24 @@ public class Monster : MonoBehaviour {
         parentRoom = room;
     }
 
-    public void TakeDamage(Player owner, int damage)
+    public void TakeDamage(IDamageable attacker, int damage)
     {
         healthPoint = Mathf.Clamp(healthPoint - damage, 0, maxHealthPoint);
 
         if (healthPoint <= 0)
         {
-            Destroy(gameObject);
-            parentRoom.monsterCount--;
+            Death(attacker);
         }
     }
 
     public void TakeHeal(int heal)
     {
         healthPoint = Mathf.Clamp(healthPoint + heal, 0, maxHealthPoint);
+    }
+
+    public void Death(IDamageable killer)
+    {
+        parentRoom.monsterCount--;
+        Destroy(gameObject);
     }
 }

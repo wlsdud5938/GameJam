@@ -19,6 +19,7 @@ public partial class Player : MonoBehaviour
     }
 
     [Header("Gun")]
+    public GunBase nowGun;
     public GunBase[] gunInventory;
     public int index = 0;
     private float nowTerm = 0;

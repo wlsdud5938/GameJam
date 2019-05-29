@@ -778,8 +778,7 @@ MonoBehaviour:
   gunList:
   - {fileID: 114416334903881350, guid: b0a1bdcc076778549a3f47b119b7f5e4, type: 2}
   - {fileID: 114558055434426296, guid: ff9476aec1b9ac8429d080f5ad312763, type: 2}
-  playerBullet: {fileID: 114448784778136162, guid: e15e1c79697b6f74d9d73d666d067346,
-    type: 2}
+  bullet: {fileID: 114448784778136162, guid: e15e1c79697b6f74d9d73d666d067346, type: 2}
 --- !u!114 &885430512
 MonoBehaviour:
   m_ObjectHideFlags: 0

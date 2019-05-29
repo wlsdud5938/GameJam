@@ -6,10 +6,7 @@ TagManager:
   tags:
   - Item
   - Wall
-  - Box
-  - Obstacle
   - Monster
-  - Gun
   layers:
   - Default
   - TransparentFX

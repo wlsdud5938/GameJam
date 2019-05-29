@@ -7,8 +7,11 @@ public class ObjectData : MonoBehaviour
     public GameObject[] obstacleList;
     public Monster[] monsterList;
     public GunBase[] gunList;
+    public Projectile bullet;
 
-    public BulletBase playerBullet;
+    public Dictionary<string, GameObject> obstacles = new Dictionary<string, GameObject>();
+    public Dictionary<string, Monster> monsters = new Dictionary<string, Monster>();
+    public Dictionary<string, GunBase> guns = new Dictionary<string, GunBase>();
 
     static ObjectData _instance;
     public static ObjectData instance
@@ -23,5 +26,15 @@ public class ObjectData : MonoBehaviour
             }
             return _instance;
         }
+    }
+
+    private void Awake()
+    {
+        foreach (GameObject o in obstacleList)
+            obstacles.Add(o.name, o);
+        foreach (Monster m in monsterList)
+            monsters.Add(m.name, m);
+        foreach (GunBase g in gunList)
+            guns.Add(g.name, g);
     }
 }

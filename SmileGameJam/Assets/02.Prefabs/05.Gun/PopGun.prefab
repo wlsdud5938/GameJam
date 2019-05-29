@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4890445248848760}
   - component: {fileID: 114558055434426296}
   m_Layer: 0
-  m_Name: ShotGun
+  m_Name: PopGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,11 +124,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b2050785b2ed214b81be9a57f06121a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gun: {fileID: 11400000, guid: a61ba8d5d16f7c644bed7ad4c22ac9a8, type: 2}
   rare: 0
-  nowBullet: {fileID: 0}
-  isBasic: 0
+  bulletName: 
   poolSize: 100
   id: ShotGun
+  isBasic: 0
   attack: 5
   maxCapacity: 10
   nowCapacity: 10

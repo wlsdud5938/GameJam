@@ -13,8 +13,8 @@ public class ShotGun : GunBase {
 
         for (int i = 0; i < bulletCount; i++)
         {
-            BulletBase newBullet =
-                BulletPooler.instance.ReuseObject(id, position, Quaternion.Euler(0, startAngle + angleGap * i + UnityEngine.Random.Range(-0.1f, 0.1f), 0));
+            float rot = startAngle + angleGap * i + Random.Range(-0.1f, 0.1f);
+            Projectile newBullet = BulletPooler.instance.ReuseObject(id, position, Quaternion.Euler(0, rot, 0));
 
             float speed = bulletSpeed + Random.Range(-1.5f, 1.5f);
             float range = this.range + Random.Range(-0.3f, 0.2f);

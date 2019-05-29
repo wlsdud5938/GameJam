@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 54563603883855200}
   m_Layer: 0
   m_Name: LaserGunItem
-  m_TagString: Gun
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -186,4 +186,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
-  col: []
