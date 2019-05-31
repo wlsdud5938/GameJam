@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "총기류", menuName = "총기류/샷건")]
-public class ShotGunBase : ScriptableObject
+[CreateAssetMenu(menuName = "총기류/샷건")]
+public class ShotgunObject : ScriptableObject
 {
+    public string name = "샷건";
+
     public Rare rare;
 
     public string id;
@@ -14,6 +16,7 @@ public class ShotGunBase : ScriptableObject
     public float bulletSpeed = 10;
     public float shotDelay = 0.5f;
     public float accurancy, range = 6;
+    public bool canPenetrate = false;
 
     [Header("[Shake]")]
     public Shake shake;

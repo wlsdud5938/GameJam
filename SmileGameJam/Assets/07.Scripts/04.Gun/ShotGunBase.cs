@@ -1,9 +1,33 @@
 ﻿using UnityEngine;
 
-public class ShotGun : GunBase {
+public class ShotGunBase : GunBase {
+
+    public ShotgunObject data;
 
     private float angle = 60;
-    public int bulletCount = 10;
+    private int bulletCount = 10;
+
+    public override void Start()
+    {
+        rare = data.rare;
+
+        id = data.id;
+
+        attack = data.attack;
+        maxCapacity = data.maxCapacity;
+        bulletSpeed = data.bulletSpeed;
+        shotDelay = data.shotDelay;
+        accurancy = data.accurancy;
+        range = data.range;
+
+        shake = data.shake;
+        shakeThrust = data.shakeThrust;
+
+        angle = data.angle;
+        bulletCount = data.bulletCount;
+
+        base.Start();
+    }
 
     protected override void UseSkill(Player owner, Vector3 position, float rotation)
     {

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public partial class Player : MonoBehaviour, IDamageable
@@ -12,7 +13,7 @@ public partial class Player : MonoBehaviour, IDamageable
 
     private GameObject[] hearts;
     private Text coinText;
-    private Image gunImage;
+    private Dictionary<string, GameObject> gunImage = new Dictionary<string, GameObject>();
     private Text bulletCountText;
 
     public float invincibilityDelay = 0.2f;
@@ -31,8 +32,11 @@ public partial class Player : MonoBehaviour, IDamageable
         animator = transform.GetChild(0).GetComponent<Animator>();
 
         coinText = GameObject.Find("CoinText").GetComponent<Text>();
-        gunImage = GameObject.Find("GunImg").GetComponent<Image>();
         bulletCountText = GameObject.Find("BulletInfo").GetComponent<Text>();
+
+        Transform gun = GameObject.Find("Gun").transform;
+        for (int i = 0; i < gun.childCount; i++)
+            gunImage.Add(gun.GetChild(i).name, gun.GetChild(i).gameObject);
 
         if (canAttack)
         {

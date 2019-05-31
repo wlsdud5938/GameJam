@@ -9,19 +9,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f633f378297d7114ea51db9066643acf, type: 3}
-  m_Name: "\uD3EC\uD06C"
-  m_EditorClassIdentifier: 
+  m_Name: "\uCE20\uCFE0\uB974\uBC45"
+  m_EditorClassIdentifier: Assembly-CSharp::ShotGunObject
+  name: "\uC0F7\uAC74"
   rare: 0
-  id: 
-  attack: 0
+  id: shotgun
+  poolSize: 100
+  attack: 5
   maxCapacity: 10
   nowCapacity: 10
   bulletSpeed: 10
   shotDelay: 0.5
   accurancy: 0
   range: 6
+  canPenetrate: 0
   shake: 0
   shakeThrust: 0.3
-  bulletDelay: 0.5
   angle: 60
   bulletCount: 10

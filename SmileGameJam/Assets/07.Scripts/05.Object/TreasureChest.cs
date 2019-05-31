@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TresueChest : MonoBehaviour {
+public class TreasureChest : MonoBehaviour {
 
     public GameObject hasItem;
 
@@ -10,9 +10,9 @@ public class TresueChest : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
-            GetComponent<BoxCollider>().enabled = false;
             Rigidbody newItem = Instantiate(hasItem, transform.position + Vector3.up * 0.5f, Quaternion.identity).GetComponent<Rigidbody>();
             newItem.AddForce(new Vector3(Random.Range(-2.0f, 2.0f), 5, -2), ForceMode.Impulse);
+            Destroy(gameObject);
         }
     }
 }

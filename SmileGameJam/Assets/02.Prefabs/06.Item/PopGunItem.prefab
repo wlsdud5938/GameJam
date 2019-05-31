@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 65397740884507716}
   - component: {fileID: 54249173260548608}
   m_Layer: 0
-  m_Name: ShotGunItem
+  m_Name: PopGunItem
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,4 +166,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992c466b3a003a14f8d0432569787540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 1
+  id: PopGun

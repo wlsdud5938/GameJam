@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunItem : MonoBehaviour {
+public class ItemCtrl : MonoBehaviour {
 
-    public int index;
+    public string id;
 
     private float delay = 0.5f;
     private Rigidbody rb;
@@ -14,6 +14,11 @@ public class GunItem : MonoBehaviour {
     {
         rb = GetComponent<Rigidbody>();
         col = GetComponents<BoxCollider>();
+    }
+
+    private void Throw()
+    {
+        rb.AddForce(new Vector3(Random.Range(-2.0f, 2.0f), 5, -2), ForceMode.Impulse);
     }
 
     private void Update()

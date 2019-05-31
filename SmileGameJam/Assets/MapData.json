@@ -26,6 +26,18 @@
                     "x": 3,
                     "z": -4,
                     "rotation": 0
+                },
+                {
+                    "index": 11,
+                    "x": -1,
+                    "z": 0,
+                    "rotation": 0
+                },
+                {
+                    "index": 11,
+                    "x": 1,
+                    "z": -2,
+                    "rotation": 0
                 }
             ],
             "monsterData": []

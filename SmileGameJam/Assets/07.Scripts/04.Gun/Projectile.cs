@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour{
 
     private IDamageable owner;
     public bool isEnemy;
+    public bool canPenetrate = false;
 
     public int damage = 0;
     public float range = 5, speed = 10;
@@ -49,7 +50,8 @@ public class Projectile : MonoBehaviour{
             if (other.CompareTag("Player"))
             {
                 other.GetComponent<Player>().TakeDamage(owner, damage);
-                PushToPool();
+                if (!canPenetrate)
+                    PushToPool();
             }
         }
         else
@@ -57,11 +59,12 @@ public class Projectile : MonoBehaviour{
             if (other.CompareTag("Monster"))
             {
                 other.GetComponent<Monster>().TakeDamage(owner, damage);
-                PushToPool();
+                if (!canPenetrate)
+                    PushToPool();
             }
         }
 
-        if (other.CompareTag("Wall"))
+        if (other.CompareTag("Wall") || other.CompareTag("Obstacle"))
         {
             PushToPool();
         }
@@ -70,5 +73,13 @@ public class Projectile : MonoBehaviour{
         //    other.GetComponent<DestroyBox>().TakeDamage(damage);
         //    PushToPool();
         //}
+    }
+
+    public void OnCollisionEnter(Collision other)
+    {
+        if (other.transform.CompareTag("Wall") || other.transform.CompareTag("Obstacle"))
+        {
+            PushToPool();
+        }
     }
 }

@@ -769,6 +769,7 @@ MonoBehaviour:
   - {fileID: 1173650047404460, guid: 9451e30795e971c4b993dea286023fdb, type: 2}
   - {fileID: 1781118950375522, guid: b0b7004ed70a5b743a331bc54ccfbeeb, type: 2}
   - {fileID: 1752513445565362, guid: d1a7806e6cd88f641b1f4fd1f5a2b810, type: 2}
+  - {fileID: 1801629975461390, guid: dac923e3728e7554d88ee64a9cbaff43, type: 2}
   monsterList:
   - {fileID: 114015235717339620, guid: 091a46f0fefed754d9d20c353e8d2d5b, type: 2}
   - {fileID: 114171648793284268, guid: 12149236fce9f31418d5297acbb86f6f, type: 2}

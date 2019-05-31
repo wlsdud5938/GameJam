@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "총기류", menuName = "총기류/라이플")]
-public class RifleGunBase : ScriptableObject
+public class RifleObject : ScriptableObject
 {
+    public string name = "라이플";
+
     public Rare rare;
 
     public string id;
@@ -10,10 +12,11 @@ public class RifleGunBase : ScriptableObject
 
     [Header("[Information]")]
     public int attack = 5;
-    public int maxCapacity = 10, nowCapacity = 10;
+    public int maxCapacity = 10;
     public float bulletSpeed = 10;
     public float shotDelay = 0.5f;
     public float accurancy, range = 6;
+    public bool canPenetrate = false;
 
     [Header("[Shake]")]
     public Shake shake;
@@ -21,4 +24,5 @@ public class RifleGunBase : ScriptableObject
 
     [Header("[Rifle Gun]")]
     public float bulletDelay = 0.5f;
+    public int bulletCount = 1;
 }

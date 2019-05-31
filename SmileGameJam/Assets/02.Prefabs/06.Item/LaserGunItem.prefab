@@ -185,4 +185,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992c466b3a003a14f8d0432569787540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
+  id: LaserGun

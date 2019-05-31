@@ -3577,15 +3577,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11622ff1676fdd44ea03fa80cfe3af59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowGun: {fileID: 0}
   coin: 0
   moveSpeed: 3.5
   canAttack: 0
   invincibilityDelay: 2
   muzzle: {fileID: 1779594009}
+  hand: {fileID: 0}
+  nowGun: {fileID: 0}
   gunInventory: []
   index: 0
-  maxCount: 0
   rotSpeed: 15
   targetRot: 0
   rollPower: 5
@@ -4391,15 +4391,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11622ff1676fdd44ea03fa80cfe3af59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowGun: {fileID: 0}
   coin: 0
   moveSpeed: 3.5
   canAttack: 0
   invincibilityDelay: 2
   muzzle: {fileID: 825729858}
+  hand: {fileID: 0}
+  nowGun: {fileID: 0}
   gunInventory: []
   index: 0
-  maxCount: 0
   rotSpeed: 15
   targetRot: 0
   rollPower: 5
@@ -8093,15 +8093,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11622ff1676fdd44ea03fa80cfe3af59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowGun: {fileID: 0}
   coin: 0
   moveSpeed: 3.5
   canAttack: 0
   invincibilityDelay: 2
   muzzle: {fileID: 1136114789}
+  hand: {fileID: 0}
+  nowGun: {fileID: 0}
   gunInventory: []
   index: 0
-  maxCount: 0
   rotSpeed: 15
   targetRot: 0
   rollPower: 5

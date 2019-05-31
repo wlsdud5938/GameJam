@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public partial class Player : MonoBehaviour
 {
@@ -26,18 +27,35 @@ public partial class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Gun"))
+        if (other.CompareTag("Item"))
         {
-            GetGun(other.GetComponent<GunItem>().index);
+            GetGun(other.GetComponent<ItemCtrl>().id);
             Destroy(other.gameObject);
         }
     }
 
-    public void GetGun(int id)
+    public void GetGun(string id)
     {
-        GunBase newGun = Instantiate(ObjectData.instance.gunList[id], transform.position, Quaternion.identity, hand);
-        gunInventory[1] = newGun;
-        nowGun = gunInventory[index = 1];
+        nowGun.gameObject.SetActive(false);
+        if (gunInventory[1] == null)
+        {
+            GunBase newGun = Instantiate(ObjectData.instance.guns[id], Vector3.zero, Quaternion.identity, hand);
+            newGun.transform.localPosition = newGun.transform.localEulerAngles = Vector3.zero;
+            gunInventory[1] = newGun;
+            nowGun = gunInventory[index = 1];
+            nowGun.Start();
+        }
+        else
+        {
+            Destroy(gunInventory[1].gameObject);
+            ItemCtrl newItem = Instantiate(ObjectData.instance.items[id], transform.position, Quaternion.identity, null);
+
+            GunBase newGun = Instantiate(ObjectData.instance.guns[id], Vector3.zero, Quaternion.identity, hand);
+            newGun.transform.localPosition = newGun.transform.localEulerAngles = Vector3.zero;
+            gunInventory[1] = newGun;
+            nowGun = gunInventory[index = 1];
+            nowGun.Start();
+        }
 
         SetGunInfo();
     }
@@ -45,6 +63,7 @@ public partial class Player : MonoBehaviour
     public void RemoveGun()
     {
         nowGun = gunInventory[index = 0];
+        nowGun.gameObject.SetActive(true);
 
         Destroy(gunInventory[1].gameObject);
         gunInventory[1] = null;
@@ -58,6 +77,14 @@ public partial class Player : MonoBehaviour
             return;
         nowTerm = 0;
 
+        foreach(KeyValuePair<string, GameObject> gun in gunImage)
+        {
+            Debug.Log(nowGun.id + "UI" + " : " + gun.Key);
+            if(gun.Key.Equals(nowGun.id + "UI"))
+                gun.Value.SetActive(true);
+            else
+                gun.Value.SetActive(false);
+        }
         SetGunUI();
     }
 
@@ -69,7 +96,7 @@ public partial class Player : MonoBehaviour
         if (nowGun.isBasic)
             bulletCountText.text = "∞";
         else
-            bulletCountText.text = nowGun.nowCapacity + "/" + nowGun.maxCapacity;
+            bulletCountText.text = nowGun.Capacity;
     }
 
     private void ShotComplete()

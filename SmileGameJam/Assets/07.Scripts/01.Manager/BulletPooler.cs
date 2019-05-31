@@ -47,7 +47,7 @@ public class BulletPooler : MonoBehaviour
             objectToReuse.Reuse(position, rotation);
             return objectToReuse;
         }
-        Debug.LogError("There is no particle : " + tag);
+        Debug.LogError("There is no Bullet : " + tag);
         return null;
     }
 
