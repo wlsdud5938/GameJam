@@ -41,8 +41,13 @@ GameObject:
   - component: {fileID: 65397740884507716}
   - component: {fileID: 54249173260548608}
   m_Layer: 0
+<<<<<<< HEAD:SmileGameJam/Assets/02.Prefabs/06.Item/ShotGunItem.prefab
   m_Name: ShotGunItem
   m_TagString: Gun
+=======
+  m_Name: PopGunItem
+  m_TagString: Item
+>>>>>>> parent of bf49245... .:SmileGameJam/Assets/02.Prefabs/06.Item/PopGunItem.prefab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

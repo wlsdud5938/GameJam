@@ -13,6 +13,10 @@ public class TresueChest : MonoBehaviour {
             GetComponent<BoxCollider>().enabled = false;
             Rigidbody newItem = Instantiate(hasItem, transform.position + Vector3.up * 0.5f, Quaternion.identity).GetComponent<Rigidbody>();
             newItem.AddForce(new Vector3(Random.Range(-2.0f, 2.0f), 5, -2), ForceMode.Impulse);
+<<<<<<< HEAD:SmileGameJam/Assets/07.Scripts/05.Object/TresueChest.cs
+=======
+            Destroy(gameObject);
+>>>>>>> parent of bf49245... .:SmileGameJam/Assets/07.Scripts/05.Object/TreasureChest.cs
         }
     }
 }

@@ -2612,6 +2612,7 @@ MonoBehaviour:
   - {fileID: 114482280706457892}
   - {fileID: 0}
   index: 0
+  maxCount: 1
   rotSpeed: 15
   targetRot: 0
   rollPower: 5

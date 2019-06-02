@@ -43,4 +43,13 @@ public class Monster : MonoBehaviour {
     {
         healthPoint = Mathf.Clamp(healthPoint + heal, 0, maxHealthPoint);
     }
+<<<<<<< HEAD:SmileGameJam/Assets/07.Scripts/04.Monster/Monster.cs
+=======
+
+    public void Death(IDamageable killer)
+    {
+        parentRoom.monsterCount--;
+        Destroy(gameObject);
+    }
+>>>>>>> parent of bf49245... .:SmileGameJam/Assets/07.Scripts/03.Player/Monster/Monster.cs
 }
