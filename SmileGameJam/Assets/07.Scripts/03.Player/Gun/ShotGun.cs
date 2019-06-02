@@ -3,7 +3,33 @@
 public class ShotGun : GunBase {
 
     private float angle = 60;
+<<<<<<< HEAD:SmileGameJam/Assets/07.Scripts/03.Player/Gun/ShotGun.cs
     public int bulletCount = 10;
+=======
+    private int bulletCount = 10;
+
+    public override void Start()
+    {
+        rare = data.rare;
+
+        id = data.id;
+
+        attack = data.attack;
+        maxCapacity = data.maxCapacity;
+        bulletSpeed = data.bulletSpeed;
+        shotDelay = data.shotDelay;
+        accurancy = data.accurancy;
+        range = data.range;
+
+        shake = data.shake;
+        shakeThrust = data.shakeThrust;
+
+        angle = data.angle;
+        bulletCount = data.bulletCount;
+
+        base.Start();
+    }
+>>>>>>> parent of bf49245... .:SmileGameJam/Assets/07.Scripts/04.Gun/ShotGunBase.cs
 
     protected override void UseSkill(Player owner, Vector3 position, float rotation)
     {

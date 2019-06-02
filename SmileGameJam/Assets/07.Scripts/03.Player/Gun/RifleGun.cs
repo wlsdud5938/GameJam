@@ -4,8 +4,35 @@ using UnityEngine;
 public class RifleGun : GunBase
 {
     [Header("[Bullet Information]")]
+<<<<<<< HEAD:SmileGameJam/Assets/07.Scripts/03.Player/Gun/RifleGun.cs
     public int bulletCount = 1;
     public float bulletDelay = 0.5f;
+=======
+    private int bulletCount = 1;
+    private float bulletDelay = 0.5f;
+
+    public override void Start()
+    {
+        rare = data.rare;
+
+        id = data.id;
+
+        attack = data.attack;
+        maxCapacity = data.maxCapacity;
+        bulletSpeed = data.bulletSpeed;
+        shotDelay = data.shotDelay;
+        accurancy = data.accurancy;
+        range = data.range;
+
+        shake = data.shake;
+        shakeThrust = data.shakeThrust;
+
+        bulletDelay = data.bulletDelay;
+        bulletCount = data.bulletCount;
+
+        base.Start();
+    }
+>>>>>>> parent of bf49245... .:SmileGameJam/Assets/07.Scripts/04.Gun/RifleGunBase.cs
 
     protected override void UseSkill(Player owner, Vector3 position, float rotation)
     {
