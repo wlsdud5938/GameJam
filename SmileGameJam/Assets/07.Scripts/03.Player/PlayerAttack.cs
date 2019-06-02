@@ -25,9 +25,9 @@ public partial class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Gun"))
+        if (other.CompareTag("Item"))
         {
-            GetGun(other.GetComponent<GunItem>().index);
+            GetGun(other.GetComponent<ItemCtrl>().index);
             Destroy(other.gameObject);
         }
     }

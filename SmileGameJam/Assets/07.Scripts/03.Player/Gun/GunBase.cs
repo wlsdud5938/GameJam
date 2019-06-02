@@ -8,28 +8,31 @@ public enum Shake { 끄기, 반대로, 랜덤으로 }
 
 public abstract class GunBase : MonoBehaviour
 {
-    public Rare rare;
-    public BulletBase nowBullet;
+    protected Rare rare;
+    public Projectile nowBullet;
 
     public bool isBasic = false;
 
     public int poolSize = 100;
-    public string id;
+    protected string id;
 
     [Header("[Information]")]
-    public int attack = 5;
+    protected int attack = 5;
+    [HideInInspector]
     public int maxCapacity = 10, nowCapacity = 10;
-    public float bulletSpeed = 10;
+    protected float bulletSpeed = 10;
+    [HideInInspector]
     public float shotDelay = 0.5f;
-    public float accurancy, range = 6;
+    protected float accurancy, range = 6;
 
     [Header("[Shake]")]
-    public Shake shake;
-    public float shakeThrust = 0.3f;
+    protected Shake shake;
+    protected float shakeThrust = 0.3f;
 
-    private void Start()
+    public virtual void Start()
     {
         nowBullet = ObjectData.instance.playerBullet;
+        nowBullet.isEnemy = true;
         id = name;
         BulletPooler.instance.CreatePool(id, nowBullet, poolSize);
 

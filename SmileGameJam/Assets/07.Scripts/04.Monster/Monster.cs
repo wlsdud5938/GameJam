@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : MonoBehaviour {
+public class Monster : MonoBehaviour, IDamageable {
 
     [Header("Information")]
     private int maxHealthPoint = 100;
@@ -28,14 +28,13 @@ public class Monster : MonoBehaviour {
         parentRoom = room;
     }
 
-    public void TakeDamage(Player owner, int damage)
+    public void TakeDamage(IDamageable owner, int damage)
     {
         healthPoint = Mathf.Clamp(healthPoint - damage, 0, maxHealthPoint);
 
         if (healthPoint <= 0)
         {
-            Destroy(gameObject);
-            parentRoom.monsterCount--;
+            Death(owner);
         }
     }
 
@@ -43,13 +42,11 @@ public class Monster : MonoBehaviour {
     {
         healthPoint = Mathf.Clamp(healthPoint + heal, 0, maxHealthPoint);
     }
-<<<<<<< HEAD:SmileGameJam/Assets/07.Scripts/04.Monster/Monster.cs
-=======
 
     public void Death(IDamageable killer)
     {
-        parentRoom.monsterCount--;
+        if (parentRoom != null)
+            parentRoom.monsterCount--;
         Destroy(gameObject);
     }
->>>>>>> parent of bf49245... .:SmileGameJam/Assets/07.Scripts/03.Player/Monster/Monster.cs
 }

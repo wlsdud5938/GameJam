@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunItem : MonoBehaviour {
+public class ItemCtrl : MonoBehaviour {
 
     public int index;
 

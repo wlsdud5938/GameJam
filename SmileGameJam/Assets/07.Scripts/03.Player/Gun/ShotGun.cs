@@ -2,10 +2,9 @@
 
 public class ShotGun : GunBase {
 
+    public ShotgunObject data;
+
     private float angle = 60;
-<<<<<<< HEAD:SmileGameJam/Assets/07.Scripts/03.Player/Gun/ShotGun.cs
-    public int bulletCount = 10;
-=======
     private int bulletCount = 10;
 
     public override void Start()
@@ -29,7 +28,6 @@ public class ShotGun : GunBase {
 
         base.Start();
     }
->>>>>>> parent of bf49245... .:SmileGameJam/Assets/07.Scripts/04.Gun/ShotGunBase.cs
 
     protected override void UseSkill(Player owner, Vector3 position, float rotation)
     {
@@ -39,7 +37,7 @@ public class ShotGun : GunBase {
 
         for (int i = 0; i < bulletCount; i++)
         {
-            BulletBase newBullet =
+            Projectile newBullet =
                 BulletPooler.instance.ReuseObject(id, position, Quaternion.Euler(0, startAngle + angleGap * i + UnityEngine.Random.Range(-0.1f, 0.1f), 0));
 
             float speed = bulletSpeed + Random.Range(-1.5f, 1.5f);

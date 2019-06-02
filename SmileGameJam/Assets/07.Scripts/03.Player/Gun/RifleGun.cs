@@ -3,11 +3,9 @@ using UnityEngine;
 
 public class RifleGun : GunBase
 {
+    public RifleObject data;
+
     [Header("[Bullet Information]")]
-<<<<<<< HEAD:SmileGameJam/Assets/07.Scripts/03.Player/Gun/RifleGun.cs
-    public int bulletCount = 1;
-    public float bulletDelay = 0.5f;
-=======
     private int bulletCount = 1;
     private float bulletDelay = 0.5f;
 
@@ -32,7 +30,6 @@ public class RifleGun : GunBase
 
         base.Start();
     }
->>>>>>> parent of bf49245... .:SmileGameJam/Assets/07.Scripts/04.Gun/RifleGunBase.cs
 
     protected override void UseSkill(Player owner, Vector3 position, float rotation)
     {
@@ -41,14 +38,14 @@ public class RifleGun : GunBase
         else
         {
             rotation += Random.Range(-accurancy, accurancy);
-            BulletBase newBullet = BulletPooler.instance.ReuseObject(id, position, Quaternion.Euler(0, rotation, 0));
+            Projectile newBullet = BulletPooler.instance.ReuseObject(id, position, Quaternion.Euler(0, rotation, 0));
             newBullet.SetInformation(owner, attack, bulletSpeed, range);
         }
     }
 
     IEnumerator ShotAnim(Player owner, Vector3 position, float rotation)
     {
-        BulletBase newBullet;
+        Projectile newBullet;
         for (int i = 0; i < bulletCount - 1; i++)
         {
             rotation += Random.Range(-accurancy, accurancy);

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public partial class Player : MonoBehaviour {
-
+public partial class Player : MonoBehaviour, IDamageable
+{
     [Header("Information")]
     public GunBase nowGun;
     public int coin = 0;
@@ -13,7 +13,6 @@ public partial class Player : MonoBehaviour {
 
     private GameObject[] hearts;
     private Text coinText;
-    private Image gunImage;
     private Text bulletCountText;
 
     public float invincibilityDelay = 0.2f;
@@ -32,7 +31,7 @@ public partial class Player : MonoBehaviour {
         animator = transform.GetChild(0).GetComponent<Animator>();
 
         coinText = GameObject.Find("CoinText").GetComponent<Text>();
-        gunImage = GameObject.Find("GunImg").GetComponent<Image>();
+
         bulletCountText = GameObject.Find("BulletInfo").GetComponent<Text>();
 
         if (canAttack)
@@ -90,7 +89,7 @@ public partial class Player : MonoBehaviour {
         coinText.text = coin.ToString();
     }
 
-    public void TakeDamage(Monster owner, int damage)
+    public void TakeDamage(IDamageable owner, int damage)
     {
         if (isRolling || invincibilityTime > 0) return;
 
@@ -99,7 +98,7 @@ public partial class Player : MonoBehaviour {
 
         if (healthPoint <= 0)
         {
-            Debug.Log("Death");
+            Death(owner);
         }
         SetInfo();
     }
@@ -114,5 +113,10 @@ public partial class Player : MonoBehaviour {
     {
         this.coin += coin;
         SetInfo();
+    }
+
+    public void Death(IDamageable killer)
+    {
+        Debug.Log("Death");
     }
 }

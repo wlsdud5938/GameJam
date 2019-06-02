@@ -2,18 +2,20 @@
 using System;
 using UnityEngine;
 
-public abstract class BulletBase : MonoBehaviour{
+public class Projectile : MonoBehaviour
+{
+    private IDamageable owner;
+    public bool isEnemy;
 
     public int damage = 0;
     public float range = 5, speed = 10;
-    private Player owner;
 
-    protected virtual void Update()
+    private void Update()
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
         range -= speed * Time.deltaTime;
-        if (range <= 0)
-            PushToPool();
+
+        PushToPool();
     }
 
     public virtual void SetInformation(Player owner, int damage, float speed , float range)
@@ -42,18 +44,24 @@ public abstract class BulletBase : MonoBehaviour{
 
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
-        if (other.CompareTag("Monster"))
+        if (isEnemy)
         {
-            other.GetComponent<Monster>().TakeDamage(owner, damage);
-            PushToPool();
+            if (other.CompareTag("Player"))
+            {
+                other.GetComponent<Player>().TakeDamage(owner, damage);
+                PushToPool();
+            }
         }
-        //else if(other.CompareTag("Box"))
-        //{
-        //    other.GetComponent<DestroyBox>().TakeDamage(damage);
-        //    PushToPool();
-        //}
-        else if(other.CompareTag("Wall"))
+        else
+        {
+            if (other.CompareTag("Monster"))
+            {
+                other.GetComponent<Monster>().TakeDamage(owner, damage);
+                PushToPool();
+            }
+        }
+
+        if (other.CompareTag("Wall"))
         {
             PushToPool();
         }

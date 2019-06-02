@@ -9,18 +9,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed20ba7dce1bab245ab84953066d6789, type: 3}
-  m_Name: "\uB808\uC774\uC800\uCD1D"
+  m_Name: "\uB531\uCD1D"
   m_EditorClassIdentifier: 
   name: "\uB77C\uC774\uD50C"
   rare: 0
-  id: LaserGun
+  id: PopGun
   attack: 5
   maxCapacity: 10
   bulletSpeed: 10
   shotDelay: 0.5
   accurancy: 0
   range: 6
-  canPenetrate: 1
+  canPenetrate: 0
   shake: 0
   shakeThrust: 0.3
   bulletDelay: 0.5

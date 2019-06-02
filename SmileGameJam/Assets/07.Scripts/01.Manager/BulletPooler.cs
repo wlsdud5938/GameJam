@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletPooler : MonoBehaviour
 {
-    public Dictionary<string, Queue<BulletBase>> poolDictionary = new Dictionary<string, Queue<BulletBase>>();
+    public Dictionary<string, Queue<Projectile>> poolDictionary = new Dictionary<string, Queue<Projectile>>();
     private Dictionary<string, Transform> parentDictionary = new Dictionary<string, Transform>();
 
     static BulletPooler _instance;
@@ -22,28 +22,28 @@ public class BulletPooler : MonoBehaviour
         }
     }
 
-    public void CreatePool(string name, BulletBase prefab, int size)
+    public void CreatePool(string name, Projectile prefab, int size)
     {
         if (!poolDictionary.ContainsKey(name))
         {
-            poolDictionary.Add(name, new Queue<BulletBase>());
+            poolDictionary.Add(name, new Queue<Projectile>());
             parentDictionary.Add(name, new GameObject(name + "Pool").transform);
         }
 
         for (int i = 0; i < size; i++)
         {
-            BulletBase newObject = Instantiate(prefab, parentDictionary[name]);
+            Projectile newObject = Instantiate(prefab, parentDictionary[name]);
             newObject.name = name;
             newObject.gameObject.SetActive(false);
             poolDictionary[name].Enqueue(newObject);
         }
     }
 
-    public BulletBase ReuseObject(string tag, Vector3 position, Quaternion rotation)
+    public Projectile ReuseObject(string tag, Vector3 position, Quaternion rotation)
     {
         if (poolDictionary.ContainsKey(tag))
         {
-            BulletBase objectToReuse = poolDictionary[tag].Dequeue();
+            Projectile objectToReuse = poolDictionary[tag].Dequeue();
             objectToReuse.Reuse(position, rotation);
             return objectToReuse;
         }
@@ -51,11 +51,11 @@ public class BulletPooler : MonoBehaviour
         return null;
     }
 
-    public BulletBase ReuseObject(string tag)
+    public Projectile ReuseObject(string tag)
     {
         if (poolDictionary.ContainsKey(tag))
         {
-            BulletBase objectToReuse = poolDictionary[tag].Dequeue();
+            Projectile objectToReuse = poolDictionary[tag].Dequeue();
             objectToReuse.Reuse();
             return objectToReuse;
         }
@@ -63,7 +63,7 @@ public class BulletPooler : MonoBehaviour
         return null;
     }
 
-    public void PushToPool(BulletBase obj)
+    public void PushToPool(Projectile obj)
     {
         poolDictionary[obj.name].Enqueue(obj);
         obj.gameObject.SetActive(false);
