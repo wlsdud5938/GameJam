@@ -23,9 +23,9 @@ GameObject:
   - component: {fileID: 65397662726371928}
   - component: {fileID: 65627869852523918}
   - component: {fileID: 54563603883855200}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: LaserGunItem
-  m_TagString: Item
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 33016266463116652}
   - component: {fileID: 23232497783719204}
   - component: {fileID: 95139599774339550}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: g001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,4 +185,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992c466b3a003a14f8d0432569787540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: LaserGun
+  index: 0
+  col: []

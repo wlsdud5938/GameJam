@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4428707838803306}
-  - component: {fileID: 114926183001127878}
+  - component: {fileID: 114416334903881350}
   m_Layer: 0
   m_Name: LaserGun
   m_TagString: Untagged
@@ -64,13 +64,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1295372441419046}
-  m_LocalRotation: {x: -0.37678322, y: 0.30367926, z: -0.56812334, w: 0.6656194}
-  m_LocalPosition: {x: -0.212, y: -0.028, z: 0.584}
+  m_LocalRotation: {x: -0.7858039, y: -0.056766395, z: -0.04692217, w: 0.61407506}
+  m_LocalPosition: {x: 0.22, y: 0.723, z: 0.306}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4428707838803306}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -170.994, y: -122.565, z: 94.09599}
+  m_LocalEulerAnglesHint: {x: -103.972, y: -0.9549866, z: -7.5169983}
 --- !u!23 &23651559518901394
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -113,7 +113,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1295372441419046}
   m_Mesh: {fileID: 4300000, guid: 1455bffa150586e4e8161c81f0004c1c, type: 3}
---- !u!114 &114926183001127878
+--- !u!114 &114416334903881350
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,11 +121,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1016274124644230}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f431e6387cfe84344b34b6bcca8a3fc1, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b2050785b2ed214b81be9a57f06121a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 
+  rare: 0
+  nowBullet: {fileID: 0}
   isBasic: 0
-  nowCapacity: 0
-  shotDelay: 0
-  data: {fileID: 11400000, guid: 064706e911d0a944b9e5c8879da7ed2d, type: 2}
+  poolSize: 100
+  id: LaserGun
+  attack: 5
+  maxCapacity: 10
+  nowCapacity: 10
+  bulletSpeed: 10
+  shotDelay: 0.5
+  accurancy: 0
+  range: 6
+  shake: 2
+  shakeThrust: 0.3
+  bulletCount: 10

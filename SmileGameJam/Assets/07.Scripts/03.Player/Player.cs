@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public partial class Player : MonoBehaviour, IDamageable
-{
+public partial class Player : MonoBehaviour {
+
     [Header("Information")]
+    public GunBase nowGun;
     public int coin = 0;
     public float moveSpeed = 3.5f;
     private int maxHealthPoint, healthPoint;
@@ -13,7 +13,7 @@ public partial class Player : MonoBehaviour, IDamageable
 
     private GameObject[] hearts;
     private Text coinText;
-    private Dictionary<string, GameObject> gunImage = new Dictionary<string, GameObject>();
+    private Image gunImage;
     private Text bulletCountText;
 
     public float invincibilityDelay = 0.2f;
@@ -32,11 +32,8 @@ public partial class Player : MonoBehaviour, IDamageable
         animator = transform.GetChild(0).GetComponent<Animator>();
 
         coinText = GameObject.Find("CoinText").GetComponent<Text>();
+        gunImage = GameObject.Find("GunImg").GetComponent<Image>();
         bulletCountText = GameObject.Find("BulletInfo").GetComponent<Text>();
-
-        Transform gun = GameObject.Find("Gun").transform;
-        for (int i = 0; i < gun.childCount; i++)
-            gunImage.Add(gun.GetChild(i).name, gun.GetChild(i).gameObject);
 
         if (canAttack)
         {
@@ -61,6 +58,7 @@ public partial class Player : MonoBehaviour, IDamageable
         if (Input.GetKeyDown(KeyCode.F)) TakeDamage(null, 1);
         if (Input.GetKeyDown(KeyCode.G)) TakeHeal(1);
         if (Input.GetKeyDown(KeyCode.Space)) Roll();
+
 
         if (isRolling)
         {
@@ -92,13 +90,7 @@ public partial class Player : MonoBehaviour, IDamageable
         coinText.text = coin.ToString();
     }
 
-    public void GetCoin(int coin)
-    {
-        this.coin += coin;
-        SetInfo();
-    }
-
-    public void TakeDamage(IDamageable attacker, int damage)
+    public void TakeDamage(Monster owner, int damage)
     {
         if (isRolling || invincibilityTime > 0) return;
 
@@ -107,7 +99,7 @@ public partial class Player : MonoBehaviour, IDamageable
 
         if (healthPoint <= 0)
         {
-            Death(attacker);
+            Debug.Log("Death");
         }
         SetInfo();
     }
@@ -118,8 +110,9 @@ public partial class Player : MonoBehaviour, IDamageable
         SetInfo();
     }
 
-    public void Death(IDamageable killer)
+    public void GetCoin(int coin)
     {
-        Debug.Log(gameObject.name + "is Killed by " + killer.ToString());
+        this.coin += coin;
+        SetInfo();
     }
 }

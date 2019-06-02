@@ -1,4 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using System;
+using System.Collections;
 
 public class GameDirector : MonoBehaviour
 {
@@ -16,8 +19,7 @@ public class GameDirector : MonoBehaviour
     {
         instance = this;
         cameraManager = Camera.main.GetComponent<CameraManager>();
-
-        mapGenerator = GameObject.Find("MapGenerator")?.GetComponent<MapGenerator>();
+        mapGenerator = GameObject.Find("MapGenerator").GetComponent<MapGenerator>();
     }
 
     private void Start()
@@ -33,9 +35,7 @@ public class GameDirector : MonoBehaviour
     public void GameStart()
     {
         spawn spawnEvent = new spawn(SpawnPlayer);
-
-        if (mapGenerator != null)
-            StartCoroutine(mapGenerator.MapGenerate(spawnEvent));
+        StartCoroutine(mapGenerator.MapGenerate(spawnEvent));
     }
     
     public void SpawnPlayer(Vector3 position)

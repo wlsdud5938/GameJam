@@ -69,10 +69,12 @@ public partial class Player : MonoBehaviour
         else if (rollnowDelay < rollDelay * rollJumpPercent)
         {
             rb.velocity = Quaternion.Euler(0, targetRot, 0) * Vector3.forward * rollPower * rollJumpPower;
+            Debug.Log(rollPower * rollJumpPower);
         }
         else if (rollnowDelay >= rollDelay * rollJumpPercent && rollnowDelay < rollDelay)
         {
             rb.velocity = Quaternion.Euler(0, targetRot, 0) * Vector3.forward * rollPower;
+            Debug.Log(rollPower);
         }
     }
 }

@@ -24,8 +24,6 @@ public class Joystick : MonoBehaviour
     public bool isLeftField = false;
     public bool isActive = true;
 
-    private Camera uiCamera;
-
     #region Protected Field
     protected float distance;
     protected Vector3 direction;
@@ -47,10 +45,9 @@ public class Joystick : MonoBehaviour
     #region Event Function
     protected virtual void Start()
     {
-        uiCamera = GameObject.Find("UI Camera").GetComponent<Camera>();
         joystick = transform.GetComponent<RectTransform>();
         lever = joystick.GetChild(0).GetComponent<RectTransform>();
-        disabledPos = new Vector3(joystick.anchoredPosition.x, joystick.anchoredPosition.y,0);
+        disabledPos = new Vector2(joystick.anchoredPosition.x, joystick.anchoredPosition.y);
     }
 
     protected virtual void Update()
@@ -115,10 +112,9 @@ public class Joystick : MonoBehaviour
         nowTouch = touch;
         isStick_Stay = true;
         isMoved = false;
-
+        
         //시작 점, 조이스틱위치 초기화
-        firstPos = Input.GetTouch(touch).position;
-        joystick.position = UIPosition(Input.GetTouch(touch).position);
+        firstPos = joystick.position = Input.GetTouch(touch).position;
         nowPos = firstPos;
 
         GetJoystickDown.Invoke();
@@ -126,7 +122,7 @@ public class Joystick : MonoBehaviour
 
     private void Stay_Move_Joystick()
     {
-        nowPos = Input.GetTouch(nowTouch).position; 
+        nowPos = Input.GetTouch(nowTouch).position;
         
         if (Vector2.SqrMagnitude(nowPos - firstPos) > 0.1f) isMoved = true;
 
@@ -148,10 +144,10 @@ public class Joystick : MonoBehaviour
         isStick_Stay = false;
         nowTouch = -1;
 
-        direction = Vector3.zero;
+        direction = Vector2.zero;
         distance = 0;
 
-        lever.anchoredPosition = Vector3.zero;
+        lever.anchoredPosition = Vector2.zero;
         joystick.anchoredPosition = disabledPos;
     }
 #endif
@@ -169,8 +165,7 @@ public class Joystick : MonoBehaviour
             isMoved = false;
 
             //시작 점, 조이스틱위치 초기화
-            firstPos = Input.mousePosition;
-            joystick.position = UIPosition(Input.mousePosition);
+            firstPos = joystick.position = Input.mousePosition;
             nowPos = firstPos;
 
             GetJoystickDown.Invoke();
@@ -183,10 +178,10 @@ public class Joystick : MonoBehaviour
             isStick_Stay = false;
             nowTouch = -1;
 
-            direction = Vector3.zero;
+            direction = Vector2.zero;
             distance = 0;
 
-            lever.anchoredPosition = Vector3.zero;
+            lever.anchoredPosition = Vector2.zero;
             joystick.anchoredPosition = disabledPos;
         }
         else if (isStick_Stay)
@@ -222,11 +217,5 @@ public class Joystick : MonoBehaviour
             lever.GetComponent<Image>().color = new Color(1, 1, 1, 0.3f);
         }
         isActive = on;
-    }
-
-    private Vector3 UIPosition(Vector3 position)
-    {
-        var screenPoint = new Vector3(position.x, position.y, 100.0f);
-        return uiCamera.ScreenToWorldPoint(screenPoint);
     }
 }
