@@ -3989,7 +3989,7 @@ Prefab:
     - target: {fileID: 224936746218725844, guid: e2cf8a1f3785cb341a52ec0227226b31,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 129.99998
+      value: 130
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2cf8a1f3785cb341a52ec0227226b31, type: 2}
@@ -6507,6 +6507,9 @@ MonoBehaviour:
   nowStage: 1
   nowWave: 0
   monsterCount: 0
+  gridCenterPos: {x: 0, y: 0, z: 0}
+  gridWorldSize: {x: 0, y: 0}
+  nodeRadius: 0
 --- !u!1 &1115304251
 GameObject:
   m_ObjectHideFlags: 0
@@ -11961,7 +11964,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2102287854}
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: -0.5}
-  m_LocalPosition: {x: 6.75, y: 4.35, z: 4.5}
+  m_LocalPosition: {x: 5.3, y: 4.35, z: 4.5}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 259630812}
