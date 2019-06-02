@@ -26,6 +26,8 @@ public class ShotGunBase : GunBase {
         angle = data.angle;
         bulletCount = data.bulletCount;
 
+        canPenetrate = data.canPenetrate;
+
         base.Start();
     }
 

@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4247492234859090}
   - component: {fileID: 212693869809444148}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 65600773486357004}
   - component: {fileID: 65133732891342150}
   - component: {fileID: 54709372279688096}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HealthItem
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992c466b3a003a14f8d0432569787540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
+  id: 
 --- !u!212 &212693869809444148
 SpriteRenderer:
   m_ObjectHideFlags: 1

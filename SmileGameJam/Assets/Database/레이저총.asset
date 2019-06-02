@@ -21,7 +21,7 @@ MonoBehaviour:
   shotDelay: 0.5
   accurancy: 0
   range: 6
-  canPenetrate: 0
+  canPenetrate: 1
   shake: 0
   shakeThrust: 0.3
   bulletDelay: 0.5

@@ -28,6 +28,8 @@ public class RifleGunBase : GunBase
         bulletDelay = data.bulletDelay;
         bulletCount = data.bulletCount;
 
+        canPenetrate = data.canPenetrate;
+
         base.Start();
     }
 

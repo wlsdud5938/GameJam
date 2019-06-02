@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TreasureChest : MonoBehaviour {
 
@@ -11,7 +9,8 @@ public class TreasureChest : MonoBehaviour {
         if (other.CompareTag("Player"))
         {
             Rigidbody newItem = Instantiate(hasItem, transform.position + Vector3.up * 0.5f, Quaternion.identity).GetComponent<Rigidbody>();
-            newItem.AddForce(new Vector3(Random.Range(-2.0f, 2.0f), 5, -2), ForceMode.Impulse);
+            newItem.AddForce(Vector3.up * 3, ForceMode.Impulse);
+            //newItem.AddForce(new Vector3(Random.Range(-2.0f, 2.0f), 5, -2), ForceMode.Impulse);
             Destroy(gameObject);
         }
     }

@@ -45,7 +45,8 @@ public class Monster : MonoBehaviour, IDamageable
 
     public void Death(IDamageable killer)
     {
-        parentRoom.monsterCount--;
+        if (parentRoom != null)
+            parentRoom.monsterCount--;
         Destroy(gameObject);
     }
 }
