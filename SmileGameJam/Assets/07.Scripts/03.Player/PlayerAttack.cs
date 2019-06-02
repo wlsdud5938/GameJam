@@ -36,17 +36,19 @@ public partial class Player : MonoBehaviour
 
     public void GetGun(string id)
     {
-        if(gunInventory[1] == null)
+        GunBase newGun = Instantiate(ObjectData.instance.guns[id], transform.position, Quaternion.identity, hand);
+        newGun.transform.localPosition = newGun.transform.localEulerAngles = Vector3.zero;
+        gunInventory[0].gameObject.SetActive(false);
+
+        if (gunInventory[1] == null)
+        {
+            gunInventory[1] = newGun;
+            nowGun = gunInventory[index = 1];
+        }
+        else
         {
 
         }
-
-        GunBase newGun = Instantiate(ObjectData.instance.guns[id], transform.position, Quaternion.identity, hand);
-        newGun.transform.localPosition = newGun.transform.localEulerAngles = Vector3.zero;
-
-        gunInventory[0].gameObject.SetActive(false);
-        gunInventory[1] = newGun;
-        nowGun = gunInventory[index = 1];
 
         SetGunInfo();
     }
