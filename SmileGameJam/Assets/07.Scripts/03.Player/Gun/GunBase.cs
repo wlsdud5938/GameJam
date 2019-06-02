@@ -26,14 +26,17 @@ public abstract class GunBase : MonoBehaviour
     public float shotDelay = 0.5f;
     protected float accurancy, range = 6;
 
+    public ParticleSystem shotParticle;
+
     [Header("[Shake]")]
     protected Shake shake;
     protected float shakeThrust = 0.3f;
 
     public virtual void Start()
     {
-        nowBullet = ObjectData.instance.playerBullet;
+        nowBullet = ObjectData.instance.bullets[id + "Bullet"];
         nowBullet.isEnemy = false;
+        nowBullet.id = id + "Explosion";
         id = name;
         BulletPooler.instance.CreatePool(id, nowBullet, poolSize);
 
@@ -48,6 +51,7 @@ public abstract class GunBase : MonoBehaviour
             nowCapacity--;
 
         UseSkill(owner, position, rotation);
+        shotParticle.Play();
     }
 
     public void ShotFinish()

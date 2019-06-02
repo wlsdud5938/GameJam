@@ -8,13 +8,14 @@ public class ObjectData : MonoBehaviour
     public Monster[] monsterList;
     public GunBase[] gunList;
     public ItemCtrl[] itemList;
-
-    public Projectile playerBullet;
+    public Projectile[] bulletList;
+    public ParticleSystem[] bulletParticleList;
 
     public Dictionary<string, GameObject> obstacles = new Dictionary<string, GameObject>();
     public Dictionary<string, Monster> monsters = new Dictionary<string, Monster>();
     public Dictionary<string, GunBase> guns = new Dictionary<string, GunBase>();
     public Dictionary<string, ItemCtrl> items = new Dictionary<string, ItemCtrl>();
+    public Dictionary<string, Projectile> bullets = new Dictionary<string, Projectile>();
 
     static ObjectData _instance;
     public static ObjectData instance
@@ -40,5 +41,9 @@ public class ObjectData : MonoBehaviour
             guns.Add(g.name, g);
         foreach (ItemCtrl i in itemList)
             items.Add(i.name, i);
+        foreach (Projectile p in bulletList)
+            bullets.Add(p.name, p);
+        foreach (ParticleSystem p in bulletParticleList)
+            ParticlePooler.instance.CreatePool(p.name, p, 50);
     }
 }

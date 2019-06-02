@@ -8,6 +8,8 @@ public partial class Player : MonoBehaviour
     public float targetRot = 0;
     private bool isMoving = false;
 
+    public GameObject rollParticle;
+
     [Header("Roll")]
     public float rollPower = 30;
     public float rollJumpPower = 1.1f;
@@ -46,6 +48,7 @@ public partial class Player : MonoBehaviour
             animator.SetLayerWeight(2, 0);
             animator.SetLayerWeight(3, 1);
             animator.SetBool("IsRolling", true);
+            rollParticle.SetActive(true);
         }
     }
 
@@ -57,6 +60,7 @@ public partial class Player : MonoBehaviour
         {
             isRolling = false;
             rollnowDelay = 0;
+            rollParticle.SetActive(false);
         }
         else if (rollnowDelay > rollDelay) //구르기 후딜레이 시작
         {
