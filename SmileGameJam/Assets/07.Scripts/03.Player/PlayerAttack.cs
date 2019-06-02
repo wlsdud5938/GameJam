@@ -27,14 +27,24 @@ public partial class Player : MonoBehaviour
     {
         if (other.CompareTag("Item"))
         {
-            GetGun(other.GetComponent<ItemCtrl>().index);
+            string itemId = other.GetComponent<ItemCtrl>().id;
+            if (itemId.EndsWith("Gun"))
+                GetGun(itemId);
             Destroy(other.gameObject);
         }
     }
 
-    public void GetGun(int id)
+    public void GetGun(string id)
     {
-        GunBase newGun = Instantiate(ObjectData.instance.gunList[id], transform.position, Quaternion.identity, hand);
+        if(gunInventory[1] == null)
+        {
+
+        }
+
+        GunBase newGun = Instantiate(ObjectData.instance.guns[id], transform.position, Quaternion.identity, hand);
+        newGun.transform.localPosition = newGun.transform.localEulerAngles = Vector3.zero;
+
+        gunInventory[0].gameObject.SetActive(false);
         gunInventory[1] = newGun;
         nowGun = gunInventory[index = 1];
 
@@ -44,6 +54,7 @@ public partial class Player : MonoBehaviour
     public void RemoveGun()
     {
         nowGun = gunInventory[index = 0];
+        nowGun.gameObject.SetActive(true);
 
         Destroy(gunInventory[1].gameObject);
         gunInventory[1] = null;

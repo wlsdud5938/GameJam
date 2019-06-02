@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemCtrl : MonoBehaviour {
 
-    public int index;
+    public string id;
 
     private float delay = 0.5f;
     private Rigidbody rb;
@@ -22,7 +22,7 @@ public class ItemCtrl : MonoBehaviour {
             delay -= Time.deltaTime;
         else
         {
-            if (rb.velocity.y == 0)
+            if (transform.position.y <= 0)
             {
                 rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePosition;
                 col[0].enabled = true;

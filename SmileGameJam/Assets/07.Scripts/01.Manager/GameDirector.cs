@@ -9,9 +9,12 @@ public class GameDirector : MonoBehaviour
     public GameObject player;
     public float playTime = 0.0f;
 
+    public bool isTest = false;
+
     [Header("Game Start")]
     private MapGenerator mapGenerator;
     private CameraManager cameraManager;
+    public Camera uiCam;
 
     public static GameDirector instance;
 
@@ -24,7 +27,8 @@ public class GameDirector : MonoBehaviour
 
     private void Start()
     {
-        GameStart();
+        if (!isTest)
+            GameStart();
     }
 
     private void Update()
@@ -41,6 +45,7 @@ public class GameDirector : MonoBehaviour
     public void SpawnPlayer(Vector3 position)
     {
         player = Instantiate(player, position, Quaternion.identity);
+        player.transform.GetChild(1).GetComponent<Canvas>().worldCamera = uiCam;
         cameraManager.enabled = true;
         cameraManager.target = GameObject.Find("Player").transform;
     }

@@ -9,7 +9,6 @@ TagManager:
   - Box
   - Obstacle
   - Monster
-  - Gun
   layers:
   - Default
   - TransparentFX
@@ -25,7 +24,7 @@ TagManager:
   - Player
   - 
   - Room
-  - 
+  - Item
   - 
   - 
   - 

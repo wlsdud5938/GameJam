@@ -15,10 +15,11 @@ public class Projectile : MonoBehaviour
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
         range -= speed * Time.deltaTime;
 
-        PushToPool();
+        if (range <= 0)
+            PushToPool();
     }
 
-    public virtual void SetInformation(Player owner, int damage, float speed , float range)
+    public void SetInformation(Player owner, int damage, float speed , float range)
     {
         this.damage = damage;
         this.speed = speed;

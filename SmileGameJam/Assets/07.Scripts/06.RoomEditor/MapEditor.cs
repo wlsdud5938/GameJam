@@ -237,7 +237,8 @@ namespace MapEditor
 
                 objectList[i] = Instantiate(objectData.obstacleList[i], cursor);
                 objectList[i].transform.GetChild(0).GetComponent<Renderer>().material.color = new Color(1, 0, 0, 0.2f);
-                objectList[i].GetComponent<BoxCollider>().enabled = false;
+                if (objectList[i].GetComponent<BoxCollider>() != null)
+                    objectList[i].GetComponent<BoxCollider>().enabled = false;
                 if (i != 0) objectList[i].SetActive(false);
             }
 

@@ -878,7 +878,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4828101141452316}
-  - component: {fileID: 114723012304427102}
+  - component: {fileID: 114999122276955352}
   m_Layer: 0
   m_Name: ShotGun
   m_TagString: Untagged
@@ -1396,13 +1396,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1851675802082242}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0.4}
+  m_LocalRotation: {x: -0.4915188, y: 0.4053606, z: -0.48819116, w: 0.5964575}
+  m_LocalPosition: {x: -0.018, y: 0.02, z: -0.136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4828101141452316}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -10.985001, y: 78.948006, z: -87.656006}
 --- !u!4 &4553395050677804
 Transform:
   m_ObjectHideFlags: 1
@@ -2335,7 +2335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.627451}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2471,24 +2471,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114723012304427102
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1799667867198946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b2050785b2ed214b81be9a57f06121a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nowBullet: {fileID: 0}
-  isBasic: 0
-  poolSize: 100
-  maxCapacity: 10
-  nowCapacity: 10
-  shotDelay: 0.5
-  data: {fileID: 0}
 --- !u!114 &114733691943614262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2762,7 +2744,7 @@ MonoBehaviour:
   muzzle: {fileID: 4995851959742138}
   hand: {fileID: 4653467904396608}
   gunInventory:
-  - {fileID: 0}
+  - {fileID: 114999122276955352}
   - {fileID: 0}
   index: 0
   rotSpeed: 15
@@ -2772,6 +2754,24 @@ MonoBehaviour:
   rollDelay: 0.42
   rollCancelDelay: 0.15
   rollJumpPercent: 0.3
+--- !u!114 &114999122276955352
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1799667867198946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f431e6387cfe84344b34b6bcca8a3fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nowBullet: {fileID: 0}
+  isBasic: 1
+  poolSize: 100
+  maxCapacity: 10
+  nowCapacity: 10
+  shotDelay: 0.5
+  data: {fileID: 11400000, guid: 6dd93d43319b43848a8bd05b8e2f4c0c, type: 2}
 --- !u!136 &136234556543470034
 CapsuleCollider:
   m_ObjectHideFlags: 1

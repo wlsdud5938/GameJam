@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 456989289}
   m_Layer: 0
   m_Name: UI Camera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -901,8 +901,9 @@ MonoBehaviour:
   - {fileID: 114897817578158188, guid: c9814a7e106a2a040b52fbebd828ac94, type: 2}
   - {fileID: 114589296562268156, guid: ed3f3cf9e5cc69145845d3d8aa843bed, type: 2}
   gunList:
-  - {fileID: 114416334903881350, guid: b0a1bdcc076778549a3f47b119b7f5e4, type: 2}
   - {fileID: 114558055434426296, guid: ff9476aec1b9ac8429d080f5ad312763, type: 2}
+  - {fileID: 114416334903881350, guid: b0a1bdcc076778549a3f47b119b7f5e4, type: 2}
+  itemList: []
   playerBullet: {fileID: 114448784778136162, guid: e15e1c79697b6f74d9d73d666d067346,
     type: 2}
 --- !u!114 &885430512
@@ -961,6 +962,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1734121817053702, guid: e2cf8a1f3785cb341a52ec0227226b31, type: 2}
   playTime: 0
+  isTest: 0
+  uiCam: {fileID: 456989290}
 --- !u!1 &1426116522
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,58 +994,6 @@ Transform:
   m_Father: {fileID: 456989288}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 270, z: 0}
---- !u!1001 &1509376259
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4182591336130592, guid: e2cf8a1f3785cb341a52ec0227226b31, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4182591336130592, guid: e2cf8a1f3785cb341a52ec0227226b31, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4182591336130592, guid: e2cf8a1f3785cb341a52ec0227226b31, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4182591336130592, guid: e2cf8a1f3785cb341a52ec0227226b31, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4182591336130592, guid: e2cf8a1f3785cb341a52ec0227226b31, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4182591336130592, guid: e2cf8a1f3785cb341a52ec0227226b31, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4182591336130592, guid: e2cf8a1f3785cb341a52ec0227226b31, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4182591336130592, guid: e2cf8a1f3785cb341a52ec0227226b31, type: 2}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 223889148010548792, guid: e2cf8a1f3785cb341a52ec0227226b31,
-        type: 2}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 456989290}
-    - target: {fileID: 224936746218725844, guid: e2cf8a1f3785cb341a52ec0227226b31,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 129.99998
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e2cf8a1f3785cb341a52ec0227226b31, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1 &1512401832
 GameObject:
   m_ObjectHideFlags: 0
@@ -1407,7 +1358,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 12055
+    m_Bits: 28439
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

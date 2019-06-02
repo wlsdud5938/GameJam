@@ -32,7 +32,7 @@ public abstract class GunBase : MonoBehaviour
     public virtual void Start()
     {
         nowBullet = ObjectData.instance.playerBullet;
-        nowBullet.isEnemy = true;
+        nowBullet.isEnemy = false;
         id = name;
         BulletPooler.instance.CreatePool(id, nowBullet, poolSize);
 
