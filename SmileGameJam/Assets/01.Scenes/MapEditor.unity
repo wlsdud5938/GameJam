@@ -4569,6 +4569,7 @@ MonoBehaviour:
   index: 0
   rotSpeed: 3
   targetRot: 0
+  rollParticle: {fileID: 0}
   rollPower: 30
   rollJumpPower: 1.1
   rollDelay: 0.5
@@ -5196,9 +5197,11 @@ MonoBehaviour:
     type: 2}
   isBasic: 0
   poolSize: 100
+  id: 
   maxCapacity: 10
   nowCapacity: 10
   shotDelay: 5
+  shotParticle: {fileID: 0}
   data: {fileID: 0}
 --- !u!4 &941706909
 Transform:
@@ -10262,9 +10265,11 @@ MonoBehaviour:
   nowBullet: {fileID: 0}
   isBasic: 1
   poolSize: 150
+  id: 
   maxCapacity: 10
   nowCapacity: 10
   shotDelay: 5
+  shotParticle: {fileID: 0}
   data: {fileID: 0}
 --- !u!1 &2128936983
 GameObject:
@@ -10328,9 +10333,16 @@ MonoBehaviour:
   gunList:
   - {fileID: 114558055434426296, guid: ff9476aec1b9ac8429d080f5ad312763, type: 2}
   - {fileID: 114390193504052282, guid: b0a1bdcc076778549a3f47b119b7f5e4, type: 2}
-  itemList: []
-  playerBullet: {fileID: 114448784778136162, guid: e15e1c79697b6f74d9d73d666d067346,
-    type: 2}
+  itemList:
+  - {fileID: 114872903600916006, guid: 56eeb87841911c44492113a2d317459d, type: 2}
+  - {fileID: 114430721477800436, guid: b4627b27fb95a304296ebf6000635f18, type: 2}
+  - {fileID: 114154356372768324, guid: 041dc0e9fb415c74fb98ebdbe0102780, type: 2}
+  - {fileID: 114961354961195996, guid: 03f56b75eb4c5ac4482c25bdcd8fc7cb, type: 2}
+  - {fileID: 114961354961195996, guid: 825f9a639dc004f4d83f7ea51c5bc467, type: 2}
+  bulletList:
+  - {fileID: 114448784778136162, guid: e15e1c79697b6f74d9d73d666d067346, type: 2}
+  bulletParticleList:
+  - {fileID: 19801142, guid: 66d0586406341d842b072c0b6217c733, type: 2}
 --- !u!1 &2139554582
 GameObject:
   m_ObjectHideFlags: 0

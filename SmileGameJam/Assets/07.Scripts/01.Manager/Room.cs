@@ -16,6 +16,12 @@ public class Room : MonoBehaviour
 
     private int obstacleCount;
 
+    [Header("[Grid]")]
+    public Vector3 gridCenterPos = Vector3.zero;
+    public Vector2 gridWorldSize;       //맵 사이즈
+    public float nodeRadius;            //노드 크기
+
+
     public void Open(int r)
     {
         enterances[r].SetActive(true);

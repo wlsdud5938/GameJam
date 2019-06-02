@@ -10,6 +10,9 @@ public class Projectile : MonoBehaviour
     public int damage = 0;
     public float range = 5, speed = 10;
 
+    public ParticleSystem[] particles;
+    public string id;
+
     private void Update()
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
@@ -25,6 +28,8 @@ public class Projectile : MonoBehaviour
         this.speed = speed;
         this.range = range;
         this.owner = owner;
+        foreach (ParticleSystem p in particles)
+            p.Play();
     }
 
     public void Reuse(Vector3 position, Quaternion rotation)
@@ -40,6 +45,7 @@ public class Projectile : MonoBehaviour
 
     public void PushToPool()
     {
+        ParticlePooler.instance.ReuseObject(id, transform.position, Quaternion.identity, 5);
         BulletPooler.instance.PushToPool(this);
     }
 
@@ -62,7 +68,16 @@ public class Projectile : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("Wall"))
+        Debug.Log(other.name);
+        if (other.CompareTag("Obstacle") || other.CompareTag("Wall"))
+        {
+            PushToPool();
+        }
+    }
+
+    public void OnCollisionEnter(Collision other)
+    {
+        if (other.transform.CompareTag("Obstacle") || other.transform.CompareTag("Wall"))
         {
             PushToPool();
         }

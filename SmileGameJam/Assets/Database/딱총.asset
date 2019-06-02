@@ -16,7 +16,7 @@ MonoBehaviour:
   id: PopGun
   attack: 5
   maxCapacity: 10
-  bulletSpeed: 10
+  bulletSpeed: 15
   shotDelay: 0.5
   accurancy: 0
   range: 6

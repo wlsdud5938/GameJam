@@ -124,18 +124,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b2050785b2ed214b81be9a57f06121a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rare: 0
   nowBullet: {fileID: 0}
   isBasic: 0
   poolSize: 100
-  id: ShotGun
-  attack: 5
+  id: 
   maxCapacity: 10
   nowCapacity: 10
-  bulletSpeed: 10
   shotDelay: 0.5
-  accurancy: 30
-  range: 3
-  shake: 1
-  shakeThrust: 0.3
-  bulletCount: 10
+  data: {fileID: 11400000, guid: e65362e93a335994db3f8aac672694ff, type: 2}
