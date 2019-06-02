@@ -14,7 +14,8 @@ public abstract class GunBase : MonoBehaviour
     public bool isBasic = false;
 
     public int poolSize = 100;
-    protected string id;
+    [HideInInspector]
+    public string id;
 
     [Header("[Information]")]
     protected int attack = 5;

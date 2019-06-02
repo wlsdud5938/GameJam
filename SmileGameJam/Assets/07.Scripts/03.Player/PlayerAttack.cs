@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public partial class Player : MonoBehaviour
 {
@@ -40,15 +41,14 @@ public partial class Player : MonoBehaviour
         newGun.transform.localPosition = newGun.transform.localEulerAngles = Vector3.zero;
         gunInventory[0].gameObject.SetActive(false);
 
-        if (gunInventory[1] == null)
+        if (gunInventory[1] != null)
         {
-            gunInventory[1] = newGun;
-            nowGun = gunInventory[index = 1];
+            Rigidbody newItem = Instantiate(ObjectData.instance.items[gunInventory[1].id.Split('(')[0] + "Item"], transform.position + Vector3.up * 0.5f, Quaternion.identity).GetComponent<Rigidbody>();
+            newItem.AddForce(Vector3.up * 5, ForceMode.Impulse);
+            Destroy(gunInventory[1].gameObject);
         }
-        else
-        {
-
-        }
+        gunInventory[1] = newGun;
+        nowGun = gunInventory[index = 1];
 
         SetGunInfo();
     }

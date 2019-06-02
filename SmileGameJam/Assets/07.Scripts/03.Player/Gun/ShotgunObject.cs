@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "총기류", menuName = "총기류/라이플")]
+[CreateAssetMenu(fileName = "총기류", menuName = "총기류/샷건")]
 public class ShotgunObject : ScriptableObject
 {
-    public string name = "라이플";
+    public string name = "샷건";
 
     public Rare rare;
 
@@ -23,7 +23,7 @@ public class ShotgunObject : ScriptableObject
     public Shake shake;
     public float shakeThrust = 0.3f;
 
-    [Header("[Rifle Gun]")]
+    [Header("[Shot Gun]")]
     public float angle = 60;
     public int bulletCount = 1;
 }
