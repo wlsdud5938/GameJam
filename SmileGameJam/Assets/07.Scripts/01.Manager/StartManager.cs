@@ -9,7 +9,7 @@ public class StartManager : MonoBehaviour
     public RectTransform medias, settings;
     public GameObject touchToReady, crown;
 
-    private float speed = 7;
+    private float multiple = 0.07f;
 
     private bool isReady = false;
 
@@ -52,6 +52,7 @@ public class StartManager : MonoBehaviour
     #region Popup
     IEnumerator MainButtonPopup()
     {
+        float speed = Mathf.Abs(mainButtons.anchoredPosition.y - 30) * multiple;
         while (mainButtons.anchoredPosition.y < 30 - speed)
         {
             mainButtons.Translate(Vector3.up * speed);
@@ -63,6 +64,7 @@ public class StartManager : MonoBehaviour
 
     IEnumerator MediaButtonPopup()
     {
+        float speed = Mathf.Abs(mainButtons.anchoredPosition.y - 5) * multiple;
         while (medias.anchoredPosition.y < 5 - speed)
         {
             medias.Translate(Vector3.up * speed);
@@ -73,6 +75,7 @@ public class StartManager : MonoBehaviour
 
     IEnumerator SettingButtonPopup()
     {
+        float speed = Mathf.Abs(mainButtons.anchoredPosition.y + 5) * multiple;
         while (settings.anchoredPosition.y > -5 + speed)
         {
             settings.Translate(Vector3.down * speed);
@@ -85,6 +88,7 @@ public class StartManager : MonoBehaviour
     #region Popdown
     IEnumerator MainButtonPopdown()
     {
+        float speed = Mathf.Abs(mainButtons.anchoredPosition.y + 70) * multiple;
         while (mainButtons.anchoredPosition.y > -70 + speed)
         {
             mainButtons.Translate(Vector3.down * speed);
@@ -95,6 +99,7 @@ public class StartManager : MonoBehaviour
 
     IEnumerator MediaButtonPopdown()
     {
+        float speed = Mathf.Abs(mainButtons.anchoredPosition.y + 105) * multiple;
         while (medias.anchoredPosition.y > -105 + speed)
         {
             medias.Translate(Vector3.down * speed);
@@ -105,6 +110,7 @@ public class StartManager : MonoBehaviour
 
     IEnumerator SettingButtonPopdown()
     {
+        float speed = Mathf.Abs(mainButtons.anchoredPosition.y - 95) * multiple;
         while (settings.anchoredPosition.y < 95 - speed)
         {
             settings.Translate(Vector3.up * speed);
