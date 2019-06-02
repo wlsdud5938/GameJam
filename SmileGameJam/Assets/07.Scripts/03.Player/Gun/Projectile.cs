@@ -68,7 +68,16 @@ public class Projectile : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("Wall"))
+        Debug.Log(other.name);
+        if (other.CompareTag("Obstacle") || other.CompareTag("Wall"))
+        {
+            PushToPool();
+        }
+    }
+
+    public void OnCollisionEnter(Collision other)
+    {
+        if (other.transform.CompareTag("Obstacle") || other.transform.CompareTag("Wall"))
         {
             PushToPool();
         }
