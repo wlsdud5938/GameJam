@@ -12,25 +12,40 @@ namespace MapEditor
         {
             get
             {
-                return LoadJsonFile<MapData>(FilePath);
+                return LoadJsonFile<MapData>(FilePath(fileName));
             }
         }
 
-        private string FilePath = "/MapData.json";
+        private string fileName = "MapData.json";
 
-        private void Awake()
+        private string FilePath(string filename)
         {
-            FilePath = Application.dataPath + FilePath;
+            if (Application.platform == RuntimePlatform.IPhonePlayer)
+            {
+                string path = Application.dataPath.Substring(0, Application.dataPath.Length - 5);
+                path = path.Substring(0, path.LastIndexOf('/'));
+                return Path.Combine(Path.Combine(path, "Documents"), filename);
+            }
+            else if (Application.platform == RuntimePlatform.Android)
+            {
+                string path = Application.persistentDataPath + filename;
+                return path;
+            }
+            else
+            {
+                string path = Application.dataPath;
+                return Path.Combine(path, filename);
+            }
         }
 
         public void SaveData(MapData data)
         {
-            CreateJsonFile(FilePath, JsonUtility.ToJson(data, prettyPrint: true));
+            CreateJsonFile(FilePath(fileName), JsonUtility.ToJson(data, prettyPrint: true));
         }
 
         public MapData LoadData()
         {
-            var data = LoadJsonFile<MapData>(FilePath);
+            var data = LoadJsonFile<MapData>(FilePath(fileName));
             return data;
         }
 
