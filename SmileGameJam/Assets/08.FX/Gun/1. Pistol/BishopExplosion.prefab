@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 8247018}
   - component: {fileID: 11451680}
   m_Layer: 0
-  m_Name: PawnExplosion
+  m_Name: BishopExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

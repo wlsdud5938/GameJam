@@ -834,6 +834,8 @@ MonoBehaviour:
   - {fileID: 1801629975461390, guid: dac923e3728e7554d88ee64a9cbaff43, type: 2}
   monsterList:
   - {fileID: 114283521888121922, guid: 091a46f0fefed754d9d20c353e8d2d5b, type: 2}
+  - {fileID: 114268906438359326, guid: c9814a7e106a2a040b52fbebd828ac94, type: 2}
+  - {fileID: 114610199903959914, guid: 12149236fce9f31418d5297acbb86f6f, type: 2}
   gunList:
   - {fileID: 114558055434426296, guid: ff9476aec1b9ac8429d080f5ad312763, type: 2}
   - {fileID: 114390193504052282, guid: b0a1bdcc076778549a3f47b119b7f5e4, type: 2}
@@ -845,8 +847,14 @@ MonoBehaviour:
   - {fileID: 114961354961195996, guid: 825f9a639dc004f4d83f7ea51c5bc467, type: 2}
   bulletList:
   - {fileID: 114448784778136162, guid: e15e1c79697b6f74d9d73d666d067346, type: 2}
+  - {fileID: 114448784778136162, guid: 5223830f60149f943bc1cfa00833dbed, type: 2}
+  - {fileID: 114448784778136162, guid: 8f976cacaab53ab45b3da326fe2e432e, type: 2}
+  - {fileID: 114448784778136162, guid: 11803550fb433a24da308f3ecc63f3a2, type: 2}
   bulletParticleList:
   - {fileID: 19801142, guid: 66d0586406341d842b072c0b6217c733, type: 2}
+  - {fileID: 19801142, guid: 66cf30c45ace28240967277e309a3d9a, type: 2}
+  - {fileID: 19801142, guid: 18a421a0dd296c749a4c2c5b3f9e5ec9, type: 2}
+  - {fileID: 19801142, guid: 275b9e9c745480d46adc01dcbdcfc62a, type: 2}
 --- !u!114 &885430512
 MonoBehaviour:
   m_ObjectHideFlags: 0

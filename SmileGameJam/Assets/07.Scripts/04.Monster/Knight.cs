@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Pawn : Monster
+public class Knight : Monster
 {
-    public int stopDist = 2;
+    public int stopDist = 4;
 
     public override void AttackPattern()
     {
@@ -21,34 +21,25 @@ public class Pawn : Monster
 
         Vector3 position = transform.position + Vector3.up;
         Quaternion rotation = Quaternion.LookRotation(target.position - transform.position);
-        Projectile newBullet = BulletPooler.instance.ReuseObject(id, position, rotation);
+        Projectile newBullet = BulletPooler.instance.ReuseObject(id, position, Quaternion.Euler(0,rotation.eulerAngles.y,0));
+        newBullet.SetInformation(null, attack, bulletSpeed, 30);
+        newBullet = BulletPooler.instance.ReuseObject(id, position, Quaternion.Euler(0, rotation.eulerAngles.y + 30, 0));
+        newBullet.SetInformation(null, attack, bulletSpeed, 30);
+        newBullet = BulletPooler.instance.ReuseObject(id, position, Quaternion.Euler(0, rotation.eulerAngles.y - 30, 0));
         newBullet.SetInformation(null, attack, bulletSpeed, 30);
     }
 
     public IEnumerator MoveAni()
     {
-        int dir = -1;
-        float minDist = float.MaxValue;
-        if(Vector3.SqrMagnitude(target.position - transform.position) > stopDist * stopDist) {
-            for (int i = 0; i < 4; i++)
-            {
-                Vector3 checkPos = transform.position + Quaternion.Euler(0, 90 * i, 0) * Vector3.forward;
-                Ray ray = new Ray(checkPos + Vector3.up * 5, Vector3.down);
-                if (!Physics.Raycast(ray, 100, unwalkableMask))
-                {
-                    float dist = Vector3.SqrMagnitude(target.position - checkPos);
-                    if (dist < minDist)
-                    {
-                        minDist = dist;
-                        dir = i;
-                    }
-                }
-            }
-        }
+        yield return StartCoroutine(JumpAni(NearestDir(), 4.2f));
+        yield return new WaitForSeconds(0.1f);
+        yield return StartCoroutine(JumpAni(NearestDir(), 4.2f));
+    }
 
+    private IEnumerator JumpAni(int dir, float jumpSpeed)
+    {
         if (dir != -1)
         {
-            float jumpSpeed = 3.0f;
             Vector3 originPos = transform.position;
 
             for (float i = 0; i < 1; i += Time.deltaTime * jumpSpeed)
@@ -67,7 +58,6 @@ public class Pawn : Monster
         }
         else
         {
-            float jumpSpeed = 3.0f;
             for (float i = 0; i < 1; i += Time.deltaTime * jumpSpeed)
             {
                 transform.localScale = new Vector3(1 + i * 0.15f, 1 - i * 0.2f, 1 + i * 0.15f);
@@ -81,5 +71,29 @@ public class Pawn : Monster
                 yield return null;
             }
         }
+    }
+
+    private int NearestDir()
+    {
+        int dir = -1;
+        float minDist = float.MaxValue;
+        if (Vector3.SqrMagnitude(target.position - transform.position) > stopDist * stopDist)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                Vector3 checkPos = transform.position + Quaternion.Euler(0, 90 * i, 0) * Vector3.forward;
+                Ray ray = new Ray(checkPos + Vector3.up * 5, Vector3.down);
+                if (!Physics.Raycast(ray, 100, unwalkableMask))
+                {
+                    float dist = Vector3.SqrMagnitude(target.position - checkPos);
+                    if (dist < minDist)
+                    {
+                        minDist = dist;
+                        dir = i;
+                    }
+                }
+            }
+        }
+        return dir;
     }
 }

@@ -29,7 +29,10 @@ public class Projectile : MonoBehaviour
         this.range = range;
         this.owner = owner;
         foreach (ParticleSystem p in particles)
+        {
             p.Play();
+            Debug.Log(p);
+        }
     }
 
     public void Reuse(Vector3 position, Quaternion rotation)
