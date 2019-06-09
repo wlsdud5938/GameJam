@@ -26,9 +26,36 @@
                     "x": 3,
                     "z": -4,
                     "rotation": 0
+                },
+                {
+                    "index": 0,
+                    "x": -1,
+                    "z": -1,
+                    "rotation": 0
+                },
+                {
+                    "index": 5,
+                    "x": 1,
+                    "z": 1,
+                    "rotation": 0
                 }
             ],
-            "monsterData": []
+            "monsterData": [
+                {
+                    "index": 12,
+                    "wave": 0,
+                    "x": -3,
+                    "z": -1,
+                    "rotation": 0
+                },
+                {
+                    "index": 12,
+                    "wave": 0,
+                    "x": 0,
+                    "z": -2,
+                    "rotation": 0
+                }
+            ]
         },
         {
             "width": 8,

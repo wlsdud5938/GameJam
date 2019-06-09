@@ -162,7 +162,7 @@ BoxCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1818182957372508}
-  m_Material: {fileID: 13400000, guid: 612516f4e107ccb4ba480d85e00562e4, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -192,7 +192,7 @@ MonoBehaviour:
   monopoly: {fileID: 4256012120535416}
   nowBullet: {fileID: 114448784778136162, guid: 8f976cacaab53ab45b3da326fe2e432e,
     type: 2}
-  attack: 5
+  attack: 1
   poolSize: 10
   bulletSpeed: 10
   stopDist: 3

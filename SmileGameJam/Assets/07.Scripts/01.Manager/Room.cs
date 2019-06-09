@@ -55,7 +55,7 @@ public class Room : MonoBehaviour
                     if(monsters[i].wave == nowWave)
                     {
                         Monster newMonster = Instantiate(ObjectData.instance.monsterList[monsters[i].index - obstacleCount], 
-                            new Vector3(monsters[i].x, 0, monsters[i].z)+ transform.GetChild(1).transform.position, Quaternion.Euler(0, 90 * monsters[i].rotation, 0) , transform.GetChild(1).transform);
+                            new Vector3(monsters[i].x, 0, monsters[i].z)+ transform.GetChild(1).transform.position, Quaternion.Euler(0, 90 * monsters[i].rotation, 0) , transform.GetChild(1).transform).GetComponent<Monster>();
                         newMonster.SetInfo(nowStage, this);
                         monsterCount++;
                     }

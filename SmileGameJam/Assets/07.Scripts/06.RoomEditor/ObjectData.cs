@@ -5,17 +5,19 @@ using UnityEngine;
 public class ObjectData : MonoBehaviour
 {
     public GameObject[] obstacleList;
-    public Monster[] monsterList;
+    public GameObject[] monsterList;
     public GunBase[] gunList;
     public ItemCtrl[] itemList;
     public Projectile[] bulletList;
     public ParticleSystem[] bulletParticleList;
 
     public Dictionary<string, GameObject> obstacles = new Dictionary<string, GameObject>();
-    public Dictionary<string, Monster> monsters = new Dictionary<string, Monster>();
+    public Dictionary<string, GameObject> monsters = new Dictionary<string, GameObject>();
     public Dictionary<string, GunBase> guns = new Dictionary<string, GunBase>();
     public Dictionary<string, ItemCtrl> items = new Dictionary<string, ItemCtrl>();
     public Dictionary<string, Projectile> bullets = new Dictionary<string, Projectile>();
+
+    public bool isEditor = false;
 
     static ObjectData _instance;
     public static ObjectData instance
@@ -35,15 +37,18 @@ public class ObjectData : MonoBehaviour
     {
         foreach (GameObject o in obstacleList)
             obstacles.Add(o.name, o);
-            foreach (Monster m in monsterList)
-                monsters.Add(m.name, m);
-        foreach (GunBase g in gunList)
-            guns.Add(g.name, g);
-        foreach (ItemCtrl i in itemList)
-            items.Add(i.name, i);
-        foreach (Projectile p in bulletList)
-            bullets.Add(p.name, p);
-        foreach (ParticleSystem p in bulletParticleList)
-            ParticlePooler.instance.CreatePool(p.name, p, 50);
+        foreach (GameObject m in monsterList)
+            monsters.Add(m.name, m);
+        if (!isEditor)
+        {
+            foreach (GunBase g in gunList)
+                guns.Add(g.name, g);
+            foreach (ItemCtrl i in itemList)
+                items.Add(i.name, i);
+            foreach (Projectile p in bulletList)
+                bullets.Add(p.name, p);
+            foreach (ParticleSystem p in bulletParticleList)
+                ParticlePooler.instance.CreatePool(p.name, p, 50);
+        }
     }
 }

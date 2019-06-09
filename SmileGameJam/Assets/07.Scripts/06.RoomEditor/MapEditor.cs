@@ -237,8 +237,8 @@ namespace MapEditor
 
                 objectList[i] = Instantiate(objectData.obstacleList[i], cursor);
                 objectList[i].transform.GetChild(0).GetComponent<Renderer>().material.color = new Color(1, 0, 0, 0.2f);
-                if (objectList[i].GetComponent<BoxCollider>() != null)
-                    objectList[i].GetComponent<BoxCollider>().enabled = false;
+                objectList[i].GetComponent<BoxCollider>().enabled = false;
+                objectList[i].GetComponent<BoxCollider>().isTrigger = false;
                 if (i != 0) objectList[i].SetActive(false);
             }
 
@@ -258,6 +258,9 @@ namespace MapEditor
 
                 objectList[i + obstacleCount] = Instantiate(objectData.monsterList[i].gameObject, cursor);
                 objectList[i + obstacleCount].transform.GetChild(0).GetComponent<Renderer>().material.color = new Color(1, 0, 0, 0.2f);
+
+                try { objectList[i + obstacleCount].GetComponent<Monster>().enabled = false; }
+                catch { objectList[i + obstacleCount].GetComponent<Rook>().enabled = false; }
                 objectList[i + obstacleCount].GetComponent<BoxCollider>().enabled = false;
                 objectList[i + obstacleCount].SetActive(false);
             }
@@ -337,7 +340,9 @@ namespace MapEditor
         private void PutMonster(int id, Vector3 position)
         {
             Vector3 pos = new Vector3(Mathf.RoundToInt(position.x), 0, Mathf.RoundToInt(position.z));
-            Instantiate(objectData.monsterList[id - obstacleCount], pos, Quaternion.identity, objectParent);
+            GameObject newMonster = Instantiate(objectData.monsterList[id - obstacleCount], pos, Quaternion.identity, objectParent);
+            try { newMonster.GetComponent<Monster>().enabled = false; }
+            catch { newMonster.GetComponent<Rook>().enabled = false; }
 
             switch (stage)
             {
@@ -412,8 +417,12 @@ namespace MapEditor
                         Instantiate(objectData.obstacleList[o.index],
                             new Vector3(o.x, 0, o.z), Quaternion.Euler(0, 90 * o.rotation, 0), objectParent);
                     foreach (MonsterData m in smallRoomData[subStage].monsterData)
-                        Instantiate(objectData.monsterList[m.index - obstacleCount],
+                    {
+                        GameObject newMonster = Instantiate(objectData.monsterList[m.index - obstacleCount],
                             new Vector3(m.x, 0, m.z), Quaternion.Euler(0, 90 * m.rotation, 0), objectParent);
+                        try { newMonster.GetComponent<Monster>().enabled = false; }
+                        catch { newMonster.GetComponent<Rook>().enabled = false; }
+                    }
 
                     for (int i = 0; i < smallRoomData.Count; i++) options.Add(i.ToString());
                     break;
@@ -421,9 +430,12 @@ namespace MapEditor
                     foreach (ObstacleData o in mediumRoomData[subStage].obstacleData)
                         Instantiate(objectData.obstacleList[o.index],
                             new Vector3(o.x, 0, o.z), Quaternion.Euler(0, 90 * o.rotation, 0), objectParent);
-                    foreach (MonsterData m in mediumRoomData[subStage].monsterData)
-                        Instantiate(objectData.monsterList[m.index - obstacleCount],
+                    foreach (MonsterData m in mediumRoomData[subStage].monsterData) {
+                        GameObject newMonster = Instantiate(objectData.monsterList[m.index - obstacleCount],
                             new Vector3(m.x, 0, m.z), Quaternion.Euler(0, 90 * m.rotation, 0), objectParent);
+                        try { newMonster.GetComponent<Monster>().enabled = false; }
+                        catch { newMonster.GetComponent<Rook>().enabled = false; }
+                    }
 
                     for (int i = 0; i < mediumRoomData.Count; i++) options.Add(i.ToString());
                     break;
@@ -432,10 +444,14 @@ namespace MapEditor
                         Instantiate(objectData.obstacleList[o.index],
                             new Vector3(o.x, 0, o.z), Quaternion.Euler(0, 90 * o.rotation, 0), objectParent);
                     foreach (MonsterData m in largeRoomData[subStage].monsterData)
-                        Instantiate(objectData.monsterList[m.index - obstacleCount],
+                    {
+                        GameObject newMonster = Instantiate(objectData.monsterList[m.index - obstacleCount],
                             new Vector3(m.x, 0, m.z), Quaternion.Euler(0, 90 * m.rotation, 0), objectParent);
+                        try { newMonster.GetComponent<Monster>().enabled = false; }
+                        catch { newMonster.GetComponent<Rook>().enabled = false; }
+                    }
 
-                    for (int i = 0; i < largeRoomData.Count; i++) options.Add(i.ToString());
+            for (int i = 0; i < largeRoomData.Count; i++) options.Add(i.ToString());
                     break;
             }
             indexDropdown.ClearOptions();
