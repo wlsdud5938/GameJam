@@ -140,12 +140,15 @@ MonoBehaviour:
   healthPoint: 10
   basicHP: 10
   stageMulti: 0.1
-  id: 
-  attackTurn: 3
+  id: Pawn
+  attackTurn: 5
   nowTime: 0
-  turnDuration: 0.5
+  turnDuration: 1
+  unwalkableMask:
+    serializedVersion: 2
+    m_Bits: 66048
   nowBullet: {fileID: 114448784778136162, guid: 5223830f60149f943bc1cfa00833dbed,
     type: 2}
-  attack: 5
+  attack: 1
   poolSize: 10
   bulletSpeed: 10
