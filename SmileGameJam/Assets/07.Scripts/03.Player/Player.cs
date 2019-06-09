@@ -52,12 +52,33 @@ public partial class Player : MonoBehaviour, IDamageable
         SetGunInfo();
     }
 
+    bool flag = true;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F)) TakeDamage(null, 1);
         if (Input.GetKeyDown(KeyCode.G)) TakeHeal(1);
         if (Input.GetKeyDown(KeyCode.Space)) Roll();
 
+#if UNITY_EDITOR
+        int x = 0, y = 0;
+        if (Input.GetKey(KeyCode.W)) y = 1;
+        else if (Input.GetKey(KeyCode.S)) y = -1;
+        if (Input.GetKey(KeyCode.D)) x = 1;
+        else if (Input.GetKey(KeyCode.A)) x = -1;
+        if (x == 0 && y == 0)
+        {
+            if (flag)
+            {
+                MoveJoystickUp(false);
+                flag = false;
+            }
+        }
+        else
+        {
+            MoveJoystickStay(1, Quaternion.LookRotation(new Vector3(x, 0, y)).eulerAngles.y);
+            flag = true;
+        }
+#endif
 
         if (isRolling)
         {

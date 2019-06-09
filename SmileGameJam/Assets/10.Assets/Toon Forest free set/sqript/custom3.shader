@@ -7,7 +7,6 @@ Shader "Custom/UnlitShadow"
 	}
 	
 	SubShader {
-		Tags {"Queue"="Opaque" }
 		LOD 100
 		
 		Pass {

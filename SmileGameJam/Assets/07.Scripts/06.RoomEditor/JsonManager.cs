@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 using UnityEngine;
 
@@ -12,59 +10,40 @@ namespace MapEditor
         {
             get
             {
-                return LoadJsonFile<MapData>(FilePath(fileName));
+                return LoadData();
             }
         }
+        public TextAsset jsonFile;
 
-        private string fileName = "MapData.json";
-
-        private string FilePath(string filename)
+        private void Awake()
         {
-            if (Application.platform == RuntimePlatform.IPhonePlayer)
-            {
-                string path = Application.dataPath.Substring(0, Application.dataPath.Length - 5);
-                path = path.Substring(0, path.LastIndexOf('/'));
-                return Path.Combine(Path.Combine(path, "Documents"), filename);
-            }
-            else if (Application.platform == RuntimePlatform.Android)
-            {
-                string path = Application.persistentDataPath + filename;
-                return path;
-            }
-            else
-            {
-                string path = Application.dataPath;
-                return Path.Combine(path, filename);
-            }
+            jsonFile = Resources.Load("MapData") as TextAsset;
         }
 
         public void SaveData(MapData data)
         {
-            CreateJsonFile(FilePath(fileName), JsonUtility.ToJson(data, prettyPrint: true));
+            CreateJsonFile(JsonUtility.ToJson(data, prettyPrint: true));
         }
 
         public MapData LoadData()
         {
-            var data = LoadJsonFile<MapData>(FilePath(fileName));
-            return data;
+            byte[] data = jsonFile.bytes;
+            string jsonData = Encoding.UTF8.GetString(data);
+            return JsonUtility.FromJson<MapData>(jsonData); 
         }
 
-        void CreateJsonFile(string filePath, string jsonData)
+        void CreateJsonFile(string jsonData)
         {
-            FileStream fileStream = new FileStream(filePath, FileMode.Create);
+            string path = Application.dataPath + "/Resources/MapData.json";
+            if (Application.platform == RuntimePlatform.Android)
+                path = Application.persistentDataPath + "/Resources/MapData.json";
+            else if(Application.platform == RuntimePlatform.IPhonePlayer)
+                path = Application.dataPath + "/Resources/MapData.json";
+
+            FileStream fileStream = new FileStream(path, FileMode.Create);
             byte[] data = Encoding.UTF8.GetBytes(jsonData);
             fileStream.Write(data, 0, data.Length);
             fileStream.Close();
-        }
-
-        T LoadJsonFile<T>(string filePath)
-        {
-            FileStream fileStream = new FileStream(filePath, FileMode.Open);
-            byte[] data = new byte[fileStream.Length];
-            fileStream.Read(data, 0, data.Length);
-            fileStream.Close();
-            string jsonData = Encoding.UTF8.GetString(data);
-            return JsonUtility.FromJson<T>(jsonData);
         }
     }
 }

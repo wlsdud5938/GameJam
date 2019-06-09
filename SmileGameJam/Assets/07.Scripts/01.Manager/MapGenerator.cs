@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MapEditor;
+using System.IO;
 
 public class MapGenerator : MonoBehaviour {
     

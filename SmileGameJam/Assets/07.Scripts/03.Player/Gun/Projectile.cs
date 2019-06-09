@@ -68,7 +68,6 @@ public class Projectile : MonoBehaviour
             }
         }
 
-        Debug.Log(other.name);
         if (other.CompareTag("Obstacle") || other.CompareTag("Wall"))
         {
             PushToPool();

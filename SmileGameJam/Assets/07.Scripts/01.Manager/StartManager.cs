@@ -9,6 +9,8 @@ public class StartManager : MonoBehaviour
     public RectTransform medias, settings;
     public GameObject touchToReady, crown;
 
+    public Animation anim;
+
     private float speed = 18f;
 
     private bool isReady = false;
@@ -16,26 +18,9 @@ public class StartManager : MonoBehaviour
     public void TouchtoReady()
     {
         if (isReady)
-        {
-            StopCoroutine(MainButtonPopup());
-            StopCoroutine(MediaButtonPopup());
-            StopCoroutine(SettingButtonPopup());
-            StartCoroutine(MainButtonPopdown());
-            StartCoroutine(MediaButtonPopdown());
-            StartCoroutine(SettingButtonPopdown());
-            touchToReady.SetActive(true);
-            crown.SetActive(false);
-        }
+            anim.CrossFade("ShowDown");
         else
-        {
-            StopCoroutine(MainButtonPopdown());
-            StopCoroutine(MediaButtonPopdown());
-            StopCoroutine(SettingButtonPopdown());
-            StartCoroutine(MainButtonPopup());
-            StartCoroutine(MediaButtonPopup());
-            StartCoroutine(SettingButtonPopup());
-            crown.SetActive(true);
-        }
+            anim.CrossFade("ShowUp");
         isReady = !isReady;
     }
 

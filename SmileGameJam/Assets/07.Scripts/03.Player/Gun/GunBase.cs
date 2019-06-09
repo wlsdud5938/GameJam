@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum Rare { 기본, 일반, 희귀, 영웅, 전설}
 public enum Shake { 끄기, 반대로, 랜덤으로 }

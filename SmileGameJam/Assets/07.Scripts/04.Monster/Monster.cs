@@ -2,14 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : MonoBehaviour, IDamageable {
+public abstract class Monster : MonoBehaviour, IDamageable {
 
-    [Header("Information")]
-    private int maxHealthPoint = 100;
-    public int healthPoint = 100;
+    [Header("[Information]")]
+    public int healthPoint = 10;
+    private int maxHealthPoint = 10;
 
-    public int basicHP = 100;
+    public int basicHP = 10;
     public float stageMulti = 0.1f;
+
+    public string id;
+
+    [Header("[Pattern]")]
+    public int attackTurn = 3;
+    private int turn = 0;
+    public float nowTime = 0, turnDuration = 0.5f;
+    public LayerMask unwalkableMask;    //장애물 레이어 마스크
+
+    [Header("[Attack]")]
+    public Projectile nowBullet;
+    protected Transform target;
+    public int attack = 5;
+    public int poolSize = 10;
+    public float bulletSpeed = 10;
 
     private Room parentRoom;
 
@@ -18,8 +33,29 @@ public class Monster : MonoBehaviour, IDamageable {
 
     private void Start()
     {
+        target = GameObject.Find("Player").transform;
         animator = transform.GetChild(0).GetComponent<Animator>();
         rb = transform.GetComponent<Rigidbody>();
+
+        nowBullet = ObjectData.instance.bullets[id + "Bullet"];
+        nowBullet.isEnemy = true;
+        nowBullet.id = id + "Explosion";
+        BulletPooler.instance.CreatePool(id, nowBullet, poolSize);
+    }
+
+    protected void Update()
+    {
+        if (nowTime > turnDuration)
+        {
+            nowTime = 0;
+            turn++;
+            if (turn % attackTurn == 0)
+                AttackPattern();
+            else
+                MovePattern();
+        }
+        else
+            nowTime += Time.deltaTime;
     }
 
     public void SetInfo(int nowStage, Room room)
@@ -33,9 +69,7 @@ public class Monster : MonoBehaviour, IDamageable {
         healthPoint = Mathf.Clamp(healthPoint - damage, 0, maxHealthPoint);
 
         if (healthPoint <= 0)
-        {
             Death(owner);
-        }
     }
 
     public void TakeHeal(int heal)
@@ -49,4 +83,7 @@ public class Monster : MonoBehaviour, IDamageable {
             parentRoom.monsterCount--;
         Destroy(gameObject);
     }
+
+    public abstract void MovePattern();
+    public abstract void AttackPattern();
 }

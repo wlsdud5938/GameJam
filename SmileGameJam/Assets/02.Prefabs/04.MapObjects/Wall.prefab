@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4993352080745612}
   - component: {fileID: 65099894226237420}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 33223900334913782}
   - component: {fileID: 23125877072694136}
   - component: {fileID: 95711998260270620}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: field_wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

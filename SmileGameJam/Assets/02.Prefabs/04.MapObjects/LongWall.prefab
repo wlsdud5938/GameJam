@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33022297662739228}
   - component: {fileID: 23117403845327060}
   - component: {fileID: 95037133183931758}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: field_wall2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4372092044758016}
   - component: {fileID: 65896198322955574}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LongWall
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

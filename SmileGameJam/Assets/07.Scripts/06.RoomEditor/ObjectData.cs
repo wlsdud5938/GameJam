@@ -35,8 +35,8 @@ public class ObjectData : MonoBehaviour
     {
         foreach (GameObject o in obstacleList)
             obstacles.Add(o.name, o);
-        foreach (Monster m in monsterList)
-            monsters.Add(m.name, m);
+            foreach (Monster m in monsterList)
+                monsters.Add(m.name, m);
         foreach (GunBase g in gunList)
             guns.Add(g.name, g);
         foreach (ItemCtrl i in itemList)

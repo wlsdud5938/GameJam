@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4995407189807452}
   - component: {fileID: 33062541070798964}
   - component: {fileID: 23380658456791800}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4806200398561734}
   - component: {fileID: 136645792675811750}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pillar01
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

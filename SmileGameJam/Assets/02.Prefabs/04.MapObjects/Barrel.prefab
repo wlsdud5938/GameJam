@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4652047234256482}
   - component: {fileID: 65453525038302334}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Barrel
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4966357161751770}
   - component: {fileID: 33471187653529154}
   - component: {fileID: 23701344406957766}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,5 +123,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.95, y: 0.95, z: 0.95}
   m_Center: {x: 0, y: 0.5, z: 0}

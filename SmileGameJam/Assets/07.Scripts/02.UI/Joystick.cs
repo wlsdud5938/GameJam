@@ -18,7 +18,6 @@ public class Joystick : MonoBehaviour
 
     private Vector2 disabledPos, firstPos, nowPos;
     private bool isStick_Stay = false, isMoved = false;
-    private int nowTouch = -1;
     #endregion
 
     public bool isLeftField = false;
@@ -63,71 +62,43 @@ public class Joystick : MonoBehaviour
 #if UNITY_ANDROID
         foreach (Touch touch in Input.touches)
         {
-            if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId) &&
-                touch.phase == TouchPhase.Began)
+            if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId)
+                && ((!isLeftField && touch.position.x > Screen.width * 0.5f)
+                || (isLeftField && touch.position.x < Screen.width * 0.5f))
+                )
             {
-                if ((!isLeftField && touch.position.x > Screen.width * 0.5f) ||
-                    (isLeftField && touch.position.x < Screen.width * 0.5f))
-                    Start_Move_Joystick(touch.fingerId);
-            }
-        }
-
-        if (isStick_Stay && nowTouch >= 0)
-        {
-            while (true)
-            {
-                try {
-                    Input.GetTouch(nowTouch);
-                    break;
-                }
-                catch {
-                    nowTouch--;
-                    if (nowTouch < 0) End_Move_Joystick();
-                }
-            }
-
-            Debug.Log(Input.GetTouch(nowTouch).phase);
-            switch (Input.GetTouch(nowTouch).phase)
-            {
-                case TouchPhase.Moved:
-                    isMoved = true;
-                    Stay_Move_Joystick();
-                    break;
-                case TouchPhase.Began:
-                case TouchPhase.Stationary:
-                    Stay_Move_Joystick();
-                    break;
-
-                case TouchPhase.Canceled:
-                case TouchPhase.Ended:
+                if (touch.phase == TouchPhase.Began)
+                    Start_Move_Joystick(touch.position);
+                else if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+                    Stay_Move_Joystick(touch.position);
+                else if (touch.phase == TouchPhase.Canceled || touch.phase == TouchPhase.Ended)
                     End_Move_Joystick();
-                    break;
+                break;
             }
-        }
 #endif
+        }
     }
     #endregion
 
     #region UNITY_ANDROID Function
 #if UNITY_ANDROID
-    private void Start_Move_Joystick(int touch)
+    private void Start_Move_Joystick(Vector2 touchPos)
     {
-        nowTouch = touch;
         isStick_Stay = true;
         isMoved = false;
 
         //시작 점, 조이스틱위치 초기화
-        firstPos = Input.GetTouch(touch).position;
-        joystick.position = UIPosition(Input.GetTouch(touch).position);
+        firstPos = touchPos;
+        joystick.position = UIPosition(touchPos);
         nowPos = firstPos;
 
         GetJoystickDown.Invoke();
     }
 
-    private void Stay_Move_Joystick()
+    private void Stay_Move_Joystick(Vector2 touchPos)
     {
-        nowPos = Input.GetTouch(nowTouch).position;
-        
+        nowPos = touchPos;
+
         if (Vector2.SqrMagnitude(nowPos - firstPos) > 0.1f) isMoved = true;
 
         distance = Vector3.Distance(nowPos, firstPos);
@@ -146,7 +117,6 @@ public class Joystick : MonoBehaviour
         GetJoystickUp.Invoke(isMoved);
 
         isStick_Stay = false;
-        nowTouch = -1;
 
         direction = Vector3.zero;
         distance = 0;
@@ -181,7 +151,6 @@ public class Joystick : MonoBehaviour
             GetJoystickUp.Invoke(isMoved);
 
             isStick_Stay = false;
-            nowTouch = -1;
 
             direction = Vector3.zero;
             distance = 0;

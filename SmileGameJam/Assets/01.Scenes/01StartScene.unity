@@ -513,6 +513,7 @@ GameObject:
   - component: {fileID: 719199162}
   - component: {fileID: 719199161}
   - component: {fileID: 719199160}
+  - component: {fileID: 719199163}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -580,6 +581,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &719199163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 719199159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee674c73b68f074bbe8687ad7d5616e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &773112438
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,11 +622,11 @@ RectTransform:
   m_Father: {fileID: 1663409864}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 113.3}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 450, y: 200}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &773112440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1256,7 +1268,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: -105}
+  m_AnchoredPosition: {x: 10, y: -105}
   m_SizeDelta: {x: 50, y: 100}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &1426835323
@@ -1289,11 +1301,11 @@ RectTransform:
   m_Father: {fileID: 1663409864}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -61.9, y: 174.8}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -63.31, y: 0}
   m_SizeDelta: {x: 84.91, y: 70.94}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1426835325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1372,6 +1384,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1663409864}
   - component: {fileID: 1663409865}
+  - component: {fileID: 1663409866}
   m_Layer: 5
   m_Name: StartScene
   m_TagString: Untagged
@@ -1456,6 +1469,22 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!111 &1663409866
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1663409863}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: ee05abf9cc1b7f84bbb26dc0fc1a4e6c, type: 2}
+  - {fileID: 7400000, guid: 1e1940efcded10b4b97f6aac376518d5, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1750029993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1466,7 +1495,6 @@ GameObject:
   - component: {fileID: 1750029994}
   - component: {fileID: 1750029996}
   - component: {fileID: 1750029995}
-  - component: {fileID: 1750029997}
   m_Layer: 5
   m_Name: TouchtoStart
   m_TagString: Untagged
@@ -1532,24 +1560,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1750029993}
   m_CullTransparentMesh: 0
---- !u!95 &1750029997
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1750029993}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5e42aa0b19dfa1b4f99541bde8d5ed8e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1878865163
 GameObject:
   m_ObjectHideFlags: 0
@@ -1618,6 +1628,7 @@ MonoBehaviour:
   settings: {fileID: 1878865164}
   touchToReady: {fileID: 1750029993}
   crown: {fileID: 1426835323}
+  anim: {fileID: 1663409866}
 --- !u!4 &2015384665
 Transform:
   m_ObjectHideFlags: 0
