@@ -141,7 +141,7 @@ MonoBehaviour:
   basicHP: 10
   stageMulti: 0.1
   id: Pawn
-  attackTurn: 5
+  attackTurn: 1
   nowTime: 0
   turnDuration: 1
   unwalkableMask:
@@ -152,3 +152,4 @@ MonoBehaviour:
   attack: 1
   poolSize: 10
   bulletSpeed: 10
+  stopDist: 2
