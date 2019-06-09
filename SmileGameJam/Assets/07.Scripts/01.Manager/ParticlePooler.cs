@@ -43,6 +43,16 @@ public class ParticlePooler : MonoBehaviour
     {
         if (poolDictionary.ContainsKey(tag))
         {
+            if(poolDictionary[tag].Count < 10)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    ParticleSystem newObject = Instantiate(poolDictionary[tag].Peek(), parentDictionary[name]);
+                    newObject.name = name;
+                    newObject.gameObject.SetActive(false);
+                    poolDictionary[name].Enqueue(newObject);
+                }
+            }
             ParticleSystem objectToReuse = poolDictionary[tag].Dequeue();
             objectToReuse.gameObject.SetActive(true);
             objectToReuse.transform.position = position;

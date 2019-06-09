@@ -44,6 +44,7 @@ public class Bishop : Monster
     public IEnumerator MoveAni()
     {
         Vector2 dir = NearestDir();
+        monopoly.position = transform.position + new Vector3(dir.x, 0, dir.y);
         float jumpSpeed = 3;
         if (dir.x !=0|| dir.y != 0)
         {

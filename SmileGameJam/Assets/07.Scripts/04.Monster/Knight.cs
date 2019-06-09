@@ -38,6 +38,7 @@ public class Knight : Monster
 
     private IEnumerator JumpAni(int dir, float jumpSpeed)
     {
+        monopoly.position = transform.position + Quaternion.Euler(0, 90 * dir, 0) * Vector3.forward;
         if (dir != -1)
         {
             Vector3 originPos = transform.position;

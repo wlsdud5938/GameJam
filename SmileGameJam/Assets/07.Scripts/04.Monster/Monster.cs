@@ -18,6 +18,7 @@ public abstract class Monster : MonoBehaviour, IDamageable {
     private int turn = 0;
     public float nowTime = 0, turnDuration = 0.5f;
     public LayerMask unwalkableMask;    //장애물 레이어 마스크
+    public Transform monopoly;
 
     [Header("[Attack]")]
     public Projectile nowBullet;
