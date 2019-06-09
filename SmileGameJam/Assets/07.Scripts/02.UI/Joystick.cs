@@ -77,7 +77,7 @@ public class Joystick : MonoBehaviour
             }
 #endif
         }//헤해;ㅜ
-    }
+    
     #endregion
 
     #region UNITY_ANDROID Function
