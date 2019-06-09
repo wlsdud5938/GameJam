@@ -75,8 +75,8 @@ public class Joystick : MonoBehaviour
                     End_Move_Joystick();
                 break;
             }
-#endif
         }//헤해;ㅜ
+#endif
     }
     #endregion
 
