@@ -46,6 +46,8 @@ public class Pawn : Monster
             }
         }
 
+        monopoly.position = transform.position + Quaternion.Euler(0, 90 * dir, 0) * Vector3.forward;
+
         if (dir != -1)
         {
             float jumpSpeed = 3.0f;
