@@ -20,6 +20,7 @@ public partial class Player : MonoBehaviour, IDamageable
     private float invincibilityTime;
 
     private Transform playerTr;
+    private bool isDead = false;
 
     private Rigidbody rb;
     private Animator animator;
@@ -56,6 +57,8 @@ public partial class Player : MonoBehaviour, IDamageable
     bool flag = true;
     private void Update()
     {
+        if (isDead) return;
+
         if (Input.GetKeyDown(KeyCode.F)) TakeDamage(null, 1);
         if (Input.GetKeyDown(KeyCode.G)) TakeHeal(1);
         if (Input.GetKeyDown(KeyCode.Space)) Roll();
@@ -113,6 +116,7 @@ public partial class Player : MonoBehaviour, IDamageable
 
     public void TakeDamage(IDamageable owner, int damage)
     {
+        if (isDead) return;
         if (isRolling || invincibilityTime > 0) return;
 
         invincibilityTime = invincibilityDelay;
@@ -127,21 +131,27 @@ public partial class Player : MonoBehaviour, IDamageable
 
     public void TakeHeal(int heal)
     {
+        if (isDead) return;
         healthPoint = Mathf.Clamp(healthPoint + heal, 0, maxHealthPoint);
         SetInfo();
     }
 
     public void GetCoin(int coin)
     {
+        if (isDead) return;
         this.coin += coin;
         SetInfo();
     }
 
     public void Death(IDamageable killer)
     {
+        if (isDead) return;
         Debug.Log("Death");
+        isDead = true;
+        StopAllCoroutines();
+        rb.velocity = Vector3.zero;
         animator.SetBool("IsDead", true);
-        Invoke("Restart", 2);
+        Invoke("Restart", 2.5f);
     }
 
     public void Restart()

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 public partial class Player : MonoBehaviour
 {
@@ -26,6 +25,7 @@ public partial class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (isDead) return;
         if (other.CompareTag("Item"))
         {
             string itemId = other.GetComponent<ItemCtrl>().id;
@@ -37,6 +37,7 @@ public partial class Player : MonoBehaviour
 
     public void GetGun(string id)
     {
+        if (isDead) return;
         GunBase newGun = Instantiate(ObjectData.instance.guns[id], transform.position, Quaternion.identity, hand);
         newGun.transform.localPosition = newGun.transform.localEulerAngles = Vector3.zero;
         gunInventory[0].gameObject.SetActive(false);
@@ -55,6 +56,7 @@ public partial class Player : MonoBehaviour
 
     public void RemoveGun()
     {
+        if (isDead) return;
         nowGun = gunInventory[index = 0];
         nowGun.gameObject.SetActive(true);
 
@@ -66,6 +68,7 @@ public partial class Player : MonoBehaviour
 
     private void SetGunInfo()
     {
+        if (isDead) return;
         if (nowGun == null)
             return;
         nowTerm = 0;
@@ -75,6 +78,7 @@ public partial class Player : MonoBehaviour
 
     private void SetGunUI()
     {
+        if (isDead) return;
         if (nowGun == null)
             return;
 
@@ -91,6 +95,7 @@ public partial class Player : MonoBehaviour
 
     public void AttackJoystickStay(float dist, float rotation)
     {
+        if (isDead) return;
         muzzleRot = rotation;
         if (nowGun == null)
             return;
@@ -118,12 +123,14 @@ public partial class Player : MonoBehaviour
 
     public void AttackJoystickUp(bool isMoved)
     {
+        if (isDead) return;
         //nowTerm = 0;
         animator.SetBool("IsAttacking", false);
     }
 
     private void LateUpdate()
     {
+        if (isDead) return;
         muzzle.eulerAngles = new Vector3(0, muzzleRot, 0);
     }
 }

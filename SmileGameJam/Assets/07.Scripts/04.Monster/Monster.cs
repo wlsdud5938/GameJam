@@ -11,6 +11,8 @@ public abstract class Monster : MonoBehaviour, IDamageable {
     public int basicHP = 10;
     public float stageMulti = 0.1f;
 
+    private bool isDead = false;
+
     public string id;
 
     [Header("[Pattern]")]
@@ -81,6 +83,8 @@ public abstract class Monster : MonoBehaviour, IDamageable {
 
     public void Death(IDamageable killer)
     {
+        if (isDead) return;
+        isDead = true;
         if (parentRoom != null)
             parentRoom.monsterCount--;
         Destroy(gameObject);

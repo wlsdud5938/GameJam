@@ -49,10 +49,10 @@ public class Room : MonoBehaviour
     {
         if (isEntered)
         {
-            nowTime += Time.deltaTime;
             if (monsterCount <= 0)
             {
-                for(int i = 0; i < monsters.Count; i++)
+                nowTime = 0;
+                for (int i = 0; i < monsters.Count; i++)
                 {
                     if(monsters[i].wave == nowWave)
                     {
@@ -65,12 +65,15 @@ public class Room : MonoBehaviour
                 }
                 if (nowWave++ > 3)
                     ClearTheRoom();
+                Debug.Log(monsterCount);
             }
+            nowTime += Time.deltaTime;
         }
     }
 
     public void EnterTheRoom()
     {
+        if (isEntered) return;
         isEntered = true;
         monsterCount = 0;
 
@@ -80,6 +83,7 @@ public class Room : MonoBehaviour
                 walls[i].SetActive(true);
         }
         Debug.Log("I must...");
+        GameDirector.instance.NormalBgm();
     }
 
     public void ClearTheRoom()
@@ -93,5 +97,6 @@ public class Room : MonoBehaviour
                 walls[i].SetActive(false);
         }
         Debug.Log("ClearTheRoom");
+        GameDirector.instance.BattleBgm();
     }
 }

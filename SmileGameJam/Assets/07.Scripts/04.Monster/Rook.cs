@@ -10,6 +10,8 @@ public class Rook : MonoBehaviour, IDamageable
     public int basicHP = 10;
     public float stageMulti = 0.1f;
 
+    private bool isDead = false;
+
     [Header("[Pattern]")]
     private float turnDuration = 0.5f;
     public float turnDelay = 0.5f;
@@ -66,6 +68,8 @@ public class Rook : MonoBehaviour, IDamageable
 
     public void Death(IDamageable killer)
     {
+        if (isDead) return;
+        isDead = true;
         if (parentRoom != null)
             parentRoom.monsterCount--;
         Destroy(gameObject);

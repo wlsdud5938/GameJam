@@ -20,6 +20,7 @@ public partial class Player : MonoBehaviour
 
     public void MoveJoystickStay(float dist, float rotation)
     {
+        if (isDead) return;
         isMoving = true;
         animator.SetFloat("RunBlend", dist);
 
@@ -33,6 +34,7 @@ public partial class Player : MonoBehaviour
 
     public void MoveJoystickUp(bool isMoved)
     {
+        if (isDead) return;
         isMoving = false;
         animator.SetFloat("RunBlend", 0);
         if (!isRolling)
@@ -41,6 +43,7 @@ public partial class Player : MonoBehaviour
 
     public void Roll()
     {
+        if (isDead) return;
         if (!isRolling)
         {
             isRolling = true;
@@ -54,6 +57,7 @@ public partial class Player : MonoBehaviour
 
     public void RollAnim()
     {
+        if (isDead) return;
         rollnowDelay += Time.deltaTime;
 
         if (rollnowDelay > rollDelay + rollCancelDelay) //구르기 끝
