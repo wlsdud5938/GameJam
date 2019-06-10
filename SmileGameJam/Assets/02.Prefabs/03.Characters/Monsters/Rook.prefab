@@ -338,10 +338,12 @@ MonoBehaviour:
   basicHP: 10
   stageMulti: 0.1
   turnDuration: 2
+  turnDelay: 2
   unwalkableMask:
     serializedVersion: 2
     m_Bits: 197120
   monopoly: {fileID: 4088338760312854}
+  monopolyPosition: {x: 0, y: 0, z: 0}
   bang: {fileID: 198505459114619006}
   attack: 2
   rangeDist: 3

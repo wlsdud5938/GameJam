@@ -186,10 +186,12 @@ MonoBehaviour:
   attackTurn: 3
   nowTime: 0
   turnDuration: 1
+  turnDelay: 1
   unwalkableMask:
     serializedVersion: 2
     m_Bits: 197120
   monopoly: {fileID: 4766170146255372}
+  monopolyPosition: {x: 0, y: 0, z: 0}
   nowBullet: {fileID: 114448784778136162, guid: 11803550fb433a24da308f3ecc63f3a2,
     type: 2}
   attack: 1

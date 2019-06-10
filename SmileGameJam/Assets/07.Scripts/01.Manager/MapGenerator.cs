@@ -127,10 +127,10 @@ public class MapGenerator : MonoBehaviour {
 
     private Room RoomGenerate(Room room, int size)
     {
-        if (smallRoomList.Count > 0)
-            ObstacleGenerate(room, room.transform.GetChild(1).transform, size);
-        else
+        if (smallRoomList.Count == 0 && size == 0)
             room.isCleared = true;
+        else
+            ObstacleGenerate(room, room.transform.GetChild(1).transform, size);
         return room;
     }
 

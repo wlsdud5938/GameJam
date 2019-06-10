@@ -8,6 +8,9 @@ public class LobbyManager : MonoBehaviour
     public Joystick moveJoystick;
     public Button skillButton;
 
+    private bool isPaused;
+    public GameObject pausePanel;
+
     public CameraManager cameraManager;
 
     public void StartToGame()
@@ -44,6 +47,15 @@ public class LobbyManager : MonoBehaviour
         cameraManager.target = nowPlayer.transform;
     }
 
+    public void PasueButton()
+    {
+        isPaused = !isPaused;
+
+        pausePanel.SetActive(isPaused);
+        if (isPaused) Time.timeScale = 0;
+        else Time.timeScale = 1;
+    }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -64,5 +76,34 @@ public class LobbyManager : MonoBehaviour
         if (flag)
             moveJoystick.JoystickActive(true);
         flag = false;
+    }
+
+    public void StopButton()
+    {
+        Time.timeScale = 1;
+        Application.Quit();
+    }
+
+    public void HomeButton()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);
+    }
+
+    public void SettingButton()
+    {
+
+    }
+
+    public void PlayButton()
+    {
+        isPaused = false;
+        gameObject.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void OnApplicationQuit()
+    {
+        Time.timeScale = 1;
     }
 }

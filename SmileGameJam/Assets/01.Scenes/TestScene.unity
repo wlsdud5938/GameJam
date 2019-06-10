@@ -10754,6 +10754,7 @@ MonoBehaviour:
   - {fileID: 19801142, guid: 66cf30c45ace28240967277e309a3d9a, type: 2}
   - {fileID: 19801142, guid: 18a421a0dd296c749a4c2c5b3f9e5ec9, type: 2}
   - {fileID: 19801142, guid: 275b9e9c745480d46adc01dcbdcfc62a, type: 2}
+  isEditor: 0
 --- !u!4 &1812204892
 Transform:
   m_ObjectHideFlags: 0

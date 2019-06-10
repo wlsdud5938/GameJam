@@ -14,6 +14,8 @@ public class Room : MonoBehaviour
     public int nowWave = 0;
     public int monsterCount;
 
+    public float nowTime;
+
     private int obstacleCount;
 
     public void Open(int r)
@@ -47,16 +49,17 @@ public class Room : MonoBehaviour
     {
         if (isEntered)
         {
-            if(monsterCount <= 0)
+            nowTime += Time.deltaTime;
+            if (monsterCount <= 0)
             {
                 for(int i = 0; i < monsters.Count; i++)
                 {
-                    Debug.Log(monsters[i].wave);
                     if(monsters[i].wave == nowWave)
                     {
-                        Monster newMonster = Instantiate(ObjectData.instance.monsterList[monsters[i].index - obstacleCount], 
-                            new Vector3(monsters[i].x, 0, monsters[i].z)+ transform.GetChild(1).transform.position, Quaternion.Euler(0, 90 * monsters[i].rotation, 0) , transform.GetChild(1).transform).GetComponent<Monster>();
-                        newMonster.SetInfo(nowStage, this);
+                        GameObject newMonster = Instantiate(ObjectData.instance.monsterList[monsters[i].index - obstacleCount],
+                            new Vector3(monsters[i].x, 0, monsters[i].z) + transform.GetChild(1).transform.position, Quaternion.Euler(0, 90 * monsters[i].rotation, 0), transform.GetChild(1).transform);
+                        try { newMonster.GetComponent<Monster>().SetInfo(nowStage, this); }
+                        catch { newMonster.GetComponent<Rook>().SetInfo(nowStage, this); }
                         monsterCount++;
                     }
                 }

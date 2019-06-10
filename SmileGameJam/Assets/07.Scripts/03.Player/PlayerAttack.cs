@@ -111,7 +111,6 @@ public partial class Player : MonoBehaviour
         }
         else
         {
-            muzzleRot = 0;
             //nowTerm = 0;
             animator.SetBool("IsAttacking", false);
         }
@@ -119,7 +118,6 @@ public partial class Player : MonoBehaviour
 
     public void AttackJoystickUp(bool isMoved)
     {
-        muzzleRot = 0;
         //nowTerm = 0;
         animator.SetBool("IsAttacking", false);
     }

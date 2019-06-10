@@ -46,12 +46,11 @@ public class Pawn : Monster
             }
         }
 
-        monopoly.position = transform.position + Quaternion.Euler(0, 90 * dir, 0) * Vector3.forward;
-
         if (dir != -1)
         {
             float jumpSpeed = 3.0f;
             Vector3 originPos = transform.position;
+            monopolyPosition = transform.position + Quaternion.Euler(0, 90 * dir, 0) * Vector3.forward;
 
             for (float i = 0; i < 1; i += Time.deltaTime * jumpSpeed)
             {
@@ -70,6 +69,7 @@ public class Pawn : Monster
         else
         {
             float jumpSpeed = 3.0f;
+            monopolyPosition = transform.position;
             for (float i = 0; i < 1; i += Time.deltaTime * jumpSpeed)
             {
                 transform.localScale = new Vector3(1 + i * 0.15f, 1 - i * 0.2f, 1 + i * 0.15f);

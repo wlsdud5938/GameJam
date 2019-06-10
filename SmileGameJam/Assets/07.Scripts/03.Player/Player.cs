@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public partial class Player : MonoBehaviour, IDamageable
@@ -139,5 +140,11 @@ public partial class Player : MonoBehaviour, IDamageable
     public void Death(IDamageable killer)
     {
         Debug.Log("Death");
+        animator.SetBool("IsDead", true);
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(1);
     }
 }

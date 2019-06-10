@@ -44,10 +44,10 @@ public class Bishop : Monster
     public IEnumerator MoveAni()
     {
         Vector2 dir = NearestDir();
-        monopoly.position = transform.position + new Vector3(dir.x, 0, dir.y);
         float jumpSpeed = 3;
         if (dir.x !=0|| dir.y != 0)
         {
+            monopolyPosition = transform.position + new Vector3(dir.x, 0, dir.y);
             Vector3 originPos = transform.position;
 
             for (float i = 0; i < 1; i += Time.deltaTime * jumpSpeed)
@@ -66,6 +66,7 @@ public class Bishop : Monster
         }
         else
         {
+            monopolyPosition = transform.position;
             for (float i = 0; i < 1; i += Time.deltaTime * jumpSpeed)
             {
                 transform.localScale = new Vector3(1 + i * 0.15f, 1 - i * 0.2f, 1 + i * 0.15f);

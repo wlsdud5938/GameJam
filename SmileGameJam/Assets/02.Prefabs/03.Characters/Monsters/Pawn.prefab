@@ -183,13 +183,15 @@ MonoBehaviour:
   basicHP: 10
   stageMulti: 0.1
   id: Pawn
-  attackTurn: 1
+  attackTurn: 3
   nowTime: 0
-  turnDuration: 1
+  turnDuration: 1.5
+  turnDelay: 1.5
   unwalkableMask:
     serializedVersion: 2
     m_Bits: 197120
   monopoly: {fileID: 4795141072684888}
+  monopolyPosition: {x: 0, y: 0, z: 0}
   nowBullet: {fileID: 114448784778136162, guid: 5223830f60149f943bc1cfa00833dbed,
     type: 2}
   attack: 1

@@ -38,9 +38,9 @@ public class Knight : Monster
 
     private IEnumerator JumpAni(int dir, float jumpSpeed)
     {
-        monopoly.position = transform.position + Quaternion.Euler(0, 90 * dir, 0) * Vector3.forward;
         if (dir != -1)
         {
+            monopolyPosition = transform.position + Quaternion.Euler(0, 90 * dir, 0) * Vector3.forward;
             Vector3 originPos = transform.position;
 
             for (float i = 0; i < 1; i += Time.deltaTime * jumpSpeed)
@@ -59,6 +59,7 @@ public class Knight : Monster
         }
         else
         {
+            monopolyPosition = transform.position;
             for (float i = 0; i < 1; i += Time.deltaTime * jumpSpeed)
             {
                 transform.localScale = new Vector3(1 + i * 0.15f, 1 - i * 0.2f, 1 + i * 0.15f);

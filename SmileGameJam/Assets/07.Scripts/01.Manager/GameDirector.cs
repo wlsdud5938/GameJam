@@ -41,7 +41,7 @@ public class GameDirector : MonoBehaviour
         spawn spawnEvent = new spawn(SpawnPlayer);
         StartCoroutine(mapGenerator.MapGenerate(spawnEvent));
     }
-    
+
     public void SpawnPlayer(Vector3 position)
     {
         player = Instantiate(player, position, Quaternion.identity);

@@ -185,11 +185,13 @@ MonoBehaviour:
   id: Knight
   attackTurn: 3
   nowTime: 0
-  turnDuration: 2
+  turnDuration: 3
+  turnDelay: 3
   unwalkableMask:
     serializedVersion: 2
     m_Bits: 197120
   monopoly: {fileID: 4256012120535416}
+  monopolyPosition: {x: 0, y: 0, z: 0}
   nowBullet: {fileID: 114448784778136162, guid: 8f976cacaab53ab45b3da326fe2e432e,
     type: 2}
   attack: 1

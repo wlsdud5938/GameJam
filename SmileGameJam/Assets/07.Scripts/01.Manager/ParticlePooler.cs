@@ -5,6 +5,7 @@ using UnityEngine;
 public class ParticlePooler : MonoBehaviour
 {
     public Dictionary<string, Queue<ParticleSystem>> poolDictionary = new Dictionary<string, Queue<ParticleSystem>>();
+    public Dictionary<string, ParticleSystem> poolBackup = new Dictionary<string, ParticleSystem>();
     private Dictionary<string, Transform> parentDictionary = new Dictionary<string, Transform>();
 
     static ParticlePooler _instance;
@@ -27,6 +28,7 @@ public class ParticlePooler : MonoBehaviour
         if (!poolDictionary.ContainsKey(name))
         {
             poolDictionary.Add(name, new Queue<ParticleSystem>());
+            poolBackup.Add(name, prefab);
             parentDictionary.Add(name, new GameObject(name + "Pool").transform);
         }
 
@@ -47,10 +49,10 @@ public class ParticlePooler : MonoBehaviour
             {
                 for (int i = 0; i < 10; i++)
                 {
-                    ParticleSystem newObject = Instantiate(poolDictionary[tag].Peek(), parentDictionary[name]);
-                    newObject.name = name;
+                    ParticleSystem newObject = Instantiate(poolBackup[tag], parentDictionary[tag]);
+                    newObject.name = tag;
                     newObject.gameObject.SetActive(false);
-                    poolDictionary[name].Enqueue(newObject);
+                    poolDictionary[tag].Enqueue(newObject);
                 }
             }
             ParticleSystem objectToReuse = poolDictionary[tag].Dequeue();

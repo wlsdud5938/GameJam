@@ -16,9 +16,11 @@ public abstract class Monster : MonoBehaviour, IDamageable {
     [Header("[Pattern]")]
     public int attackTurn = 3;
     private int turn = 0;
-    public float nowTime = 0, turnDuration = 0.5f;
+    private float turnDuration = 0.5f;
+    public float turnDelay = 0.5f;
     public LayerMask unwalkableMask;    //장애물 레이어 마스크
     public Transform monopoly;
+    public Vector3 monopolyPosition;
 
     [Header("[Attack]")]
     public Projectile nowBullet;
@@ -46,17 +48,16 @@ public abstract class Monster : MonoBehaviour, IDamageable {
 
     protected void Update()
     {
-        if (nowTime > turnDuration)
+        monopoly.position = monopolyPosition;
+        if (parentRoom.nowTime > turnDuration)
         {
-            nowTime = 0;
+            turnDuration += turnDelay;
             turn++;
             if (turn % attackTurn == 0)
                 AttackPattern();
             else
                 MovePattern();
         }
-        else
-            nowTime += Time.deltaTime;
     }
 
     public void SetInfo(int nowStage, Room room)

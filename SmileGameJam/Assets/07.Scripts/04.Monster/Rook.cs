@@ -11,10 +11,11 @@ public class Rook : MonoBehaviour, IDamageable
     public float stageMulti = 0.1f;
 
     [Header("[Pattern]")]
-    public float turnDuration = 0.5f;
+    private float turnDuration = 0.5f;
+    public float turnDelay = 0.5f;
     public LayerMask unwalkableMask;    //장애물 레이어 마스크
     public Transform monopoly;
-    private float nowTime = 0;
+    public Vector3 monopolyPosition;
 
     [Header("[Attack]")]
     public ParticleSystem bang;
@@ -36,13 +37,12 @@ public class Rook : MonoBehaviour, IDamageable
     }
     private void Update()
     {
-        if (nowTime > turnDuration)
+        monopoly.position = monopolyPosition;
+        if (parentRoom.nowTime > turnDuration)
         {
-            nowTime = 0;
+            turnDuration += turnDelay;
             AttackPattern();
         }
-        else
-            nowTime += Time.deltaTime;
     }
 
     public void SetInfo(int nowStage, Room room)
@@ -92,10 +92,10 @@ public class Rook : MonoBehaviour, IDamageable
 
     public IEnumerator MoveAni(Vector2 dir)
     {
-        monopoly.position = transform.position + new Vector3(dir.x, 0, dir.y);
         float jumpSpeed = 3;
         if (dir.x != 0 || dir.y != 0)
         {
+            monopolyPosition = transform.position + new Vector3(dir.x, 0, dir.y);
             Vector3 originPos = transform.position;
 
             for (float i = 0; i < 1; i += Time.deltaTime * jumpSpeed)
@@ -114,6 +114,7 @@ public class Rook : MonoBehaviour, IDamageable
         }
         else
         {
+            monopolyPosition = transform.position;
             for (float i = 0; i < 1; i += Time.deltaTime * jumpSpeed)
             {
                 transform.localScale = new Vector3(1 + i * 0.15f, 1 - i * 0.2f, 1 + i * 0.15f);
