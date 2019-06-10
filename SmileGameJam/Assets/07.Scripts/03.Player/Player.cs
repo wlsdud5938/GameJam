@@ -141,6 +141,7 @@ public partial class Player : MonoBehaviour, IDamageable
     {
         Debug.Log("Death");
         animator.SetBool("IsDead", true);
+        Invoke("Restart", 2);
     }
 
     public void Restart()
