@@ -47,8 +47,8 @@ public class Bishop : Monster
         float jumpSpeed = 3;
         if (dir.x !=0|| dir.y != 0)
         {
-            monopolyPosition = transform.position + new Vector3(dir.x, 0, dir.y);
-            Vector3 originPos = transform.position;
+            monopolyPosition = HeightZero(transform.position + new Vector3(dir.x, 0, dir.y));
+            Vector3 originPos = HeightZero(transform.position);
 
             for (float i = 0; i < 1; i += Time.deltaTime * jumpSpeed)
             {
@@ -62,11 +62,11 @@ public class Bishop : Monster
                 transform.position = new Vector3(originPos.x, Mathf.Sin(Mathf.PI * i) * 1.5f, originPos.z) + new Vector3(dir.x, 0, dir.y) * i;
                 yield return null;
             }
-            transform.position = originPos + new Vector3(dir.x, 0, dir.y);
+            transform.position = HeightZero(originPos + new Vector3(dir.x, 0, dir.y));
         }
         else
         {
-            monopolyPosition = transform.position;
+            monopolyPosition = HeightZero(transform.position);
             for (float i = 0; i < 1; i += Time.deltaTime * jumpSpeed)
             {
                 transform.localScale = new Vector3(1 + i * 0.15f, 1 - i * 0.2f, 1 + i * 0.15f);
@@ -79,6 +79,7 @@ public class Bishop : Monster
                 transform.position = new Vector3(transform.position.x, Mathf.Sin(Mathf.PI * i) * 1.5f, transform.position.z);
                 yield return null;
             }
+            transform.position = HeightZero(transform.position);
         }
     }
 

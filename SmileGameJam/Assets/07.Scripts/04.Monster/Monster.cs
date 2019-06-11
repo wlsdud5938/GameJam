@@ -92,4 +92,9 @@ public abstract class Monster : MonoBehaviour, IDamageable {
 
     public abstract void MovePattern();
     public abstract void AttackPattern();
+
+    public Vector3 HeightZero(Vector3 v)
+    {
+        return new Vector3(v.x, 0, v.z);
+    }
 }

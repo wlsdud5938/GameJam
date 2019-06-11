@@ -49,8 +49,8 @@ public class Pawn : Monster
         if (dir != -1)
         {
             float jumpSpeed = 3.0f;
-            Vector3 originPos = transform.position;
-            monopolyPosition = transform.position + Quaternion.Euler(0, 90 * dir, 0) * Vector3.forward;
+            Vector3 originPos = HeightZero(transform.position);
+            monopolyPosition = HeightZero(transform.position + Quaternion.Euler(0, 90 * dir, 0) * Vector3.forward);
 
             for (float i = 0; i < 1; i += Time.deltaTime * jumpSpeed)
             {
@@ -64,12 +64,12 @@ public class Pawn : Monster
                 transform.position = new Vector3(originPos.x, Mathf.Sin(Mathf.PI * i) * 1.5f, originPos.z) + Quaternion.Euler(0, 90 * dir, 0) * Vector3.forward * i;
                 yield return null;
             }
-            transform.position = originPos + Quaternion.Euler(0, 90 * dir, 0) * Vector3.forward;
+            transform.position = HeightZero(originPos + Quaternion.Euler(0, 90 * dir, 0) * Vector3.forward);
         }
         else
         {
             float jumpSpeed = 3.0f;
-            monopolyPosition = transform.position;
+            monopolyPosition = HeightZero(transform.position);
             for (float i = 0; i < 1; i += Time.deltaTime * jumpSpeed)
             {
                 transform.localScale = new Vector3(1 + i * 0.15f, 1 - i * 0.2f, 1 + i * 0.15f);
@@ -82,6 +82,7 @@ public class Pawn : Monster
                 transform.position = new Vector3(transform.position.x, Mathf.Sin(Mathf.PI * i) * 1.5f, transform.position.z);
                 yield return null;
             }
+            transform.position = HeightZero(transform.position);
         }
     }
 }

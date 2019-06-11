@@ -99,8 +99,8 @@ public class Rook : MonoBehaviour, IDamageable
         float jumpSpeed = 3;
         if (dir.x != 0 || dir.y != 0)
         {
-            monopolyPosition = transform.position + new Vector3(dir.x, 0, dir.y);
-            Vector3 originPos = transform.position;
+            monopolyPosition = HeightZero(transform.position + new Vector3(dir.x, 0, dir.y));
+            Vector3 originPos = HeightZero(transform.position);
 
             for (float i = 0; i < 1; i += Time.deltaTime * jumpSpeed)
             {
@@ -114,7 +114,7 @@ public class Rook : MonoBehaviour, IDamageable
                 transform.position = new Vector3(originPos.x, Mathf.Sin(Mathf.PI * i) * 1.5f, originPos.z) + new Vector3(dir.x, 0, dir.y) * i;
                 yield return null;
             }
-            transform.position = originPos + new Vector3(dir.x, 0, dir.y);
+            transform.position = HeightZero(originPos + new Vector3(dir.x, 0, dir.y));
         }
         else
         {
@@ -131,6 +131,7 @@ public class Rook : MonoBehaviour, IDamageable
                 transform.position = new Vector3(transform.position.x, Mathf.Sin(Mathf.PI * i) * 1.5f, transform.position.z);
                 yield return null;
             }
+            transform.position = HeightZero(transform.position);
         }
     }
 
@@ -160,5 +161,10 @@ public class Rook : MonoBehaviour, IDamageable
             }
         }
         return new Vector2(x, y);
+    }
+
+    public Vector3 HeightZero(Vector3 v)
+    {
+        return new Vector3(v.x, 0, v.z);
     }
 }
