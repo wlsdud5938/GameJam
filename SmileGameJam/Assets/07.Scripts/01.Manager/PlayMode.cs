@@ -15,6 +15,16 @@ public class PlayMode : MonoBehaviour {
         else Time.timeScale = 1;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isPaused = true;
+            pausePanel.SetActive(true);
+            Time.timeScale = 0;
+        }
+    }
+
     public void StopButton()
     {
         Time.timeScale = 1;

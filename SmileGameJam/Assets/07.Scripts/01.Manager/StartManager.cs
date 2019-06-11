@@ -18,9 +18,25 @@ public class StartManager : MonoBehaviour
     public void TouchtoReady()
     {
         if (isReady)
-            anim.CrossFade("ShowDown");
+        {
+            StopAllCoroutines();
+            StartCoroutine(MainButtonPopdown());
+            StartCoroutine(MediaButtonPopdown());
+            StartCoroutine(SettingButtonPopdown());
+            touchToReady.SetActive(true);
+            crown.SetActive(false);
+            //anim.Play("ShowDown");
+        }
         else
-            anim.CrossFade("ShowUp");
+        {
+            StopAllCoroutines();
+            StartCoroutine(MainButtonPopup());
+            StartCoroutine(MediaButtonPopup());
+            StartCoroutine(SettingButtonPopup());
+            touchToReady.SetActive(false);
+            crown.SetActive(true);
+            //anim.Play("ShowUp");
+        }
         isReady = !isReady;
     }
 

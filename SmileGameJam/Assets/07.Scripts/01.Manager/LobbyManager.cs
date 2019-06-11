@@ -58,6 +58,12 @@ public class LobbyManager : MonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            isPaused = true;
+            pausePanel.SetActive(true);
+            Time.timeScale = 0;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -98,7 +104,7 @@ public class LobbyManager : MonoBehaviour
     public void PlayButton()
     {
         isPaused = false;
-        gameObject.SetActive(false);
+        pausePanel.SetActive(false);
         Time.timeScale = 1;
     }
 
