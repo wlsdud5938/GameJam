@@ -7,7 +7,7 @@ public class ShotGun : GunBase {
     private float angle = 60;
     private int bulletCount = 10;
 
-    public override void Start()
+    public override void Awake()
     {
         rare = data.rare;
 
@@ -26,12 +26,11 @@ public class ShotGun : GunBase {
         angle = data.angle;
         bulletCount = data.bulletCount;
 
-        base.Start();
+        base.Awake();
     }
 
     protected override void UseSkill(Player owner, Vector3 position, float rotation)
     {
-        angle *= accurancy;
         float startAngle = rotation - angle * 0.5f;
         float angleGap = angle / bulletCount;
 

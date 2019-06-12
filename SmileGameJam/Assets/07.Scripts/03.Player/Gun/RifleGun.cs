@@ -9,7 +9,7 @@ public class RifleGun : GunBase
     private int bulletCount = 1;
     private float bulletDelay = 0.5f;
 
-    public override void Start()
+    public override void Awake()
     {
         rare = data.rare;
 
@@ -28,7 +28,7 @@ public class RifleGun : GunBase
         bulletDelay = data.bulletDelay;
         bulletCount = data.bulletCount;
 
-        base.Start();
+        base.Awake();
     }
 
     protected override void UseSkill(Player owner, Vector3 position, float rotation)

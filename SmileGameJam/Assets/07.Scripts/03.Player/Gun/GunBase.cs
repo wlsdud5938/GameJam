@@ -29,12 +29,11 @@ public abstract class GunBase : MonoBehaviour
     protected Shake shake;
     protected float shakeThrust = 0.3f;
 
-    public virtual void Start()
+    public virtual void Awake()
     {
         nowBullet = ObjectData.instance.bullets[id + "Bullet"];
         nowBullet.isEnemy = false;
         nowBullet.id = id + "Explosion";
-        id = name;
         BulletPooler.instance.CreatePool(id, nowBullet, poolSize);
 
         nowCapacity = maxCapacity;

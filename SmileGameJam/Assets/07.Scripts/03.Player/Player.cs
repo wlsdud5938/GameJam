@@ -8,11 +8,12 @@ public partial class Player : MonoBehaviour, IDamageable
     public GunBase nowGun;
     public int coin = 0;
     public float moveSpeed = 3.5f;
-    private int maxHealthPoint, healthPoint;
+    public int maxHealthPoint, healthPoint;
 
     public bool canAttack = true;
 
-    private GameObject[] hearts;
+    private Image[] hearts;
+    public Sprite[] heartImg;
     private Text coinText;
     private Text bulletCountText;
 
@@ -39,13 +40,17 @@ public partial class Player : MonoBehaviour, IDamageable
         if (canAttack)
         {
             Transform healthTr = GameObject.Find("Health").transform;
-            hearts = new GameObject[healthTr.childCount];
+            hearts = new Image[healthTr.childCount];
             for (int i = 0; i < healthTr.childCount; i++)
-                hearts[i] = healthTr.GetChild(i).gameObject;
-            maxHealthPoint = healthPoint = healthTr.childCount;
+                hearts[i] = healthTr.GetChild(i).GetComponent<Image>();
+            maxHealthPoint = healthPoint = healthTr.childCount * 2;
 
             nowGun = gunInventory[0];
         }
+        Transform gunUIParent = GameObject.Find("Gun").transform;
+        gunUI = new GameObject[gunUIParent.childCount];
+        for (int i = 0; i < gunUIParent.childCount; i++)
+            gunUI[i] = gunUIParent.GetChild(i).gameObject;
     }
 
     private void Start()
@@ -83,7 +88,6 @@ public partial class Player : MonoBehaviour, IDamageable
             flag = true;
         }
 #endif
-
         if (isRolling)
         {
             RollAnim();
@@ -104,12 +108,25 @@ public partial class Player : MonoBehaviour, IDamageable
 
     private void SetInfo()
     {
-        for(int i = 0; i < maxHealthPoint; i++)
+        int full = healthPoint / 2;
+        int half = healthPoint % 2;
+        for(int i = 0; i < maxHealthPoint / 2; i++)
         {
-            if (i < healthPoint)
-                hearts[i].SetActive(true);
+            if (i < full)
+            {
+                hearts[i].sprite = heartImg[0];
+                hearts[i].gameObject.SetActive(true);
+            }
+            else if (half == 1)
+            {
+                hearts[i].sprite = heartImg[1];
+                hearts[i].gameObject.SetActive(true);
+                half = 0;
+            }
             else
-                hearts[i].SetActive(false);
+            {
+                hearts[i].gameObject.SetActive(false);
+            }
         }
         coinText.text = coin.ToString();
     }

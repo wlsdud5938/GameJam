@@ -22,8 +22,9 @@ public class ItemCtrl : MonoBehaviour {
             delay -= Time.deltaTime;
         else
         {
-            if (transform.position.y <= 0)
+            if (transform.position.y <= 0.5f)
             {
+                transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
                 rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePosition;
                 col[0].enabled = true;
             }

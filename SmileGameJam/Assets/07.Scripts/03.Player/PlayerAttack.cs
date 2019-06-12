@@ -20,6 +20,7 @@ public partial class Player : MonoBehaviour
 
     [Header("Gun")]
     public GunBase[] gunInventory;
+    private GameObject[] gunUI;
     public int index = 0;
     private float nowTerm = 0;
 
@@ -42,12 +43,14 @@ public partial class Player : MonoBehaviour
         newGun.transform.localPosition = newGun.transform.localEulerAngles = Vector3.zero;
         gunInventory[0].gameObject.SetActive(false);
 
+        //if (gunInventory[1] != null)
+        //{
+        //    Rigidbody newItem = Instantiate(ObjectData.instance.items[gunInventory[1].id.Split('(')[0] + "Item"], transform.position + Vector3.up * 0.5f, Quaternion.identity).GetComponent<Rigidbody>();
+        //    newItem.AddForce(Vector3.up * 5, ForceMode.Impulse);
+        //    Destroy(gunInventory[1].gameObject);
+        //}
         if (gunInventory[1] != null)
-        {
-            Rigidbody newItem = Instantiate(ObjectData.instance.items[gunInventory[1].id.Split('(')[0] + "Item"], transform.position + Vector3.up * 0.5f, Quaternion.identity).GetComponent<Rigidbody>();
-            newItem.AddForce(Vector3.up * 5, ForceMode.Impulse);
             Destroy(gunInventory[1].gameObject);
-        }
         gunInventory[1] = newGun;
         nowGun = gunInventory[index = 1];
 
@@ -71,6 +74,13 @@ public partial class Player : MonoBehaviour
         if (isDead) return;
         if (nowGun == null)
             return;
+        for (int i = 0; i < gunUI.Length; i++)
+        {
+            if (gunUI[i].name.Substring(0, gunUI[i].name.Length - 2) == nowGun.id)
+                gunUI[i].SetActive(true);
+            else
+                gunUI[i].SetActive(false);
+        }
         nowTerm = 0;
 
         SetGunUI();
@@ -83,9 +93,9 @@ public partial class Player : MonoBehaviour
             return;
 
         if (nowGun.isBasic)
-            bulletCountText.text = "∞";
+            bulletCountText.text = "x ∞";
         else
-            bulletCountText.text = nowGun.nowCapacity + "/" + nowGun.maxCapacity;
+            bulletCountText.text = "x " + nowGun.nowCapacity + "/" + nowGun.maxCapacity;
     }
 
     private void ShotComplete()
